@@ -1,0 +1,14 @@
+title: CleanFast · 轻断食时钟
+description: 一款克制的、不收集数据的间歇性断食计时 App
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: true
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
