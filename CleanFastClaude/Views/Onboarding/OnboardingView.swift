@@ -309,7 +309,7 @@ struct OnboardingView: View {
                     VStack(spacing: 12) {
                         timingModeCard(
                             mode: .manual,
-                            titleSuffix: "（推荐）",
+                            titleSuffix: String(localized: "（推荐）"),
                             detail: "到点后只提醒，不自动切换。\n准备好了再轻触进入下一段。"
                         )
                         timingModeCard(

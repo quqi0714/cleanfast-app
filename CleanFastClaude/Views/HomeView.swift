@@ -295,10 +295,10 @@ struct HomeView: View {
 
     private var topBarLeftText: String {
         if let start = vm.session?.startDate {
-            return "始于 \(TimeFormat.relativeClock(start))"
+            return String(localized: "始于 \(TimeFormat.relativeClock(start))")
         }
         let fastingHours = vm.targetMinutes / 60
-        return "目标 \(fastingHours):\(24 - fastingHours)"
+        return String(localized: "目标 \(fastingHours):\(24 - fastingHours)")
     }
 
     private var cinemaTimeBlock: some View {
@@ -406,7 +406,7 @@ struct HomeView: View {
     private var stageOrSubtitle: String {
         switch vm.state {
         case .fasting: return vm.currentStage.title
-        case .eating: return vm.hasReachedTarget ? "进食已满" : "进食窗口"
+        case .eating: return vm.hasReachedTarget ? String(localized: "进食已满") : String(localized: "进食窗口")
         default: return ""
         }
     }
@@ -509,10 +509,10 @@ struct HomeView: View {
 
     private var stateLabel: String {
         switch vm.state {
-        case .notStarted: return "准 备 中"
-        case .fasting: return vm.hasReachedTarget ? "超 额 完 成" : "断 食 进 行 中"
-        case .eating: return vm.hasReachedTarget ? "进 食 已 满" : "进 食 窗 口"
-        case .skipped: return "今 日 休 息"
+        case .notStarted: return String(localized: "准 备 中")
+        case .fasting: return vm.hasReachedTarget ? String(localized: "超 额 完 成") : String(localized: "断 食 进 行 中")
+        case .eating: return vm.hasReachedTarget ? String(localized: "进 食 已 满") : String(localized: "进 食 窗 口")
+        case .skipped: return String(localized: "今 日 休 息")
         }
     }
 
@@ -587,7 +587,7 @@ struct HomeView: View {
         switch vm.state {
         case .fasting, .eating:
             HStack(spacing: 6) {
-                Text(vm.hasReachedTarget ? "已超额" : "还剩")
+                Text(vm.hasReachedTarget ? LocalizedStringKey("已超额") : LocalizedStringKey("还剩"))
                     .font(.system(size: 13, weight: .medium, design: .rounded))
                     .foregroundStyle(secondaryClockColor)
                 Text(secondaryClockValue)
@@ -812,14 +812,14 @@ struct HomeView: View {
 
     private var stateTitle: String {
         switch vm.state {
-        case .notStarted: return "准备好了"
+        case .notStarted: return String(localized: "准备好了")
         case .fasting:
-            if vm.timingMode == .automatic { return "断食窗口" }
-            return vm.hasReachedTarget ? "超额完成中" : "断食中"
+            if vm.timingMode == .automatic { return String(localized: "断食窗口") }
+            return vm.hasReachedTarget ? String(localized: "超额完成中") : String(localized: "断食中")
         case .eating:
-            if vm.timingMode == .automatic { return "进食窗口" }
-            return vm.hasReachedTarget ? "进食时间已满" : "进食窗口"
-        case .skipped:    return "今天休息"
+            if vm.timingMode == .automatic { return String(localized: "进食窗口") }
+            return vm.hasReachedTarget ? String(localized: "进食时间已满") : String(localized: "进食窗口")
+        case .skipped:    return String(localized: "今天休息")
         }
     }
 
@@ -836,66 +836,66 @@ struct HomeView: View {
         let lockedHours = Int(vm.activeTargetDuration / 3600)
         switch vm.state {
         case .notStarted:
-            return "从你点击开始的那一刻计时"
+            return String(localized: "从你点击开始的那一刻计时")
         case .fasting:
             if let end = vm.sessionEndDate {
                 if vm.timingMode == .automatic {
-                    return "断食窗口至 \(TimeFormat.relativeClock(end))"
+                    return String(localized: "断食窗口至 \(TimeFormat.relativeClock(end))")
                 }
                 return vm.hasReachedTarget
-                    ? "目标 \(lockedHours) 小时（已达成）"
-                    : "\(TimeFormat.relativeClock(end)) 后可以进食"
+                    ? String(localized: "目标 \(lockedHours) 小时（已达成）")
+                    : String(localized: "\(TimeFormat.relativeClock(end)) 后可以进食")
             }
-            return "目标 \(lockedHours) 小时"
+            return String(localized: "目标 \(lockedHours) 小时")
         case .eating:
             if let end = vm.sessionEndDate {
                 if vm.timingMode == .automatic {
-                    return "进食窗口至 \(TimeFormat.relativeClock(end))"
+                    return String(localized: "进食窗口至 \(TimeFormat.relativeClock(end))")
                 }
                 return vm.hasReachedTarget
-                    ? "进食窗口 \(lockedHours) 小时（已满）"
-                    : "建议 \(TimeFormat.relativeClock(end)) 前结束进食"
+                    ? String(localized: "进食窗口 \(lockedHours) 小时（已满）")
+                    : String(localized: "建议 \(TimeFormat.relativeClock(end)) 前结束进食")
             }
-            return "进食窗口 \(lockedHours) 小时"
+            return String(localized: "进食窗口 \(lockedHours) 小时")
         case .skipped:
-            return "明天再继续就好"
+            return String(localized: "明天再继续就好")
         }
     }
 
     private var stageTitle: String {
         switch vm.state {
-        case .notStarted: return "准备好了，就开始"
+        case .notStarted: return String(localized: "准备好了，就开始")
         case .fasting:
             return vm.currentStage.title
         case .eating:
-            if vm.timingMode == .automatic { return "现在是进食窗口" }
-            return vm.hasReachedTarget ? "进食窗口已满" : "慢慢进食"
-        case .skipped:    return "生活也需要弹性"
+            if vm.timingMode == .automatic { return String(localized: "现在是进食窗口") }
+            return vm.hasReachedTarget ? String(localized: "进食窗口已满") : String(localized: "慢慢进食")
+        case .skipped:    return String(localized: "生活也需要弹性")
         }
     }
 
     private var stageMessage: String {
         switch vm.state {
         case .notStarted:
-            return "按你的节奏来，准备好了就开始。"
+            return String(localized: "按你的节奏来，准备好了就开始。")
         case .fasting:
             if vm.hasReachedTarget {
-                return "目标已经到了。\n想继续也可以，身体舒服最重要。"
+                return String(localized: "目标已经到了。\n想继续也可以，身体舒服最重要。")
             }
             if vm.timingMode == .automatic {
-                return vm.currentStage.message + "\n时钟会按你的设定自动进入下一段。"
+                return vm.currentStage.message + "\n" + String(localized: "时钟会按你的设定自动进入下一段。")
             }
             return vm.currentStage.message
         case .eating:
             if vm.timingMode == .automatic {
-                return "现在处于进食窗口。\n时间到后会自动回到断食窗口。"
+                return String(localized: "现在处于进食窗口。\n时间到后会自动回到断食窗口。")
             }
             if vm.hasReachedTarget {
-                return "进食窗口建议时长已到。\n准备好就可以开始下一轮断食。"
+                return String(localized: "进食窗口建议时长已到。\n准备好就可以开始下一轮断食。")
             }
-            return "辛苦啦，开始温和进食吧。\n少量多次，记得喝水。"
+            return String(localized: "辛苦啦，开始温和进食吧。\n少量多次，记得喝水。")
         case .skipped:
-            return "今天休息一下没关系，明天再继续就好。"
+            return String(localized: "今天休息一下没关系，明天再继续就好。")
         }
     }
 
@@ -904,16 +904,16 @@ struct HomeView: View {
     private var primaryTitle: String {
         if vm.timingMode == .automatic {
             switch vm.state {
-            case .notStarted: return "开始计时"
-            case .fasting, .eating: return "今天休息"
-            case .skipped: return "恢复今天"
+            case .notStarted: return String(localized: "开始计时")
+            case .fasting, .eating: return String(localized: "今天休息")
+            case .skipped: return String(localized: "恢复今天")
             }
         }
         switch vm.state {
-        case .notStarted: return "开始断食"
-        case .fasting:    return "结束断食"
-        case .eating:     return "现在开始断食"
-        case .skipped:    return "恢复今天"
+        case .notStarted: return String(localized: "开始断食")
+        case .fasting:    return String(localized: "结束断食")
+        case .eating:     return String(localized: "现在开始断食")
+        case .skipped:    return String(localized: "恢复今天")
         }
     }
 
@@ -949,9 +949,9 @@ struct HomeView: View {
 
     private var skipConfirmationMessage: String {
         if vm.timingMode == .automatic {
-            return "今天先休息，明天会按设定时间自动开始。"
+            return String(localized: "今天先休息，明天会按设定时间自动开始。")
         }
-        return "今天先休息，准备好了记得回来点击“开始”。"
+        return String(localized: "今天先休息，准备好了记得回来点击“开始”。")
     }
 }
 

@@ -257,7 +257,7 @@ struct SettingsView: View {
         .listRowBackground(AppColor.cardSurface.opacity(0.7))
     }
 
-    private func aboutLinkRow(symbol: String, title: String, subtitle: String? = nil) -> some View {
+    private func aboutLinkRow(symbol: String, title: LocalizedStringKey, subtitle: String? = nil) -> some View {
         HStack(spacing: 10) {
             Image(systemName: symbol)
                 .font(.system(size: 14, weight: .medium))

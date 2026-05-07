@@ -180,15 +180,15 @@
     "可于%@ %@ 进食" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Eat at%@ %@" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可于%@ %@ 进食" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "可於%@ %@ 進食" } }
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可于%1$@ %2$@ 进食" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "可於%1$@ %2$@ 進食" } }
       }
     },
     "建议%@ %@ 前结束" : {
       "localizations" : {
         "en" : { "stringUnit" : { "state" : "translated", "value" : "Suggest finishing by%@ %@" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "建议%@ %@ 前结束" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "建議%@ %@ 前結束" } }
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "建议%1$@ %2$@ 前结束" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "建議%1$@ %2$@ 前結束" } }
       }
     },
     "目标 %lld 小时" : {
@@ -268,32 +268,25 @@
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "進食" } }
       }
     },
-    "%lld 小时 %lld 分" : {
+    "%@%lld 小时 %lld 分" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lldh %lldm" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld 小时 %lld 分" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%lld 小時 %lld 分" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$@%2$lldh %3$lldm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%1$@%2$lld 小时 %3$lld 分" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%1$@%2$lld 小時 %3$lld 分" } }
       }
     },
-    "%lld 分" : {
+    "%@%lld 分" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lldm" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld 分" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%lld 分" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$@%2$lldm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%1$@%2$lld 分" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%1$@%2$lld 分" } }
       }
     },
-    "+%lld 小时 %lld 分" : {
+    "还剩 %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "+%lldh %lldm" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 小时 %lld 分" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 小時 %lld 分" } }
-      }
-    },
-    "+%lld 分" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "+%lldm" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 分" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 分" } }
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ left" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "还剩 %@" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "還剩 %@" } }
       }
     }
   }
