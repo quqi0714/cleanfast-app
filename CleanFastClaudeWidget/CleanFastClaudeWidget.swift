@@ -419,22 +419,28 @@ struct MediumWidgetView: View {
         f.dateFormat = "HH:mm"
         let when = f.string(from: session.targetEndDate)
         let cal = Calendar.current
-        let dayPrefix: String
-        if cal.isDateInToday(session.targetEndDate) {
-            dayPrefix = String(localized: "今天")
-        } else if cal.isDateInTomorrow(session.targetEndDate) {
-            dayPrefix = String(localized: "明天")
-        } else {
-            dayPrefix = ""
-        }
+
         if s.hasReachedTarget {
             return s.state == .fasting
                 ? String(localized: "目标已达成，继续计时")
                 : String(localized: "进食窗口已满")
         }
+
+        // 拆成"今天/明天/无前缀" 3 套独立的本地化 key，避免英文翻译里
+        // "Eat at" 跟动态前缀粘连成 "Eat attomorrow"。
+        if cal.isDateInToday(session.targetEndDate) {
+            return s.state == .fasting
+                ? String(localized: "可于今天 \(when) 进食")
+                : String(localized: "建议今天 \(when) 前结束")
+        }
+        if cal.isDateInTomorrow(session.targetEndDate) {
+            return s.state == .fasting
+                ? String(localized: "可于明天 \(when) 进食")
+                : String(localized: "建议明天 \(when) 前结束")
+        }
         return s.state == .fasting
-            ? String(localized: "可于\(dayPrefix) \(when) 进食")
-            : String(localized: "建议\(dayPrefix) \(when) 前结束")
+            ? String(localized: "可于 \(when) 进食")
+            : String(localized: "建议 \(when) 前结束")
     }
 }
 

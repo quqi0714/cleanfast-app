@@ -8,7 +8,6 @@
 
     },
     "（推荐）" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -31,7 +30,6 @@
       }
     },
     "%@ 后可以进食" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -438,7 +436,6 @@
       }
     },
     "今 日 休 息" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -482,8 +479,35 @@
         }
       }
     },
+    "今天 %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "today %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "今天 %@" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "今天 %@" } }
+      }
+    },
+    "明天 %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "tomorrow %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "明天 %@" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "明天 %@" } }
+      }
+    },
+    "昨天 %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "yesterday %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "昨天 %@" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "昨天 %@" } }
+      }
+    },
+    "%lld月%lld日 %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld/%2$lld %3$@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld月%2$lld日 %3$@" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld月%2$lld日 %3$@" } }
+      }
+    },
     "今天休息" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -506,7 +530,6 @@
       }
     },
     "今天休息一下没关系，明天再继续就好。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -573,7 +596,6 @@
       }
     },
     "今天先休息，明天会按设定时间自动开始。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -618,7 +640,6 @@
       }
     },
     "从你点击开始的那一刻计时" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -663,7 +684,6 @@
       }
     },
     "使用条款" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -774,7 +794,6 @@
       }
     },
     "准 备 中" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -797,7 +816,6 @@
       }
     },
     "准备好了" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1151,7 +1169,6 @@
       }
     },
     "始于 %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1373,7 +1390,6 @@
       }
     },
     "建议 %@ 前结束进食" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1464,7 +1480,6 @@
       }
     },
     "开始计时" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1553,7 +1568,6 @@
       }
     },
     "恢复今天" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1598,7 +1612,6 @@
       }
     },
     "慢慢进食" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1665,7 +1678,6 @@
       }
     },
     "按你的节奏来，准备好了就开始。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1909,7 +1921,6 @@
       }
     },
     "断食窗口" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1954,7 +1965,6 @@
       }
     },
     "断食窗口至 %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2043,7 +2053,6 @@
       }
     },
     "时钟会按你的设定自动进入下一段。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2089,7 +2098,6 @@
       }
     },
     "明天再继续就好" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2422,7 +2430,6 @@
       }
     },
     "现在处于进食窗口。\n时间到后会自动回到断食窗口。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2445,7 +2452,6 @@
       }
     },
     "现在开始断食" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2468,7 +2474,6 @@
       }
     },
     "现在是进食窗口" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2513,7 +2518,6 @@
       }
     },
     "目标 %lld 小时" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2536,7 +2540,6 @@
       }
     },
     "目标 %lld 小时（已达成）" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2559,7 +2562,6 @@
       }
     },
     "目标 %lld:%lld" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2582,7 +2584,6 @@
       }
     },
     "目标已经到了。\n想继续也可以，身体舒服最重要。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2737,7 +2738,6 @@
       }
     },
     "结束断食" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2760,7 +2760,6 @@
       }
     },
     "联系我们" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3004,7 +3003,6 @@
       }
     },
     "超 额 完 成" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3027,7 +3025,6 @@
       }
     },
     "超额完成中" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3182,7 +3179,6 @@
       }
     },
     "辛苦啦，开始温和进食吧。\n少量多次，记得喝水。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3316,7 +3312,6 @@
       }
     },
     "进 食 已 满" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3339,7 +3334,6 @@
       }
     },
     "进 食 窗 口" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3407,7 +3401,6 @@
       }
     },
     "进食已满" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3474,7 +3467,6 @@
       }
     },
     "进食时间已满" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3519,7 +3511,6 @@
       }
     },
     "进食窗口 %lld 小时" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3542,7 +3533,6 @@
       }
     },
     "进食窗口 %lld 小时（已满）" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3609,7 +3599,6 @@
       }
     },
     "进食窗口已满" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3676,7 +3665,6 @@
       }
     },
     "进食窗口建议时长已到。\n准备好就可以开始下一轮断食。" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3721,7 +3709,6 @@
       }
     },
     "进食窗口至 %@" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -3898,7 +3885,6 @@
       }
     },
     "隐私政策" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
