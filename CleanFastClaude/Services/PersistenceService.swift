@@ -1,6 +1,10 @@
 import Foundation
+import os.log
 
 final class PersistenceService: Sendable {
+    /// 解码失败时打 console 日志，方便用户上报或测试时排查损坏的 UserDefaults。
+    private static let log = Logger(subsystem: "com.MaxQ.CleanFast", category: "Persistence")
+
     nonisolated static let shared = PersistenceService()
 
     /// App Group 标识符——主 App 和 Widget 共享同一份 UserDefaults。
@@ -47,11 +51,23 @@ final class PersistenceService: Sendable {
     var session: FastingSession? {
         get {
             guard let data = defaults.data(forKey: Key.session) else { return nil }
-            return try? decoder.decode(FastingSession.self, from: data)
+            do {
+                return try decoder.decode(FastingSession.self, from: data)
+            } catch {
+                // 损坏的 session JSON：日志记录便于排查，并清掉这条无效数据避免下次再撞。
+                Self.log.error("session.v1 decode failed: \(String(describing: error), privacy: .public). Clearing corrupted entry.")
+                defaults.removeObject(forKey: Key.session)
+                return nil
+            }
         }
         set {
-            if let value = newValue, let data = try? encoder.encode(value) {
-                defaults.set(data, forKey: Key.session)
+            if let value = newValue {
+                do {
+                    let data = try encoder.encode(value)
+                    defaults.set(data, forKey: Key.session)
+                } catch {
+                    Self.log.error("session.v1 encode failed: \(String(describing: error), privacy: .public).")
+                }
             } else {
                 defaults.removeObject(forKey: Key.session)
             }

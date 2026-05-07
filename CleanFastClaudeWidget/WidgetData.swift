@@ -142,28 +142,56 @@ struct WidgetSnapshot {
         targetMinutes: Int,
         at date: Date
     ) -> (state: WidgetFastingState, session: WidgetSession) {
-        var nextState = state
-        var current = session
-        var guardCount = 0
+        guard state == .fasting || state == .eating else {
+            return (state, session)
+        }
+
         let fastingDuration = TimeInterval(targetMinutes * 60)
         let eatingDuration = TimeInterval(max(0, 24 * 60 - targetMinutes) * 60)
 
-        while date >= current.targetEndDate && guardCount < 200 {
-            let nextStart = current.targetEndDate
-            switch nextState {
-            case .fasting:
-                nextState = .eating
-                current = WidgetSession(startDate: nextStart, targetDuration: eatingDuration)
-            case .eating:
-                nextState = .fasting
-                current = WidgetSession(startDate: nextStart, targetDuration: fastingDuration)
-            default:
-                return (nextState, current)
-            }
-            guardCount += 1
+        let result = advanceAutomaticCycle(
+            startDate: session.startDate,
+            currentDuration: session.targetDuration,
+            isFasting: state == .fasting,
+            fastingDuration: fastingDuration,
+            eatingDuration: eatingDuration,
+            at: date
+        )
+
+        let nextState: WidgetFastingState = result.isFasting ? .fasting : .eating
+        let nextSession = WidgetSession(
+            startDate: result.startDate,
+            targetDuration: result.duration
+        )
+        return (nextState, nextSession)
+    }
+
+    /// 自动模式循环推进的纯函数实现（无副作用，仅算 Date 数学）。
+    ///
+    /// **MIRROR**：必须与 `FastingTimerViewModel.advanceAutomaticCycle` 保持算法等价。
+    /// 改动这里时同步改主 App 那一份，反之亦然。
+    /// 单元测试 `advanceAutomatic_mirrorsWidgetImplementation` 会双跑两份实现并比对结果。
+    static func advanceAutomaticCycle(
+        startDate: Date,
+        currentDuration: TimeInterval,
+        isFasting: Bool,
+        fastingDuration: TimeInterval,
+        eatingDuration: TimeInterval,
+        at referenceDate: Date
+    ) -> (startDate: Date, duration: TimeInterval, isFasting: Bool, cyclesAdvanced: Int) {
+        var current = (start: startDate, duration: currentDuration, fasting: isFasting)
+        var cycles = 0
+        let maxCycles = 200
+
+        while referenceDate >= current.start.addingTimeInterval(current.duration) && cycles < maxCycles {
+            let nextStart = current.start.addingTimeInterval(current.duration)
+            let nextFasting = !current.fasting
+            let nextDuration = nextFasting ? fastingDuration : eatingDuration
+            current = (nextStart, nextDuration, nextFasting)
+            cycles += 1
         }
 
-        return (nextState, current)
+        return (current.start, current.duration, current.fasting, cycles)
     }
 
     var elapsed: TimeInterval {

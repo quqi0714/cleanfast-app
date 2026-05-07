@@ -443,37 +443,60 @@ final class FastingTimerViewModel: ObservableObject {
     private func advanceAutomaticSessionIfNeeded(at referenceDate: Date) -> Bool {
         guard timingMode == .automatic,
               state == .fasting || state == .eating,
-              var current = session
+              let current = session
         else { return false }
 
-        var nextState = state
-        var didAdvance = false
-        var guardCount = 0
+        let result = Self.advanceAutomaticCycle(
+            startDate: current.startDate,
+            currentDuration: current.targetDuration,
+            isFasting: state == .fasting,
+            fastingDuration: fastingDuration,
+            eatingDuration: eatingDuration,
+            at: referenceDate
+        )
 
-        while referenceDate >= current.targetEndDate && guardCount < 200 {
-            let nextStart = current.targetEndDate
-            switch nextState {
-            case .fasting:
-                nextState = .eating
-                current = FastingSession(startDate: nextStart, targetDuration: eatingDuration)
-            case .eating:
-                nextState = .fasting
-                current = FastingSession(startDate: nextStart, targetDuration: fastingDuration)
-            default:
-                return false
-            }
-            didAdvance = true
-            guardCount += 1
-        }
+        guard result.cyclesAdvanced > 0 else { return false }
 
-        guard didAdvance else { return false }
+        let nextState: FastingState = result.isFasting ? .fasting : .eating
+        let nextSession = FastingSession(
+            startDate: result.startDate,
+            targetDuration: result.duration
+        )
         state = nextState
-        session = current
+        session = nextSession
         persistence.state = nextState
-        persistence.session = current
+        persistence.session = nextSession
         scheduleSessionNotification()
         reloadWidgets()
         return true
+    }
+
+    /// 自动模式循环推进的纯函数实现（无副作用，仅算 Date 数学）。
+    ///
+    /// **MIRROR**：必须与 `WidgetData.advanceAutomaticCycle` 保持算法等价。
+    /// 改动这里时同步改 widget 那一份，反之亦然。
+    /// 单元测试 `advanceAutomatic_mirrorsWidgetImplementation` 会双跑两份实现并比对结果。
+    static func advanceAutomaticCycle(
+        startDate: Date,
+        currentDuration: TimeInterval,
+        isFasting: Bool,
+        fastingDuration: TimeInterval,
+        eatingDuration: TimeInterval,
+        at referenceDate: Date
+    ) -> (startDate: Date, duration: TimeInterval, isFasting: Bool, cyclesAdvanced: Int) {
+        var current = (start: startDate, duration: currentDuration, fasting: isFasting)
+        var cycles = 0
+        let maxCycles = 200
+
+        while referenceDate >= current.start.addingTimeInterval(current.duration) && cycles < maxCycles {
+            let nextStart = current.start.addingTimeInterval(current.duration)
+            let nextFasting = !current.fasting
+            let nextDuration = nextFasting ? fastingDuration : eatingDuration
+            current = (nextStart, nextDuration, nextFasting)
+            cycles += 1
+        }
+
+        return (current.start, current.duration, current.fasting, cycles)
     }
 
     private func reloadWidgets() {

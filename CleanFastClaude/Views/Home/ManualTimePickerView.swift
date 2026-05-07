@@ -120,20 +120,32 @@ struct RecentTimeWheelPicker: View {
 
     private var dayOptions: [RecentDay] {
         let options = RecentTimeSelection.dayOptions(now: referenceNow)
-        return options.isEmpty ? [.today] : options
+        if options.isEmpty {
+            assertionFailure("dayOptions empty — RecentTimeSelection.range broken?")
+            return [.today]
+        }
+        return options
     }
 
     private var hourOptions: [Int] {
         let day = dayOptions.contains(selectedDay) ? selectedDay : dayOptions.last ?? .today
         let options = RecentTimeSelection.hourOptions(day: day, now: referenceNow)
-        return options.isEmpty ? Array(0..<24) : options
+        if options.isEmpty {
+            assertionFailure("hourOptions empty for day=\(day) — should always have at least 1 hour available")
+            return Array(0..<24)
+        }
+        return options
     }
 
     private var minuteOptions: [Int] {
         let day = dayOptions.contains(selectedDay) ? selectedDay : dayOptions.last ?? .today
         let hour = hourOptions.contains(selectedHour) ? selectedHour : hourOptions.last ?? 0
         let options = RecentTimeSelection.minuteOptions(day: day, hour: hour, now: referenceNow)
-        return options.isEmpty ? Array(0..<60) : options
+        if options.isEmpty {
+            assertionFailure("minuteOptions empty for day=\(day) hour=\(hour)")
+            return Array(0..<60)
+        }
+        return options
     }
 
     private func commitSelection() {
@@ -144,6 +156,13 @@ struct RecentTimeWheelPicker: View {
         let minute = validMinutes.contains(selectedMinute) ? selectedMinute : validMinutes.last ?? 0
         let candidate = RecentTimeSelection.date(day: day, hour: hour, minute: minute, now: referenceNow)
         let clamped = RecentTimeSelection.clamp(candidate, now: referenceNow)
+
+        // 不变量：commitSelection 后 selection 永远在 48h 窗口内。
+        let selectionRange = RecentTimeSelection.range(now: referenceNow)
+        assert(
+            selectionRange.contains(clamped),
+            "ManualTimePicker: clamped selection \(clamped) outside 48h range \(selectionRange)"
+        )
 
         if selectedDay != day || selectedHour != hour || selectedMinute != minute {
             applyState(from: clamped)

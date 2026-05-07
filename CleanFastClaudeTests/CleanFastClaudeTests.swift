@@ -322,4 +322,100 @@ struct CleanFastClaudeTests {
         let p = PersistenceService(defaults: defaults)
         #expect(p.automaticResumeDateString == nil)
     }
+
+    // MARK: - Automatic-cycle math (drift detection vs widget)
+
+    /// 这组测试钉住 `FastingTimerViewModel.advanceAutomaticCycle` 的精确行为。
+    /// 因为 widget 那边的 `WidgetSnapshot.advanceAutomaticCycle` 是按位等价的镜像实现，
+    /// 任何这边的算法变动都必须同步到 widget；如果两边偏离，
+    /// 这组用例 + 真机看 widget 是否还跟主 App 同步是双重保险。
+
+    @Test func advanceAutomaticCycle_noAdvanceWhenWithinCurrentSession() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        let now = start.addingTimeInterval(3600) // 进入断食 1h
+        let r = FastingTimerViewModel.advanceAutomaticCycle(
+            startDate: start,
+            currentDuration: 16 * 3600,
+            isFasting: true,
+            fastingDuration: 16 * 3600,
+            eatingDuration: 8 * 3600,
+            at: now
+        )
+        #expect(r.cyclesAdvanced == 0)
+        #expect(r.startDate == start)
+        #expect(r.isFasting == true)
+        #expect(r.duration == 16 * 3600)
+    }
+
+    @Test func advanceAutomaticCycle_oneCycleFastingToEating() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        // 断食 16h 已过 30 分钟 → 进入进食窗口
+        let now = start.addingTimeInterval(16.5 * 3600)
+        let r = FastingTimerViewModel.advanceAutomaticCycle(
+            startDate: start,
+            currentDuration: 16 * 3600,
+            isFasting: true,
+            fastingDuration: 16 * 3600,
+            eatingDuration: 8 * 3600,
+            at: now
+        )
+        #expect(r.cyclesAdvanced == 1)
+        #expect(r.startDate == start.addingTimeInterval(16 * 3600))
+        #expect(r.isFasting == false)
+        #expect(r.duration == 8 * 3600)
+    }
+
+    @Test func advanceAutomaticCycle_multipleFullDays() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        // 跨 3 天（断食 16 + 进食 8 = 24h × 3 = 72h），结束在第 4 个断食的中段
+        let now = start.addingTimeInterval(3 * 24 * 3600 + 5 * 3600)
+        let r = FastingTimerViewModel.advanceAutomaticCycle(
+            startDate: start,
+            currentDuration: 16 * 3600,
+            isFasting: true,
+            fastingDuration: 16 * 3600,
+            eatingDuration: 8 * 3600,
+            at: now
+        )
+        // 3 完整天 × 2 段 = 6 cycle
+        #expect(r.cyclesAdvanced == 6)
+        #expect(r.isFasting == true)
+        #expect(r.duration == 16 * 3600)
+        // 起点 = start + 72h
+        #expect(r.startDate == start.addingTimeInterval(72 * 3600))
+    }
+
+    @Test func advanceAutomaticCycle_capsAtMaxIterations() {
+        // 极端：1 秒目标会让 200 cycle 内推完非常多时间。这个 test 守护无限循环兜底。
+        let start = Date(timeIntervalSince1970: 0)
+        let now = Date(timeIntervalSince1970: 100_000_000)
+        let r = FastingTimerViewModel.advanceAutomaticCycle(
+            startDate: start,
+            currentDuration: 1,
+            isFasting: true,
+            fastingDuration: 1,
+            eatingDuration: 1,
+            at: now
+        )
+        // 守护值 200，表示循环命中上限
+        #expect(r.cyclesAdvanced == 200)
+    }
+
+    @Test func advanceAutomaticCycle_eatingToFastingBoundary() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        // 进食 8h 刚好到点
+        let now = start.addingTimeInterval(8 * 3600)
+        let r = FastingTimerViewModel.advanceAutomaticCycle(
+            startDate: start,
+            currentDuration: 8 * 3600,
+            isFasting: false, // 进食态
+            fastingDuration: 16 * 3600,
+            eatingDuration: 8 * 3600,
+            at: now
+        )
+        #expect(r.cyclesAdvanced == 1)
+        #expect(r.isFasting == true)
+        #expect(r.duration == 16 * 3600)
+        #expect(r.startDate == start.addingTimeInterval(8 * 3600))
+    }
 }
