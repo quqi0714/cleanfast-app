@@ -285,9 +285,11 @@
 				};
 			};
 			buildConfigurationList = 92D6B2702F9EE1540009CAC6 /* Build configuration list for PBXProject "CleanFast-Claude" */;
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				"zh-Hans",
+				"zh-Hant",
 				en,
 				Base,
 			);

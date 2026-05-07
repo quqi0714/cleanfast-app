@@ -1,0 +1,300 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "version" : "1.0",
+  "strings" : {
+    "轻断食时钟" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "CleanFast" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "轻断食时钟" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "輕斷食時鐘" } }
+      }
+    },
+    "看一眼当前断食 / 进食状态。" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Glance at your fasting / eating status." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "看一眼当前断食 / 进食状态。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "看一眼目前斷食 / 進食狀態。" } }
+      }
+    },
+    "未开始" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Not started" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "未开始" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "未開始" } }
+      }
+    },
+    "断食中" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fasting" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "断食中" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "斷食中" } }
+      }
+    },
+    "目标达成" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Goal reached" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "目标达成" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "目標達成" } }
+      }
+    },
+    "进食窗口" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eating" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "进食窗口" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "進食視窗" } }
+      }
+    },
+    "窗口已满" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Window full" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "窗口已满" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "視窗已滿" } }
+      }
+    },
+    "今天休息" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Resting today" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "今天休息" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "今天休息" } }
+      }
+    },
+    "消化中" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Digesting" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "消化中" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "消化中" } }
+      }
+    },
+    "血糖渐稳" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settling" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "血糖渐稳" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "血糖漸穩" } }
+      }
+    },
+    "动用糖原" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Glycogen" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "动用糖原" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "動用糖原" } }
+      }
+    },
+    "燃料切换" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Switching" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "燃料切换" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "燃料切換" } }
+      }
+    },
+    "深度供能" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Deep fueling" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "深度供能" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "深度供能" } }
+      }
+    },
+    "%lldh" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lldh" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lldh" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%lldh" } }
+      }
+    },
+    "断" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "F" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "断" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "斷" } }
+      }
+    },
+    "食" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "E" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "食" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "食" } }
+      }
+    },
+    "休" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "R" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "休" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "休" } }
+      }
+    },
+    "+" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "+" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "+" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "+" } }
+      }
+    },
+    "—" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "—" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "—" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "—" } }
+      }
+    },
+    "准备好再开始" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start when ready" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "准备好再开始" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "準備好再開始" } }
+      }
+    },
+    "目标 %lldh 已达成" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Goal %lldh reached" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "目标 %lldh 已达成" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "目標 %lldh 已達成" } }
+      }
+    },
+    "目标 %lldh" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Goal %lldh" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "目标 %lldh" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "目標 %lldh" } }
+      }
+    },
+    "明天再继续" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Pick up tomorrow" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "明天再继续" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "明天再繼續" } }
+      }
+    },
+    "目标已达成，继续计时" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Goal reached — still counting" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "目标已达成，继续计时" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "目標已達成，繼續計時" } }
+      }
+    },
+    "进食窗口已满" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eating window full" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "进食窗口已满" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "進食視窗已滿" } }
+      }
+    },
+    "可于%@ %@ 进食" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eat at%@ %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可于%@ %@ 进食" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "可於%@ %@ 進食" } }
+      }
+    },
+    "建议%@ %@ 前结束" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Suggest finishing by%@ %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "建议%@ %@ 前结束" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "建議%@ %@ 前結束" } }
+      }
+    },
+    "目标 %lld 小时" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld-hour goal" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "目标 %lld 小时" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "目標 %lld 小時" } }
+      }
+    },
+    "今天" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "today" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "今天" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "今天" } }
+      }
+    },
+    "明天" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "tomorrow" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "明天" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "明天" } }
+      }
+    },
+    "准备好再开始 · %lldh" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start when ready · %lldh" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "准备好再开始 · %lldh" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "準備好再開始 · %lldh" } }
+      }
+    },
+    "目标达成 +" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Goal reached +" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "目标达成 +" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "目標達成 +" } }
+      }
+    },
+    "断食 " : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fasting " } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "断食 " } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "斷食 " } }
+      }
+    },
+    "%@ " : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ " } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%@ " } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%@ " } }
+      }
+    },
+    "窗口已满 +" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Window full +" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "窗口已满 +" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "視窗已滿 +" } }
+      }
+    },
+    "进食窗口 " : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eating " } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "进食窗口 " } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "進食視窗 " } }
+      }
+    },
+    "断食" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Fasting" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "断食" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "斷食" } }
+      }
+    },
+    "进食" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eating" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "进食" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "進食" } }
+      }
+    },
+    "%lld 小时 %lld 分" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lldh %lldm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld 小时 %lld 分" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%lld 小時 %lld 分" } }
+      }
+    },
+    "%lld 分" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%lldm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%lld 分" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%lld 分" } }
+      }
+    },
+    "+%lld 小时 %lld 分" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "+%lldh %lldm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 小时 %lld 分" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 小時 %lld 分" } }
+      }
+    },
+    "+%lld 分" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "+%lldm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 分" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "+%lld 分" } }
+      }
+    }
+  }
+}

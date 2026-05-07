@@ -8,8 +8,8 @@ enum HomeStyle: String, Codable, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .classic: return "经典"
-        case .cinematic: return "极简"
+        case .classic: return String(localized: "经典")
+        case .cinematic: return String(localized: "极简")
         }
     }
 }

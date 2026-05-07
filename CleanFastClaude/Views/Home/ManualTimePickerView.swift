@@ -11,27 +11,27 @@ enum ManualTimeAction: String, Identifiable {
     var title: String {
         switch self {
         case .startFasting, .restartFasting:
-            return "上顿饭结束时间"
+            return String(localized: "上顿饭结束时间")
         case .startEating:
-            return "进食开始时间"
+            return String(localized: "进食开始时间")
         }
     }
 
     var pickerLabel: String {
         switch self {
         case .startFasting, .restartFasting:
-            return "上顿饭结束"
+            return String(localized: "上顿饭结束")
         case .startEating:
-            return "进食开始"
+            return String(localized: "进食开始")
         }
     }
 
     var confirmTitle: String {
         switch self {
         case .startFasting, .restartFasting:
-            return "开始断食"
+            return String(localized: "开始断食")
         case .startEating:
-            return "开始进食"
+            return String(localized: "开始进食")
         }
     }
 }

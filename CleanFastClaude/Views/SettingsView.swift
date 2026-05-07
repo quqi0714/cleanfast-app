@@ -101,7 +101,7 @@ struct SettingsView: View {
         } header: {
             Text("计时方式")
         } footer: {
-            ZHText(content: timingModeFooter, size: 13, color: AppColor.textSecondary, lineSpacing: 2)
+            ZHText(verbatim: timingModeFooter, size: 13, color: AppColor.textSecondary, lineSpacing: 2)
         }
         .listRowBackground(AppColor.cardSurface.opacity(0.7))
     }
@@ -216,7 +216,7 @@ struct SettingsView: View {
         .listRowBackground(AppColor.cardSurface.opacity(0.7))
     }
 
-    private func instructionRow(num: String, text: String) -> some View {
+    private func instructionRow(num: String, text: LocalizedStringKey) -> some View {
         HStack(alignment: .top, spacing: 8) {
             Text(num)
                 .font(.system(size: 12, weight: .bold, design: .rounded))

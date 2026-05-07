@@ -185,14 +185,14 @@ struct WidgetSnapshot {
     /// 仅在 .fasting 状态下返回；其他状态返回 nil（widget 端可据此决定是否展示副标题）。
     var fastingStageTitle: String? {
         guard state == .fasting, session != nil else { return nil }
-        if hasReachedTarget { return "目标达成" }
+        if hasReachedTarget { return String(localized: "目标达成") }
         let h = elapsed / 3600
         switch h {
-        case ..<2:  return "消化中"
-        case ..<4:  return "血糖渐稳"
-        case ..<8:  return "动用糖原"
-        case ..<12: return "燃料切换"
-        default:    return "深度供能"
+        case ..<2:  return String(localized: "消化中")
+        case ..<4:  return String(localized: "血糖渐稳")
+        case ..<8:  return String(localized: "动用糖原")
+        case ..<12: return String(localized: "燃料切换")
+        default:    return String(localized: "深度供能")
         }
     }
 

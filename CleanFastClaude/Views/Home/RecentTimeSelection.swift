@@ -58,9 +58,9 @@ enum RecentDay: Int, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .twoDaysAgo: return "前天"
-        case .yesterday: return "昨天"
-        case .today: return "今天"
+        case .twoDaysAgo: return String(localized: "前天")
+        case .yesterday: return String(localized: "昨天")
+        case .today: return String(localized: "今天")
         }
     }
 

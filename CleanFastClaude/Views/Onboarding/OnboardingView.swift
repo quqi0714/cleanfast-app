@@ -139,7 +139,7 @@ struct OnboardingView: View {
         }
     }
 
-    private func bulletCard(symbol: String, title: String, body: String) -> some View {
+    private func bulletCard(symbol: String, title: LocalizedStringKey, body: LocalizedStringKey) -> some View {
         let shape = RoundedRectangle(cornerRadius: 18, style: .continuous)
         return HStack(alignment: .top, spacing: 14) {
             Image(systemName: symbol)
@@ -341,7 +341,7 @@ struct OnboardingView: View {
         }
     }
 
-    private func timingModeCard(mode: TimingMode, titleSuffix: String, detail: String) -> some View {
+    private func timingModeCard(mode: TimingMode, titleSuffix: String, detail: LocalizedStringKey) -> some View {
         let selected = timingMode == mode
         let shape = RoundedRectangle(cornerRadius: 16, style: .continuous)
         return Button {
@@ -615,9 +615,9 @@ struct OnboardingView: View {
 
 private struct FastingPlanPreset: Identifiable {
     let hours: Int
-    let name: String
-    let badge: String?
-    let detail: String
+    let name: LocalizedStringKey
+    let badge: LocalizedStringKey?
+    let detail: LocalizedStringKey
 
     var id: Int { hours }
 }

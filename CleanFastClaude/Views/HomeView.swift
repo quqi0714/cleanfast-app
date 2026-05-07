@@ -277,7 +277,7 @@ struct HomeView: View {
         }
     }
 
-    private func cornerButton(symbol: String, label: String, action: @escaping () -> Void) -> some View {
+    private func cornerButton(symbol: String, label: LocalizedStringKey, action: @escaping () -> Void) -> some View {
         Button(action: action) {
             Image(systemName: symbol)
                 .font(.system(size: 15, weight: .medium))
@@ -387,7 +387,7 @@ struct HomeView: View {
                 .foregroundStyle(cinematicStageLabelColor)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("\(stageOrSubtitle)，查看说明")
+            .accessibilityLabel(Text("\(stageOrSubtitle)，查看说明"))
         } else {
             Text(stageOrSubtitle)
                 .foregroundStyle(cinematicStageLabelColor)
@@ -664,13 +664,13 @@ struct HomeView: View {
     private var stageCard: some View {
         GlassCardView {
             VStack(alignment: .leading, spacing: 6) {
-                ZHText(content: stageTitle, size: 17, weight: .semibold,
+                ZHText(verbatim: stageTitle, size: 17, weight: .semibold,
                        color: AppColor.textPrimary)
                     .id(stageTitle)
                     .transition(.opacity)
                     .animation(.easeInOut(duration: 0.5), value: stageTitle)
 
-                ZHText(content: stageMessage, size: 14, weight: .regular,
+                ZHText(verbatim: stageMessage, size: 14, weight: .regular,
                        color: AppColor.textSecondary, lineSpacing: 3)
                     .id(stageMessage)
                     .transition(.opacity)

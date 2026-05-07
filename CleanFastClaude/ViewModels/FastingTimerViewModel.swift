@@ -344,19 +344,19 @@ final class FastingTimerViewModel: ObservableObject {
         switch state {
         case .fasting:
             if timingMode == .automatic {
-                title = "已进入进食窗口"
-                body = "断食窗口已经结束，时钟会继续帮你记录这一段。"
+                title = String(localized: "已进入进食窗口")
+                body = String(localized: "断食窗口已经结束，时钟会继续帮你记录这一段。")
             } else {
-                title = "辛苦啦"
-                body = "你的断食目标已达成，可以开始温和进食了。"
+                title = String(localized: "辛苦啦")
+                body = String(localized: "你的断食目标已达成，可以开始温和进食了。")
             }
         case .eating:
             if timingMode == .automatic {
-                title = "已回到断食窗口"
-                body = "进食窗口已经结束，新一段断食已经开始。"
+                title = String(localized: "已回到断食窗口")
+                body = String(localized: "进食窗口已经结束，新一段断食已经开始。")
             } else {
-                title = "差不多到时间啦"
-                body = "进食窗口建议时长已到，准备好就可以开始下一轮断食。"
+                title = String(localized: "差不多到时间啦")
+                body = String(localized: "进食窗口建议时长已到，准备好就可以开始下一轮断食。")
             }
         default:
             cancelSessionNotifications()
@@ -391,8 +391,8 @@ final class FastingTimerViewModel: ObservableObject {
         Task { @MainActor in
             let result = await NotificationService.shared.scheduleTargetReached(
                 at: fireDate,
-                title: "已进入进食窗口",
-                body: "断食窗口已经结束，时钟会继续帮你记录这一段。"
+                title: String(localized: "已进入进食窗口"),
+                body: String(localized: "断食窗口已经结束，时钟会继续帮你记录这一段。")
             )
             if result == .notAuthorized {
                 persistence.notificationEnabled = false

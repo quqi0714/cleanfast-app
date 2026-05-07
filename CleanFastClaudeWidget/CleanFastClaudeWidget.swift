@@ -141,8 +141,8 @@ struct CleanFastClaudeWidget: Widget {
                     backgroundFor(entry: entry)
                 }
         }
-        .configurationDisplayName("轻断食时钟")
-        .description("看一眼当前断食 / 进食状态。")
+        .configurationDisplayName(LocalizedStringResource("轻断食时钟"))
+        .description(LocalizedStringResource("看一眼当前断食 / 进食状态。"))
         .supportedFamilies([
             .systemSmall,
             .systemMedium,
@@ -227,10 +227,10 @@ private func ringColor(_ snapshot: WidgetSnapshot) -> Color {
 
 private func stateLabel(_ snapshot: WidgetSnapshot) -> String {
     switch snapshot.state {
-    case .notStarted: return "未开始"
-    case .fasting:    return snapshot.hasReachedTarget ? "目标达成" : "断食中"
-    case .eating:     return snapshot.hasReachedTarget ? "窗口已满" : "进食窗口"
-    case .skipped:    return "今天休息"
+    case .notStarted: return String(localized: "未开始")
+    case .fasting:    return snapshot.hasReachedTarget ? String(localized: "目标达成") : String(localized: "断食中")
+    case .eating:     return snapshot.hasReachedTarget ? String(localized: "窗口已满") : String(localized: "进食窗口")
+    case .skipped:    return String(localized: "今天休息")
     }
 }
 
@@ -242,25 +242,27 @@ private func subtitleLabel(_ snapshot: WidgetSnapshot) -> String? {
 private func lockShortLabel(_ snapshot: WidgetSnapshot) -> String {
     switch snapshot.state {
     case .notStarted: return "\(snapshot.targetMinutes / 60)h"
-    case .fasting:    return snapshot.hasReachedTarget ? "+" : "断"
-    case .eating:     return snapshot.hasReachedTarget ? "+" : "食"
-    case .skipped:    return "休"
+    case .fasting:    return snapshot.hasReachedTarget ? "+" : String(localized: "断")
+    case .eating:     return snapshot.hasReachedTarget ? "+" : String(localized: "食")
+    case .skipped:    return String(localized: "休")
     }
 }
 
 private func lockDetailLabel(_ snapshot: WidgetSnapshot) -> String {
     switch snapshot.state {
     case .notStarted:
-        return "准备好再开始"
+        return String(localized: "准备好再开始")
     case .fasting, .eating:
         guard let session = snapshot.session else { return "" }
         let hours = Int(session.targetDuration / 3600)
         if snapshot.hasReachedTarget {
-            return snapshot.state == .fasting ? "目标 \(hours)h 已达成" : "窗口已满"
+            return snapshot.state == .fasting
+                ? String(localized: "目标 \(hours)h 已达成")
+                : String(localized: "窗口已满")
         }
-        return "目标 \(hours)h"
+        return String(localized: "目标 \(hours)h")
     case .skipped:
-        return "明天再继续"
+        return String(localized: "明天再继续")
     }
 }
 
@@ -336,14 +338,17 @@ struct SmallWidgetView: View {
 
     private func bottomLine(_ s: WidgetSnapshot) -> String {
         switch s.state {
-        case .notStarted: return "目标 \(s.targetMinutes / 60)h"
+        case .notStarted: return String(localized: "目标 \(s.targetMinutes / 60)h")
         case .fasting, .eating:
             guard let session = s.session else { return "" }
+            let hours = Int(session.targetDuration) / 3600
             if s.hasReachedTarget {
-                return s.state == .fasting ? "目标 \(Int(session.targetDuration) / 3600)h 已达成" : "窗口已满"
+                return s.state == .fasting
+                    ? String(localized: "目标 \(hours)h 已达成")
+                    : String(localized: "窗口已满")
             }
-            return "目标 \(Int(session.targetDuration) / 3600)h"
-        case .skipped: return "明天再继续"
+            return String(localized: "目标 \(hours)h")
+        case .skipped: return String(localized: "明天再继续")
         }
     }
 }
@@ -408,18 +413,28 @@ struct MediumWidgetView: View {
 
     private func endLine(_ s: WidgetSnapshot) -> String? {
         guard let session = s.session, s.state == .fasting || s.state == .eating else {
-            return s.state == .notStarted ? "准备好了再开始" : nil
+            return s.state == .notStarted ? String(localized: "准备好了再开始") : nil
         }
         let f = DateFormatter()
         f.dateFormat = "HH:mm"
         let when = f.string(from: session.targetEndDate)
         let cal = Calendar.current
-        let prefix = cal.isDateInToday(session.targetEndDate) ? "今天" :
-                     cal.isDateInTomorrow(session.targetEndDate) ? "明天" : ""
-        if s.hasReachedTarget {
-            return s.state == .fasting ? "目标已达成，继续计时" : "进食窗口已满"
+        let dayPrefix: String
+        if cal.isDateInToday(session.targetEndDate) {
+            dayPrefix = String(localized: "今天")
+        } else if cal.isDateInTomorrow(session.targetEndDate) {
+            dayPrefix = String(localized: "明天")
+        } else {
+            dayPrefix = ""
         }
-        return s.state == .fasting ? "可于\(prefix) \(when) 进食" : "建议\(prefix) \(when) 前结束"
+        if s.hasReachedTarget {
+            return s.state == .fasting
+                ? String(localized: "目标已达成，继续计时")
+                : String(localized: "进食窗口已满")
+        }
+        return s.state == .fasting
+            ? String(localized: "可于\(dayPrefix) \(when) 进食")
+            : String(localized: "建议\(dayPrefix) \(when) 前结束")
     }
 }
 
@@ -477,7 +492,7 @@ struct LockRectangularView: View {
     private func elapsedHM(_ s: WidgetSnapshot) -> String {
         switch s.state {
         case .notStarted:
-            return "目标 \(s.targetMinutes / 60) 小时"
+            return String(localized: "目标 \(s.targetMinutes / 60) 小时")
         case .fasting:
             guard let session = s.session else { return "—" }
             if s.hasReachedTarget {
@@ -494,9 +509,9 @@ struct LockRectangularView: View {
             }
             // 进食中 → 倒计时到窗口结束
             let remaining = max(0, Int(session.targetEndDate.timeIntervalSince(s.date)))
-            return "还剩 " + formatHM(remaining)
+            return String(localized: "还剩 \(formatHM(remaining))")
         case .skipped:
-            return "今天休息"
+            return String(localized: "今天休息")
         }
     }
 
@@ -504,9 +519,9 @@ struct LockRectangularView: View {
         let h = seconds / 3600
         let m = (seconds % 3600) / 60
         if h > 0 {
-            return "\(prefix)\(h) 小时 \(m) 分"
+            return String(localized: "\(prefix)\(h) 小时 \(m) 分")
         }
-        return "\(prefix)\(m) 分"
+        return String(localized: "\(prefix)\(m) 分")
     }
 }
 
