@@ -4,7 +4,7 @@ title: Terms of Use / 使用条款 · CleanFast
 
 # Terms of Use / 使用条款
 
-**Last updated / 最后更新：2026-05-01**
+**Last updated / 最后更新：2026-07-20**
 
 ---
 
@@ -12,7 +12,8 @@ title: Terms of Use / 使用条款 · CleanFast
 
 ### 1. 接受条款
 
-下载、安装或使用"轻断食时钟（CleanFast）"即表示你已阅读并同意本使用条款，
+"轻断食时钟（CleanFast）"由 **MaxHope LLC**（美国加利福尼亚州注册公司，下称"我们"或"开发者"）开发并发行。
+下载、安装或使用本应用即表示你已阅读并同意本使用条款，
 以及 Apple 标准最终用户许可协议
 （[EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)）。
 若你不同意任一条款，请不要使用本应用。
@@ -53,7 +54,7 @@ title: Terms of Use / 使用条款 · CleanFast
 ### 5. 知识产权
 
 应用代码、界面设计、文案、图标、品牌名称（包括但不限于"轻断食时钟" / "CleanFast"）
-归开发者 [作者名 / 工作室名] 所有，受适用著作权法及国际条约保护。
+归 MaxHope LLC 所有，受适用著作权法及国际条约保护。
 未经书面许可，不得复制、修改、反编译或用于任何商业用途。
 
 ### 6. 责任限制
@@ -76,7 +77,8 @@ title: Terms of Use / 使用条款 · CleanFast
 
 ### 9. 联系
 
-邮件：**quqi0714@icloud.com**
+MaxHope LLC
+邮件：**app@maxhope.la**
 
 ---
 
@@ -84,6 +86,8 @@ title: Terms of Use / 使用条款 · CleanFast
 
 ### 1. Acceptance
 
+CleanFast is developed and published by **MaxHope LLC**, a California limited liability
+company ("we", "us", or "the developer").
 By downloading, installing, or using CleanFast, you agree to these Terms and the Apple
 Standard End User License Agreement
 ([EULA](https://www.apple.com/legal/internet-services/itunes/dev/stdeula/)).
@@ -127,7 +131,7 @@ We do not warrant that the app will be error-free, uninterrupted, or meet all yo
 ### 5. Intellectual Property
 
 The app's code, interface, copy, icons, and brand names (including but not limited to
-"CleanFast" and "轻断食时钟") are owned by [Author Name / Studio Name] and are protected
+"CleanFast" and "轻断食时钟") are owned by MaxHope LLC and are protected
 by applicable copyright laws and international treaties. You may not copy, modify, decompile,
 or use them commercially without written permission.
 
@@ -153,4 +157,5 @@ without regard to conflict-of-law principles.
 
 ### 9. Contact
 
-Email: **quqi0714@icloud.com**
+MaxHope LLC
+Email: **app@maxhope.la**

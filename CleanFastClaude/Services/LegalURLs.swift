@@ -1,18 +1,17 @@
 import Foundation
 
-/// 法律 / 联系方式相关的外链常量。
+/// 法律 / 联系方式相关的外链常量。运营主体：MaxHope LLC。
 ///
-/// **注意**：上架前需把 `githubUserSlug` 改成你实际的 GitHub Pages 路径。
-/// 现在用 `quqi0714` 占位（按你的 iCloud 邮箱 username 推测）；
-/// 如果 GitHub 用户名不一样，把这里的字符串替换掉即可。
+/// 法律页面目前托管在 GitHub Pages（已验证在线）；
+/// 日后若迁到 maxhope.la 域名，只需改 `base` 一处。
 enum LegalURLs {
-    /// GitHub Pages 域名前缀。形如 `https://<username>.github.io/<repo>`
+    /// 法律页面域名前缀。
     private static let base = "https://quqi0714.github.io/cleanfast"
 
     static let privacyPolicy = URL(string: "\(base)/privacy.html")!
     static let termsOfUse    = URL(string: "\(base)/terms.html")!
 
-    static let contactEmail = "quqi0714@icloud.com"
+    static let contactEmail = "app@maxhope.la"
     static let mailto = URL(string: "mailto:\(contactEmail)?subject=CleanFast%20%E5%8F%8D%E9%A6%88")!
 
     /// 应用版本号 + 构建号，从 Info.plist 读取（避免硬编码）。

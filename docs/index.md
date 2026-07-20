@@ -17,4 +17,8 @@ A gentle intermittent fasting timer for iOS. Local-first. Zero tracking.
 
 ## Contact / 联系
 
-Email: <a href="mailto:quqi0714@icloud.com">quqi0714@icloud.com</a>
+Email: <a href="mailto:app@maxhope.la">app@maxhope.la</a>
+
+---
+
+© 2026 MaxHope LLC

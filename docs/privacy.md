@@ -4,7 +4,7 @@ title: Privacy Policy / 隐私政策 · CleanFast
 
 # Privacy Policy / 隐私政策
 
-**Last updated / 最后更新：2026-05-01**
+**Last updated / 最后更新：2026-07-20**
 
 ---
 
@@ -12,7 +12,8 @@ title: Privacy Policy / 隐私政策 · CleanFast
 
 ### 概述
 
-"轻断食时钟（CleanFast）"是一款本地化的间歇性断食计时工具。我们坚持"轻"的设计理念——
+"轻断食时钟（CleanFast）"是一款本地化的间歇性断食计时工具，由 **MaxHope LLC**
+（美国加利福尼亚州注册公司，下称"我们"）开发并发行。我们坚持"轻"的设计理念——
 **不收集任何用户数据，不上传，不追踪**。
 
 ### 我们不收集任何数据
@@ -58,7 +59,8 @@ title: Privacy Policy / 隐私政策 · CleanFast
 
 ### 联系我们
 
-如有任何疑问，请邮件联系：**quqi0714@icloud.com**
+MaxHope LLC
+如有任何疑问，请邮件联系：**app@maxhope.la**
 
 ---
 
@@ -66,7 +68,8 @@ title: Privacy Policy / 隐私政策 · CleanFast
 
 ### Overview
 
-CleanFast is a local-first intermittent fasting timer for iOS. We stand by the "light" design philosophy:
+CleanFast is a local-first intermittent fasting timer for iOS, developed and published by
+**MaxHope LLC**, a California limited liability company ("we"). We stand by the "light" design philosophy:
 **we collect no user data, upload nothing, and track nothing**.
 
 ### We Collect Nothing
@@ -113,4 +116,5 @@ release notes. Please review periodically.
 
 ### Contact
 
-Questions? Email **quqi0714@icloud.com**.
+MaxHope LLC
+Questions? Email **app@maxhope.la**.
