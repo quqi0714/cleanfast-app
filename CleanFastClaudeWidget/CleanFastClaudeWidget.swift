@@ -35,17 +35,23 @@ struct CleanFastClaudeProvider: TimelineProvider {
            nextDay > now {
             entries.append(CleanFastClaudeEntry(date: nextDay, snapshot: WidgetSnapshot.current(at: nextDay)))
         }
+        // 自动模式存在"明天自动恢复"时（skipped 和跨午夜后的 notStarted 都可能带着
+        // resumeDate），必须在恢复时刻放 entry，并给恢复后的断食段生成完整刷新序列，
+        // 否则用户不开 App 的话 widget 会一直停在"未开始/休息"。
         if snapshot.timingMode == .automatic,
-           snapshot.state == .notStarted,
+           snapshot.state == .notStarted || snapshot.state == .skipped,
            let resumeDate = snapshot.automaticResumeStartDate,
            resumeDate > now {
-            entries.append(CleanFastClaudeEntry(date: resumeDate, snapshot: WidgetSnapshot.current(at: resumeDate)))
+            let resumeSnapshot = WidgetSnapshot.current(at: resumeDate)
+            entries.append(CleanFastClaudeEntry(date: resumeDate, snapshot: resumeSnapshot))
+            if resumeSnapshot.state == .fasting || resumeSnapshot.state == .eating {
+                appendActiveTimelineEntries(to: &entries, snapshot: resumeSnapshot, now: resumeDate)
+            }
         }
 
-        // 进行中状态用 .atEnd 让 entries 跑完后 iOS 自动再请求一次 timeline，
-        // 避免长会话末端进度条停摆
-        let policy: TimelineReloadPolicy =
-            (snapshot.state == .fasting || snapshot.state == .eating) ? .atEnd : .never
+        // 只要时间线里还有未来的 entry（会话推进 / 午夜失效 / 自动恢复），就用 .atEnd
+        // 让 iOS 在末尾自动再请求一次，衔接下一段；纯静态的单条 entry 才用 .never。
+        let policy: TimelineReloadPolicy = entries.count > 1 ? .atEnd : .never
         completion(Timeline(entries: entries.sorted(by: { $0.date < $1.date }), policy: policy))
     }
 
@@ -415,9 +421,8 @@ struct MediumWidgetView: View {
         guard let session = s.session, s.state == .fasting || s.state == .eating else {
             return s.state == .notStarted ? String(localized: "准备好了再开始") : nil
         }
-        let f = DateFormatter()
-        f.dateFormat = "HH:mm"
-        let when = f.string(from: session.targetEndDate)
+        // 跟随系统 locale/时制偏好（中文默认 24h 不变，en-US 显示 3:30 PM）
+        let when = session.targetEndDate.formatted(date: .omitted, time: .shortened)
         let cal = Calendar.current
 
         if s.hasReachedTarget {

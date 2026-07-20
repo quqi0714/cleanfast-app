@@ -169,8 +169,10 @@ struct WidgetSnapshot {
     /// 自动模式循环推进的纯函数实现（无副作用，仅算 Date 数学）。
     ///
     /// **MIRROR**：必须与 `FastingTimerViewModel.advanceAutomaticCycle` 保持算法等价。
-    /// 改动这里时同步改主 App 那一份，反之亦然。
-    /// 单元测试 `advanceAutomatic_mirrorsWidgetImplementation` 会双跑两份实现并比对结果。
+    /// 改动这里时同步改主 App 那一份，反之亦然（widget target 无法被测试 target
+    /// 引用，跨 target 等价只能靠人工同步）。
+    /// 主 App 侧的单元测试 `advanceAutomaticCycle_matchesPinnedReference` 用独立
+    /// 参考实现钉住该算法的行为——改这里时请同步看它是否需要更新。
     static func advanceAutomaticCycle(
         startDate: Date,
         currentDuration: TimeInterval,

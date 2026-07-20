@@ -109,6 +109,12 @@ final class FastingTimerViewModel: ObservableObject {
     }
 
     private func tick(at date: Date) {
+        // 跳过状态跨午夜要失效（App 整夜留在前台时 scenePhase 不变化，
+        // 只能靠 tick 兜底触发 rehydrate）。
+        if state == .skipped, skippedDateString != schedule.dayString(for: date) {
+            rehydrate()
+            return
+        }
         // 仅在有进行中会话、或自动模式有等待恢复的情况下发布 `now`。
         // 未开始 / 已跳过手动模式下 `now` 不影响任何 UI 显示，
         // 静音 @Published 可以避免 HomeView 每秒空转一次 body。
@@ -147,8 +153,6 @@ final class FastingTimerViewModel: ObservableObject {
         return session.targetDuration - elapsed
     }
 
-    var overshoot: TimeInterval { max(0, -remaining) }
-
     var hasReachedTarget: Bool {
         guard session != nil else { return false }
         return remaining <= 0
@@ -174,7 +178,12 @@ final class FastingTimerViewModel: ObservableObject {
     // MARK: - Actions
 
     func startFasting(at date: Date = Date()) {
-        let startDate = min(date, Date())
+        var startDate = min(date, Date())
+        // 从进食态重新开始断食时，新断食的开始不允许早于当前进食段的开始，
+        // 否则会出现"断食开始于进食之前"的倒挂时间线。
+        if state == .eating, let current = session {
+            startDate = max(startDate, current.startDate)
+        }
         let s = FastingSession(startDate: startDate, targetDuration: fastingDuration)
         session = s
         state = .fasting
@@ -201,7 +210,12 @@ final class FastingTimerViewModel: ObservableObject {
     }
 
     func startEating(at date: Date = Date()) {
-        let s = FastingSession(startDate: date, targetDuration: eatingDuration)
+        var startDate = min(date, Date())
+        // 结束断食时，进食的开始不允许早于这段断食的开始（时间线倒挂保护）。
+        if state == .fasting, let current = session {
+            startDate = max(startDate, current.startDate)
+        }
+        let s = FastingSession(startDate: startDate, targetDuration: eatingDuration)
         session = s
         state = .eating
         persistence.session = s
@@ -335,32 +349,32 @@ final class FastingTimerViewModel: ObservableObject {
     // MARK: - Notification helpers
 
     private func scheduleSessionNotification() {
-        guard persistence.notificationEnabled, let session else {
+        guard persistence.notificationEnabled, let session,
+              state == .fasting || state == .eating
+        else {
             cancelSessionNotifications()
             return
         }
+
+        // 自动模式：预排未来若干次窗口切换（用户几天不开 App 也能持续收到提醒）。
+        if timingMode == .automatic {
+            scheduleAutomaticSeries(
+                sessionStart: session.startDate,
+                sessionDuration: session.targetDuration,
+                sessionIsFasting: state == .fasting
+            )
+            return
+        }
+
+        // 手动模式：只挂"当前目标达成"这一条。
         let title: String
         let body: String
-        switch state {
-        case .fasting:
-            if timingMode == .automatic {
-                title = String(localized: "已进入进食窗口")
-                body = String(localized: "断食窗口已经结束，时钟会继续帮你记录这一段。")
-            } else {
-                title = String(localized: "辛苦啦")
-                body = String(localized: "你的断食目标已达成，可以开始温和进食了。")
-            }
-        case .eating:
-            if timingMode == .automatic {
-                title = String(localized: "已回到断食窗口")
-                body = String(localized: "进食窗口已经结束，新一段断食已经开始。")
-            } else {
-                title = String(localized: "差不多到时间啦")
-                body = String(localized: "进食窗口建议时长已到，准备好就可以开始下一轮断食。")
-            }
-        default:
-            cancelSessionNotifications()
-            return
+        if state == .fasting {
+            title = String(localized: "辛苦啦")
+            body = String(localized: "你的断食目标已达成，可以开始温和进食了。")
+        } else {
+            title = String(localized: "差不多到时间啦")
+            body = String(localized: "进食窗口建议时长已到，准备好就可以开始下一轮断食。")
         }
         let endDate = session.targetEndDate
         guard endDate.timeIntervalSinceNow > 1 else {
@@ -381,23 +395,67 @@ final class FastingTimerViewModel: ObservableObject {
         guard persistence.notificationEnabled,
               let resumeDate = automaticResumeStartDate()
         else { return }
+        // 恢复后的第一段是断食：以 resumeDate 为起点的断食会话推出整串切换。
+        scheduleAutomaticSeries(
+            sessionStart: resumeDate,
+            sessionDuration: fastingDuration,
+            sessionIsFasting: true
+        )
+    }
 
-        let fireDate = resumeDate.addingTimeInterval(fastingDuration)
-        guard fireDate.timeIntervalSinceNow > 1 else {
-            cancelSessionNotifications()
-            return
-        }
-
-        Task { @MainActor in
-            let result = await NotificationService.shared.scheduleTargetReached(
-                at: fireDate,
-                title: String(localized: "已进入进食窗口"),
-                body: String(localized: "断食窗口已经结束，时钟会继续帮你记录这一段。")
+    /// 把"当前会话之后的 N 次切换"转成通知系列挂给系统。
+    private func scheduleAutomaticSeries(
+        sessionStart: Date,
+        sessionDuration: TimeInterval,
+        sessionIsFasting: Bool
+    ) {
+        let transitions = Self.upcomingAutomaticTransitions(
+            sessionStart: sessionStart,
+            sessionDuration: sessionDuration,
+            sessionIsFasting: sessionIsFasting,
+            fastingDuration: fastingDuration,
+            eatingDuration: eatingDuration,
+            count: NotificationService.maxSeriesCount
+        )
+        let items = transitions.map { transition in
+            NotificationService.PlannedNotification(
+                fireDate: transition.fireDate,
+                title: transition.endedWindowIsFasting
+                    ? String(localized: "已进入进食窗口")
+                    : String(localized: "已回到断食窗口"),
+                body: transition.endedWindowIsFasting
+                    ? String(localized: "断食窗口已经结束，时钟会继续帮你记录这一段。")
+                    : String(localized: "进食窗口已经结束，新一段断食已经开始。")
             )
+        }
+        Task { @MainActor in
+            let result = await NotificationService.shared.scheduleSeries(items)
             if result == .notAuthorized {
                 persistence.notificationEnabled = false
             }
         }
+    }
+
+    /// 自动模式：从给定会话推出接下来 `count` 次窗口切换。
+    /// 纯函数（只做 Date 数学），返回每次切换的触发时刻 + 刚结束的是否断食窗口。
+    static func upcomingAutomaticTransitions(
+        sessionStart: Date,
+        sessionDuration: TimeInterval,
+        sessionIsFasting: Bool,
+        fastingDuration: TimeInterval,
+        eatingDuration: TimeInterval,
+        count: Int
+    ) -> [(fireDate: Date, endedWindowIsFasting: Bool)] {
+        guard count > 0, fastingDuration > 0, eatingDuration > 0 else { return [] }
+        var result: [(fireDate: Date, endedWindowIsFasting: Bool)] = []
+        var windowEnd = sessionStart.addingTimeInterval(sessionDuration)
+        var windowIsFasting = sessionIsFasting
+        for _ in 0..<count {
+            result.append((windowEnd, windowIsFasting))
+            windowIsFasting.toggle()
+            windowEnd = windowEnd.addingTimeInterval(windowIsFasting ? fastingDuration : eatingDuration)
+        }
+        return result
     }
 
     private func cancelSessionNotifications() {
@@ -473,9 +531,11 @@ final class FastingTimerViewModel: ObservableObject {
 
     /// 自动模式循环推进的纯函数实现（无副作用，仅算 Date 数学）。
     ///
-    /// **MIRROR**：必须与 `WidgetData.advanceAutomaticCycle` 保持算法等价。
-    /// 改动这里时同步改 widget 那一份，反之亦然。
-    /// 单元测试 `advanceAutomatic_mirrorsWidgetImplementation` 会双跑两份实现并比对结果。
+    /// **MIRROR**：必须与 `WidgetSnapshot.advanceAutomaticCycle` 保持算法等价。
+    /// 改动这里时同步改 widget 那一份，反之亦然（widget target 无法被测试 target
+    /// 引用，跨 target 等价只能靠人工同步）。
+    /// 单元测试 `advanceAutomaticCycle_matchesPinnedReference` 用独立的参考实现
+    /// 钉住这一份的行为，防止单边被改坏。
     static func advanceAutomaticCycle(
         startDate: Date,
         currentDuration: TimeInterval,

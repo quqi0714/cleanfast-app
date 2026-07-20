@@ -19,7 +19,10 @@
             <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
             <key>NSPrivacyAccessedAPITypeReasons</key>
             <array>
+                <!-- CA92.1：读写本 Extension 自身可访问的 UserDefaults -->
                 <string>CA92.1</string>
+                <!-- 1C8F.1：通过 App Group 读取主 App 写入的共享 UserDefaults -->
+                <string>1C8F.1</string>
             </array>
         </dict>
     </array>

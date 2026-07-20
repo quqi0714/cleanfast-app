@@ -22,7 +22,9 @@ enum RecentTimeSelection {
     static func day(for date: Date, now: Date) -> RecentDay {
         let calendar = Calendar.current
         let todayStart = calendar.startOfDay(for: now)
-        return date >= todayStart ? .today : .yesterday
+        if date >= todayStart { return .today }
+        let yesterdayStart = calendar.date(byAdding: .day, value: -1, to: todayStart) ?? todayStart
+        return date >= yesterdayStart ? .yesterday : .twoDaysAgo
     }
 
     static func dayOptions(now: Date = Date()) -> [RecentDay] {

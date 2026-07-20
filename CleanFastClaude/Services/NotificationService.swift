@@ -1,19 +1,34 @@
 import UserNotifications
 import Foundation
 
-/// 本地通知调度。一个会话最多有一条「目标达成」通知挂在 iOS 通知中心，
-/// 状态切换/跳过/恢复会取消它，保证不会有过期通知到来。
+/// 本地通知调度。
+/// - 手动模式：一个会话最多一条「目标达成」通知（`identifier`）。
+/// - 自动模式：预排未来若干次窗口切换（`seriesIdentifiers`），
+///   这样用户几天不打开 App 也能按节奏收到提醒。
+/// 状态切换/跳过/恢复都会先取消全部，保证不会有过期通知到来。
 final class NotificationService: NSObject, UNUserNotificationCenterDelegate, @unchecked Sendable {
     static let shared = NotificationService()
 
     private let center = UNUserNotificationCenter.current()
     private static let identifier = "cleanfast.targetReached"
+    /// 自动模式一次最多预排的切换条数（16:8 下 ≈ 3 天），远低于系统 64 条上限。
+    static let maxSeriesCount = 6
+    private static let seriesIdentifiers: [String] =
+        (0..<maxSeriesCount).map { "cleanfast.targetReached.series.\($0)" }
+    private static let allIdentifiers: [String] = [identifier] + seriesIdentifiers
 
     enum ScheduleResult: Equatable {
         case scheduled
         case notAuthorized
         case expired
         case failed
+    }
+
+    /// 待预排的一条通知（自动模式的某次窗口切换）。
+    struct PlannedNotification {
+        let fireDate: Date
+        let title: String
+        let body: String
     }
 
     private override init() {
@@ -66,28 +81,65 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate, @un
 
         cancelAll()
 
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.body = body
-        content.sound = .default
-        content.interruptionLevel = .active
-
-        let components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fireDate)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        let request = UNNotificationRequest(
-            identifier: Self.identifier,
-            content: content,
-            trigger: trigger
-        )
         do {
-            try await center.add(request)
+            try await center.add(request(identifier: Self.identifier,
+                                         fireDate: fireDate, title: title, body: body))
             return .scheduled
         } catch {
             return .failed
         }
     }
 
+    /// 批量预排一串通知（自动模式的未来切换）。先清空旧的，再逐条挂上；
+    /// 已过期的条目被跳过，超出 `maxSeriesCount` 的截断。
+    func scheduleSeries(_ items: [PlannedNotification]) async -> ScheduleResult {
+        let status = await authorizationStatus()
+        switch status {
+        case .notDetermined:
+            let granted = await requestPermission()
+            guard granted else { return .notAuthorized }
+        case .authorized, .provisional, .ephemeral:
+            break
+        default:
+            return .notAuthorized
+        }
+
+        cancelAll()
+
+        let valid = items
+            .filter { $0.fireDate.timeIntervalSinceNow > 1 }
+            .prefix(Self.seriesIdentifiers.count)
+        guard !valid.isEmpty else { return .expired }
+
+        var scheduledAny = false
+        for (index, item) in valid.enumerated() {
+            do {
+                try await center.add(request(identifier: Self.seriesIdentifiers[index],
+                                             fireDate: item.fireDate,
+                                             title: item.title, body: item.body))
+                scheduledAny = true
+            } catch {
+                // 单条失败不阻断其余条目
+            }
+        }
+        return scheduledAny ? .scheduled : .failed
+    }
+
+    private func request(identifier: String, fireDate: Date, title: String, body: String) -> UNNotificationRequest {
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        content.sound = .default
+        content.interruptionLevel = .active
+
+        let components = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute, .second], from: fireDate
+        )
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+        return UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    }
+
     func cancelAll() {
-        center.removePendingNotificationRequests(withIdentifiers: [Self.identifier])
+        center.removePendingNotificationRequests(withIdentifiers: Self.allIdentifiers)
     }
 }

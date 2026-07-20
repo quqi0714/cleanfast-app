@@ -418,4 +418,166 @@ struct CleanFastClaudeTests {
         #expect(r.duration == 16 * 3600)
         #expect(r.startDate == start.addingTimeInterval(8 * 3600))
     }
+
+    /// 独立参考实现（刻意用不同写法：直接按周期数学求余，而不是逐段循环），
+    /// 在整段网格上与 `advanceAutomaticCycle` 比对，钉住其行为。
+    /// widget 侧的镜像副本无法被本 target 引用，人工同步时以此为准绳。
+    @Test func advanceAutomaticCycle_matchesPinnedReference() {
+        let base = Date(timeIntervalSince1970: 1_700_000_000)
+        let plans: [(fasting: TimeInterval, eating: TimeInterval)] = [
+            (16 * 3600, 8 * 3600),
+            (18 * 3600, 6 * 3600),
+            (23 * 3600, 1 * 3600),
+        ]
+        let offsets: [TimeInterval] = [
+            0, 1, 3599, 3600, 8 * 3600 - 1, 8 * 3600, 16 * 3600 - 1, 16 * 3600,
+            24 * 3600, 30 * 3600, 72 * 3600 + 5 * 3600, 30 * 24 * 3600 + 123,
+        ]
+        for plan in plans {
+            for isFasting in [true, false] {
+                let currentDuration = isFasting ? plan.fasting : plan.eating
+                for offset in offsets {
+                    let now = base.addingTimeInterval(offset)
+                    let r = FastingTimerViewModel.advanceAutomaticCycle(
+                        startDate: base,
+                        currentDuration: currentDuration,
+                        isFasting: isFasting,
+                        fastingDuration: plan.fasting,
+                        eatingDuration: plan.eating,
+                        at: now
+                    )
+                    // 参考实现：先消耗当前段，再按整周期求余推进
+                    var refStart = base
+                    var refFasting = isFasting
+                    var refDuration = currentDuration
+                    if now >= base.addingTimeInterval(currentDuration) {
+                        refStart = base.addingTimeInterval(currentDuration)
+                        refFasting = !isFasting
+                        refDuration = refFasting ? plan.fasting : plan.eating
+                        let cycle = plan.fasting + plan.eating
+                        var remaining = now.timeIntervalSince(refStart)
+                        let fullCycles = floor(remaining / cycle)
+                        refStart = refStart.addingTimeInterval(fullCycles * cycle)
+                        remaining -= fullCycles * cycle
+                        if remaining >= refDuration {
+                            refStart = refStart.addingTimeInterval(refDuration)
+                            refFasting.toggle()
+                            refDuration = refFasting ? plan.fasting : plan.eating
+                        }
+                    }
+                    #expect(r.startDate == refStart,
+                            "startDate mismatch at offset \(offset), fasting=\(isFasting)")
+                    #expect(r.isFasting == refFasting,
+                            "isFasting mismatch at offset \(offset), fasting=\(isFasting)")
+                    #expect(r.duration == refDuration,
+                            "duration mismatch at offset \(offset), fasting=\(isFasting)")
+                }
+            }
+        }
+    }
+
+    // MARK: - Upcoming automatic transitions (notification series)
+
+    @Test func upcomingTransitions_alternateAndAccumulateCorrectly() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        let transitions = FastingTimerViewModel.upcomingAutomaticTransitions(
+            sessionStart: start,
+            sessionDuration: 16 * 3600,
+            sessionIsFasting: true,
+            fastingDuration: 16 * 3600,
+            eatingDuration: 8 * 3600,
+            count: 4
+        )
+        #expect(transitions.count == 4)
+        // 断食结束 → 进食结束 → 断食结束 → 进食结束
+        #expect(transitions[0].fireDate == start.addingTimeInterval(16 * 3600))
+        #expect(transitions[0].endedWindowIsFasting == true)
+        #expect(transitions[1].fireDate == start.addingTimeInterval(24 * 3600))
+        #expect(transitions[1].endedWindowIsFasting == false)
+        #expect(transitions[2].fireDate == start.addingTimeInterval(40 * 3600))
+        #expect(transitions[2].endedWindowIsFasting == true)
+        #expect(transitions[3].fireDate == start.addingTimeInterval(48 * 3600))
+        #expect(transitions[3].endedWindowIsFasting == false)
+    }
+
+    @Test func upcomingTransitions_startingFromEatingWindow() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        let transitions = FastingTimerViewModel.upcomingAutomaticTransitions(
+            sessionStart: start,
+            sessionDuration: 8 * 3600,
+            sessionIsFasting: false,
+            fastingDuration: 16 * 3600,
+            eatingDuration: 8 * 3600,
+            count: 2
+        )
+        #expect(transitions.count == 2)
+        #expect(transitions[0].fireDate == start.addingTimeInterval(8 * 3600))
+        #expect(transitions[0].endedWindowIsFasting == false)
+        #expect(transitions[1].fireDate == start.addingTimeInterval(24 * 3600))
+        #expect(transitions[1].endedWindowIsFasting == true)
+    }
+
+    @Test func upcomingTransitions_zeroCountOrDuration_returnsEmpty() {
+        let start = Date()
+        #expect(FastingTimerViewModel.upcomingAutomaticTransitions(
+            sessionStart: start, sessionDuration: 16 * 3600, sessionIsFasting: true,
+            fastingDuration: 16 * 3600, eatingDuration: 8 * 3600, count: 0
+        ).isEmpty)
+        #expect(FastingTimerViewModel.upcomingAutomaticTransitions(
+            sessionStart: start, sessionDuration: 16 * 3600, sessionIsFasting: true,
+            fastingDuration: 0, eatingDuration: 8 * 3600, count: 3
+        ).isEmpty)
+    }
+
+    // MARK: - Start-time lower-bound clamping（时间线倒挂保护）
+
+    @Test func startEating_beforeFastingStart_clampsToFastingStart() {
+        let (vm, _) = makeVM()
+        let fastStart = Date().addingTimeInterval(-4 * 3600)
+        vm.startFasting(at: fastStart)
+        // 试图把进食开始选到断食开始之前 1 小时 → 应钳制到断食开始
+        vm.endFasting(at: fastStart.addingTimeInterval(-3600))
+        #expect(vm.state == .eating)
+        #expect(vm.session?.startDate == fastStart)
+    }
+
+    @Test func restartFasting_beforeEatingStart_clampsToEatingStart() {
+        let (vm, _) = makeVM()
+        vm.startFasting(at: Date().addingTimeInterval(-10 * 3600))
+        let eatingStart = Date().addingTimeInterval(-2 * 3600)
+        vm.endFasting(at: eatingStart)
+        // 进食态重新开始断食，选到进食开始之前 → 应钳制到进食开始
+        vm.startFasting(at: eatingStart.addingTimeInterval(-3600))
+        #expect(vm.state == .fasting)
+        #expect(vm.session?.startDate == eatingStart)
+    }
+
+    @Test func startEating_normalPastTime_keepsChosenTime() {
+        let (vm, _) = makeVM()
+        let fastStart = Date().addingTimeInterval(-6 * 3600)
+        vm.startFasting(at: fastStart)
+        let eatingStart = Date().addingTimeInterval(-30 * 60)
+        vm.endFasting(at: eatingStart)
+        #expect(vm.session?.startDate == eatingStart)
+    }
+
+    // MARK: - RecentTimeSelection day mapping
+
+    @Test func recentDay_mapsTodayYesterdayAndTwoDaysAgo() {
+        let cal = Calendar.current
+        let now = Date()
+        let todayStart = cal.startOfDay(for: now)
+
+        let todayDate = todayStart.addingTimeInterval(60)
+        #expect(RecentTimeSelection.day(for: todayDate, now: now) == .today)
+
+        let yesterdayDate = cal.date(byAdding: .day, value: -1, to: todayStart)!
+            .addingTimeInterval(5 * 3600)
+        #expect(RecentTimeSelection.day(for: yesterdayDate, now: now) == .yesterday)
+
+        // 关键回归：前天的时间必须映射到 .twoDaysAgo（修复前会错报成 .yesterday）
+        let twoDaysAgoDate = cal.date(byAdding: .day, value: -2, to: todayStart)!
+            .addingTimeInterval(20 * 3600)
+        #expect(RecentTimeSelection.day(for: twoDaysAgoDate, now: now) == .twoDaysAgo)
+    }
 }

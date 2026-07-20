@@ -144,6 +144,7 @@
 
     },
     "今天" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -210,7 +211,26 @@
       }
     },
     "准备好了再开始" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start when you're ready"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "准备好了再开始"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "準備好了再開始"
+          }
+        }
+      }
     },
     "准备好再开始" : {
       "localizations" : {
@@ -278,46 +298,136 @@
         }
       }
     },
+    "可于 %@ 进食" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eat at %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可于 %@ 进食"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可於 %@ 進食"
+          }
+        }
+      }
+    },
     "可于今天 %@ 进食" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eat at %@ today" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可于今天 %@ 进食" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "可於今天 %@ 進食" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eat at %@ today"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可于今天 %@ 进食"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可於今天 %@ 進食"
+          }
+        }
       }
     },
     "可于明天 %@ 进食" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eat at %@ tomorrow" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可于明天 %@ 进食" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "可於明天 %@ 進食" } }
-      }
-    },
-    "可于 %@ 进食" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Eat at %@" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "可于 %@ 进食" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "可於 %@ 進食" } }
-      }
-    },
-    "建议今天 %@ 前结束" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Finish by %@ today" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "建议今天 %@ 前结束" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "建議今天 %@ 前結束" } }
-      }
-    },
-    "建议明天 %@ 前结束" : {
-      "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Finish by %@ tomorrow" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "建议明天 %@ 前结束" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "建議明天 %@ 前結束" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eat at %@ tomorrow"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可于明天 %@ 进食"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可於明天 %@ 進食"
+          }
+        }
       }
     },
     "建议 %@ 前结束" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "Finish by %@" } },
-        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "建议 %@ 前结束" } },
-        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "建議 %@ 前結束" } }
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish by %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建议 %@ 前结束"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建議 %@ 前結束"
+          }
+        }
+      }
+    },
+    "建议今天 %@ 前结束" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish by %@ today"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建议今天 %@ 前结束"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建議今天 %@ 前結束"
+          }
+        }
+      }
+    },
+    "建议明天 %@ 前结束" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish by %@ tomorrow"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建议明天 %@ 前结束"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "建議明天 %@ 前結束"
+          }
+        }
       }
     },
     "断" : {
@@ -409,6 +519,7 @@
       }
     },
     "明天" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

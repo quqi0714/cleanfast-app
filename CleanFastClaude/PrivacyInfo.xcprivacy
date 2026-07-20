@@ -23,7 +23,10 @@
             <string>NSPrivacyAccessedAPICategoryUserDefaults</string>
             <key>NSPrivacyAccessedAPITypeReasons</key>
             <array>
+                <!-- CA92.1：读写本 App 自身的 UserDefaults -->
                 <string>CA92.1</string>
+                <!-- 1C8F.1：通过 App Group 与同组的 Widget Extension 共享 UserDefaults -->
+                <string>1C8F.1</string>
             </array>
         </dict>
     </array>
