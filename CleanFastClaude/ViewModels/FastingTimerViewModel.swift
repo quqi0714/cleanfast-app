@@ -12,6 +12,8 @@ final class FastingTimerViewModel: ObservableObject {
     @Published private(set) var timingMode: TimingMode
     @Published private(set) var manualStartNeedsTimeChoice: Bool
     @Published private(set) var now: Date = Date()
+    /// 达到求评里程碑时置 true，由 HomeView 消费（调系统评分弹窗后回调 markReviewRequestHandled）。
+    @Published private(set) var pendingReviewRequest: Bool = false
 
     private let persistence: PersistenceService
     private let schedule: ScheduleService
@@ -214,6 +216,10 @@ final class FastingTimerViewModel: ObservableObject {
         // 结束断食时，进食的开始不允许早于这段断食的开始（时间线倒挂保护）。
         if state == .fasting, let current = session {
             startDate = max(startDate, current.startDate)
+        }
+        // 手动结束一段「已达标」的断食 → 记一次完成（求评里程碑依据）。
+        if state == .fasting, hasReachedTarget {
+            recordCompletedFast()
         }
         let s = FastingSession(startDate: startDate, targetDuration: eatingDuration)
         session = s
@@ -515,6 +521,12 @@ final class FastingTimerViewModel: ObservableObject {
 
         guard result.cyclesAdvanced > 0 else { return false }
 
+        // 自动模式「实时」走完一段断食（单次推进、断食→进食）也记一次完成；
+        // 离开多日后的多周期追赶不计（用户并未真的经历那些窗口）。
+        if result.cyclesAdvanced == 1, state == .fasting, !result.isFasting {
+            recordCompletedFast()
+        }
+
         let nextState: FastingState = result.isFasting ? .fasting : .eating
         let nextSession = FastingSession(
             startDate: result.startDate,
@@ -557,6 +569,27 @@ final class FastingTimerViewModel: ObservableObject {
         }
 
         return (current.start, current.duration, current.fasting, cycles)
+    }
+
+    // MARK: - App Store review milestones
+
+    /// 求评里程碑：第 3 / 10 / 30 次达成断食目标。
+    /// 时机选在刚完成目标的高光时刻；系统自身限制每 365 天最多真正弹出 3 次。
+    private static let reviewMilestones: Set<Int> = [3, 10, 30]
+
+    private func recordCompletedFast() {
+        let count = persistence.completedFastCount + 1
+        persistence.completedFastCount = count
+        if Self.reviewMilestones.contains(count),
+           persistence.reviewRequestedForCount < count {
+            pendingReviewRequest = true
+        }
+    }
+
+    /// HomeView 调用系统评分请求后回调，落盘防重复。
+    func markReviewRequestHandled() {
+        pendingReviewRequest = false
+        persistence.reviewRequestedForCount = persistence.completedFastCount
     }
 
     private func reloadWidgets() {

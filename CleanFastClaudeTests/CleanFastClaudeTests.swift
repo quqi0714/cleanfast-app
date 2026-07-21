@@ -580,4 +580,62 @@ struct CleanFastClaudeTests {
             .addingTimeInterval(20 * 3600)
         #expect(RecentTimeSelection.day(for: twoDaysAgoDate, now: now) == .twoDaysAgo)
     }
+
+    // MARK: - Review milestones（求评里程碑）
+
+    /// 每轮完成后经 skip/resume 回到 notStarted，
+    /// 否则从进食态回退开始时间会被时间线倒挂钳制挡住（那是生产期望行为）。
+    @Test func completedFast_thirdCompletionTriggersReviewRequest() {
+        let (vm, defaults) = makeVM()
+        func completeOneFast() {
+            vm.startFasting(at: Date().addingTimeInterval(-17 * 3600)) // 超过 16h 目标
+            vm.endFasting()
+            vm.skipToday()
+            vm.resumeToday()
+        }
+        for i in 1...2 {
+            completeOneFast()
+            #expect(vm.pendingReviewRequest == false, "第 \(i) 次不应触发")
+        }
+        completeOneFast()
+        #expect(vm.pendingReviewRequest == true)
+        let p = PersistenceService(defaults: defaults)
+        #expect(p.completedFastCount == 3)
+
+        vm.markReviewRequestHandled()
+        #expect(vm.pendingReviewRequest == false)
+        #expect(p.reviewRequestedForCount == 3)
+
+        // 第 4 次完成：非里程碑，不再触发
+        completeOneFast()
+        #expect(vm.pendingReviewRequest == false)
+        #expect(p.completedFastCount == 4)
+    }
+
+    @Test func completedFast_unreachedTargetDoesNotCount() {
+        let (vm, defaults) = makeVM()
+        vm.startFasting(at: Date().addingTimeInterval(-3600)) // 只断了 1h，未达标
+        vm.endFasting()
+        #expect(PersistenceService(defaults: defaults).completedFastCount == 0)
+        #expect(vm.pendingReviewRequest == false)
+    }
+
+    @Test func completedFast_automaticSingleAdvanceCounts_multiCatchupDoesNot() {
+        // 实时单周期推进（断食 16h 后 30 分钟）→ 计 1 次
+        let liveSession = FastingSession(
+            startDate: Date().addingTimeInterval(-16.5 * 3600),
+            targetDuration: TimeInterval(16 * 3600)
+        )
+        let (vm1, d1) = makeVM(timingMode: .automatic, state: .fasting, session: liveSession)
+        #expect(vm1.state == .eating)
+        #expect(PersistenceService(defaults: d1).completedFastCount == 1)
+
+        // 离开 30 小时的多周期追赶 → 不计
+        let staleSession = FastingSession(
+            startDate: Date().addingTimeInterval(-30 * 3600),
+            targetDuration: TimeInterval(16 * 3600)
+        )
+        let (_, d2) = makeVM(timingMode: .automatic, state: .fasting, session: staleSession)
+        #expect(PersistenceService(defaults: d2).completedFastCount == 0)
+    }
 }

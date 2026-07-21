@@ -36,6 +36,8 @@ final class PersistenceService: Sendable {
         static let manualStartNeedsTimeChoice = "manualStartNeedsTimeChoice.v1"
         static let automaticFastingStartMinute = "automaticFastingStartMinute.v1"
         static let automaticResumeDateString = "automaticResumeDate.v1"
+        static let completedFastCount         = "completedFastCount.v1"
+        static let reviewRequestedForCount    = "reviewRequestedForCount.v1"
     }
 
     var state: FastingState {
@@ -149,6 +151,18 @@ final class PersistenceService: Sendable {
                 defaults.removeObject(forKey: Key.automaticFastingStartMinute)
             }
         }
+    }
+
+    /// 累计「达成目标」的断食次数（手动结束达标 + 自动模式实时切换各计一次）。
+    var completedFastCount: Int {
+        get { defaults.integer(forKey: Key.completedFastCount) }
+        set { defaults.set(newValue, forKey: Key.completedFastCount) }
+    }
+
+    /// 最近一次已发出评分请求时的 completedFastCount，防止同一里程碑重复求评。
+    var reviewRequestedForCount: Int {
+        get { defaults.integer(forKey: Key.reviewRequestedForCount) }
+        set { defaults.set(newValue, forKey: Key.reviewRequestedForCount) }
     }
 
     var automaticResumeDateString: String? {

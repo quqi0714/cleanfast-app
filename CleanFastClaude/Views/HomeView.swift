@@ -1,9 +1,11 @@
 import SwiftUI
 import Combine
+import StoreKit
 
 struct HomeView: View {
     @ObservedObject var vm: FastingTimerViewModel
     @EnvironmentObject private var settings: AppSettingsStore
+    @Environment(\.requestReview) private var requestReview
     @State private var showSettings = false
     @State private var showAdjustStartTime = false
     @State private var showSkipConfirmation = false
@@ -82,6 +84,15 @@ struct HomeView: View {
         .onChange(of: vm.state) { _, _ in
             withAnimation(.spring(response: 1.0, dampingFraction: 0.8)) {
                 animatedProgress = vm.progress
+            }
+        }
+        .onChange(of: vm.pendingReviewRequest) { _, pending in
+            guard pending else { return }
+            // 稍等状态切换动画落定再弹系统评分，避免打断高光时刻
+            Task { @MainActor in
+                try? await Task.sleep(for: .seconds(1.6))
+                requestReview()
+                vm.markReviewRequestHandled()
             }
         }
     }
