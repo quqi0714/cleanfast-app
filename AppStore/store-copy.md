@@ -23,24 +23,26 @@
 
 ## 简体中文（zh-Hans）
 
+> 索引机制：名称权重最高 > 副标题 > 关键词字段；三处互不重复用词；描述不参与搜索。
+
 **名称**（30 字符内）
 ```
-轻断食时钟 - 16:8 断食计时器
+轻断食时钟 - 16:8断食计时器
 ```
 
-**副标题**（30 字符内）
+**副标题**（30 字符内，黄金关键词位）
 ```
-不打卡不催促，按你的节奏断食
-```
-
-**推广文本**（170 字符内，可随时更新）
-```
-一个温和的 16:8 计时器：手动 / 自动两种节奏，桌面锁屏小组件，完全本地、零数据收集。
+间歇性断食与进食窗口提醒
 ```
 
-**关键词**（100 字符内，半角逗号分隔）
+**推广文本**（170 字符内，可随时更新，不索引——品牌语气放这里）
 ```
-断食,轻断食,16:8,168,间歇性断食,禁食,断食计时,断食追踪,减脂,轻食,健康,自律,小组件,fasting
+不打卡，不催促，不制造焦虑。一个温和的 16:8 计时器：手动 / 自动两种节奏，桌面锁屏小组件，完全本地、零数据收集。
+```
+
+**关键词**（100 字符内，半角逗号分隔，已与名称/副标题去重）
+```
+减肥,减脂,瘦身,减重,168,禁食,液断,生酮,体重,空腹,不吃晚饭,断糖,计划,打卡,自律,轻食,小组件,fasting
 ```
 
 **描述**
@@ -91,19 +93,19 @@
 CleanFast — 16:8 Fasting Timer
 ```
 
-**Subtitle** (≤30 chars)
+**Subtitle** (≤30 chars, keyword slot: adds "intermittent" + "tracker")
 ```
-Gentle fasting. No pressure.
-```
-
-**Promotional Text** (≤170 chars)
-```
-A calm 16:8 timer with home & lock screen widgets, manual or automatic rhythm, and zero data collection. Everything stays on your device.
+Intermittent fasting tracker
 ```
 
-**Keywords** (≤100 chars)
+**Promotional Text** (≤170 chars, not indexed — brand voice lives here)
 ```
-fasting,intermittent,16:8,fast,timer,IF,tracker,eating,window,ketosis,health,widget,mindful
+Gentle fasting. No pressure. A calm 16:8 timer with home & lock screen widgets, manual or automatic rhythm, and zero data collection.
+```
+
+**Keywords** (≤100 chars, deduped against name/subtitle)
+```
+weight,loss,eating,window,hours,keto,ketosis,omad,water,clock,widget,if,168,plan,mindful
 ```
 
 **Description**
@@ -152,12 +154,65 @@ The first release of CleanFast:
 
 ---
 
+## 繁體中文（zh-Hant，台灣/香港商店獨立索引）
+
+**名稱**
+```
+輕斷食時鐘 - 16:8斷食計時器
+```
+
+**副標題**
+```
+間歇性斷食與進食時段提醒
+```
+
+**關鍵詞**
+```
+減肥,減脂,瘦身,減重,168,禁食,液斷,生酮,體重,空腹,不吃晚飯,斷糖,計劃,打卡,自律,輕食,小工具,fasting
+```
+
+描述 / 推廣文本 / 新版本說明：由簡體版轉繁體即可（提交前我可代轉）。
+
+---
+
+## 附加元数据集（关键词配额倍增）
+
+> 美区商店同时索引 en-US、es-MX、zh-Hans 三套关键词；en-GB 覆盖英联邦多国。
+> 界面无对应语言也可添加商店元数据，用户界面自动回落到英文。
+
+**es-MX（墨西哥西语——美区西语用户直接命中）**
+```
+名称：   CleanFast: Ayuno Intermitente
+副标题： Temporizador de ayuno 16:8
+关键词： ayuno,intermitente,ayunar,peso,perder,bajar,horas,ventana,comer,reloj,keto,168
+描述：   可复用英文版（或提交前我来翻译一版西语）
+```
+
+**en-GB（顺带覆盖 AU/CA 等）**
+```
+Name / Subtitle：与 en-US 相同
+Keywords（换一批变体词）：
+weight,loss,eating,window,hours,keto,omad,water,clock,widget,if,168,plan,diary,log
+```
+
+---
+
+## ASO 运营备忘
+
+- 上线前用 Apple Search Ads 后台的**关键词热度指数**逐个验证上述词，热度 < 5 的替换
+- 关键词字段**不放竞品商标**（Zero、YAZIO 等——审核 2.3.7 风险）
+- 健康类忌疗效承诺（"瘦十斤"类措辞），现有克制文案是加分项
+- 每 2–4 周小版本更新维持活跃权重；公开回复用户评论
+- 求评弹窗已内置：第 3 / 10 / 30 次完成断食目标时触发系统评分请求（Apple 上限每年 3 次）
+
+---
+
 ## 上传检查单
 
 - [ ] D-U-N-S 到号 → 组织开发者账号注册完成（$99）
 - [ ] Xcode: Signing Team 切到 MaxHope LLC 的新 Team，注册 Bundle ID + App Group
 - [ ] Archive → Distribute → App Store Connect 上传
-- [ ] 截图：zh 5 张 + en 5 张（本目录已备好，1320×2868）
+- [ ] 截图：优先用 zh-framed / en-framed 各 5 张（带卖点横幅，1320×2868）；raw 版在 zh / en 目录备用
 - [ ] 上表所有文案粘贴到对应语言页
 - [ ] 隐私标签全选"不收集"，隐私政策 URL 填上表链接
 - [ ] 年龄分级问卷 + 出口合规（工程已声明，无需再答）
