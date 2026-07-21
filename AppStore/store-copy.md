@@ -11,7 +11,7 @@
 | SKU | cleanfast-001（任意唯一字符串即可） |
 | 主类目 | 健康健美（Health & Fitness） |
 | 次类目 | 生活（可留空） |
-| 价格 | 免费 |
+| 价格 | **付费买断**（建议首发 ¥6 / $0.99 冲量攒评分，站稳后可调价；永不加订阅/内购/广告——这是产品承诺） |
 | 年龄分级 | 问卷如实作答（无敏感内容 → 4+；"健康主题"相关题选"否/无"，App 不提供医疗建议） |
 | App 隐私 | **Data Not Collected（不收集数据）** —— 全部类目选"否" |
 | 隐私政策 URL | https://quqi0714.github.io/cleanfast/privacy.html |
@@ -30,42 +30,45 @@
 轻断食时钟 - 16:8断食计时器
 ```
 
-**副标题**（30 字符内，黄金关键词位）
+**副标题**（30 字符内，黄金关键词位 + 核心定位）
 ```
-间歇性断食与进食窗口提醒
+一次买断的间歇性断食提醒
 ```
 
-**推广文本**（170 字符内，可随时更新，不索引——品牌语气放这里）
+**推广文本**（170 字符内，可随时更新，不索引——定位宣言放这里）
 ```
-不打卡，不催促，不制造焦虑。一个温和的 16:8 计时器：手动 / 自动两种节奏，桌面锁屏小组件，完全本地、零数据收集。
+十个断食 App 九个订阅制。这一个反着来：一次买断，无广告无内购，不打卡不催促——只做一件事，安静地计时。
 ```
 
 **关键词**（100 字符内，半角逗号分隔，已与名称/副标题去重）
 ```
-减肥,减脂,瘦身,减重,168,禁食,液断,生酮,体重,空腹,不吃晚饭,断糖,计划,打卡,自律,轻食,小组件,fasting
+减肥,减脂,瘦身,减重,168,禁食,液断,生酮,体重,空腹,不吃晚饭,断糖,计划,打卡,自律,买断,小组件,fasting
 ```
 
-**描述**
+**描述**（前三行是折叠线以上的黄金位——定位宣言开场）
 ```
-轻断食时钟是一款克制的间歇性断食计时器。
+我们也搜过 App Store：断食应用十个有十个是订阅制，
+塞满了课程、社区、打卡和弹窗——而你可能只是想要一个安静的断食闹钟。
 
-不打卡，不排行，不制造焦虑。准备好了就开始，想休息就跳过今天——生活也需要弹性。
+所以这一个反着来：一次买断，无订阅，无广告，无内购。打开，就是计时器本身。
 
-【为什么是它】
+【轻，是设计出来的】
+• 一次买断：付一次钱，一直用。没有订阅，没有广告，没有"高级版"——以后也不会有
 • 一眼看懂：一个圆环 / 一条光带，断食走到哪、还剩多久，打开就知道
+• 不打卡，不排行，不推鸡汤：想休息就跳过今天，生活也需要弹性
 • 两种风格：经典圆环与极简大字，浅色深色都好看
-• 两种节奏:
+• 两种节奏：
 　- 手动切换：到点只提醒，什么时候进入下一段由你决定
 　- 自动切换：按设定窗口自动轮转，打开就知道现在该不该吃
 • 身体阶段陪伴：消化中 → 血糖渐稳 → 动用糖原 → 燃料切换 → 深度供能，
-　每个阶段都有温和的说明，不夸大、不吓唬
+　克制的说明，不夸大、不吓唬
 • 桌面 / 锁屏小组件：不打开 App 也能看到当前进度
 • 忘记按了？开始时间随时可以调整
-• 到点提醒：断食或进食目标达成时发一条本地通知，仅此而已
+• 到点提醒：目标达成时发一条本地通知，仅此而已
 
-【隐私】
+【隐私也轻】
 不登录、不联网、不收集任何数据。所有记录只保存在你自己的设备上，
-卸载即彻底删除。没有广告，没有第三方 SDK。
+卸载即彻底删除。没有第三方 SDK。
 
 【健康说明】
 本应用仅用于计时与提醒，不提供医疗建议。间歇性断食并非适合所有人，
@@ -77,8 +80,8 @@
 **新版本说明（v1.0）**
 ```
 轻断食时钟首个版本与你见面：
-• 16:8 及自定义断食计划
-• 手动 / 自动两种切换节奏
+• 一次买断，无订阅无广告无内购——以后也不会有
+• 16:8 及自定义断食计划，手动 / 自动两种切换节奏
 • 经典圆环与极简大字两种首页风格
 • 桌面 / 锁屏小组件
 • 完全本地，零数据收集
@@ -93,14 +96,14 @@
 CleanFast — 16:8 Fasting Timer
 ```
 
-**Subtitle** (≤30 chars, keyword slot: adds "intermittent" + "tracker")
+**Subtitle** (≤30 chars, keywords + core positioning; exactly 30)
 ```
-Intermittent fasting tracker
+Intermittent fasting, pay once
 ```
 
-**Promotional Text** (≤170 chars, not indexed — brand voice lives here)
+**Promotional Text** (≤170 chars, not indexed — the manifesto lives here)
 ```
-Gentle fasting. No pressure. A calm 16:8 timer with home & lock screen widgets, manual or automatic rhythm, and zero data collection.
+Every fasting app is a subscription now. This one isn't: pay once, no ads, no upsells, no streaks — just a quiet, beautiful fasting clock.
 ```
 
 **Keywords** (≤100 chars, deduped against name/subtitle)
@@ -108,15 +111,20 @@ Gentle fasting. No pressure. A calm 16:8 timer with home & lock screen widgets, 
 weight,loss,eating,window,hours,keto,ketosis,omad,water,clock,widget,if,168,plan,mindful
 ```
 
-**Description**
+**Description** (first 3 lines sit above the fold — manifesto first)
 ```
-CleanFast is a calm, minimal intermittent fasting timer.
+We tried the other fasting apps too. Ten out of ten were subscriptions,
+stuffed with courses, communities, streaks and upsells — when all you
+wanted was a quiet clock.
 
-No streaks. No leaderboards. No anxiety. Start when you're ready,
-and skip a day whenever life happens — flexibility is part of the plan.
+So CleanFast goes the other way: pay once, own it forever.
+No subscription, no ads, no in-app purchases. Open it, and it's a timer.
 
-WHY CLEANFAST
+LIGHT BY DESIGN
+• Pay once: no subscription, no ads, no "premium" tier — ever
 • Glanceable: one ring (or one light bar) shows exactly where you are
+• No streaks, no leaderboards, no motivational spam — skip a day
+  whenever life happens
 • Two home styles: a classic progress ring or a minimal cinematic clock,
   beautiful in both light and dark mode
 • Two rhythms:
@@ -129,10 +137,9 @@ WHY CLEANFAST
 • Forgot to tap? Adjust the start time anytime
 • One local notification when a goal is reached — that's all
 
-PRIVACY
+PRIVACY, ALSO LIGHT
 No account. No network. No data collection. Everything stays on your
-device and is deleted completely when you uninstall. No ads, no
-third-party SDKs.
+device and is deleted completely when you uninstall. No third-party SDKs.
 
 HEALTH NOTE
 CleanFast is a timer, not medical advice. Intermittent fasting is not
@@ -145,8 +152,8 @@ At your own pace.
 **What's New (v1.0)**
 ```
 The first release of CleanFast:
-• 16:8 and custom fasting plans
-• Manual or automatic window switching
+• Pay once — no subscriptions, no ads, no IAP, and it will stay that way
+• 16:8 and custom fasting plans, manual or automatic switching
 • Classic ring & minimal cinematic home styles
 • Home and lock screen widgets
 • Fully local, zero data collection
@@ -163,12 +170,12 @@ The first release of CleanFast:
 
 **副標題**
 ```
-間歇性斷食與進食時段提醒
+一次買斷的間歇性斷食提醒
 ```
 
 **關鍵詞**
 ```
-減肥,減脂,瘦身,減重,168,禁食,液斷,生酮,體重,空腹,不吃晚飯,斷糖,計劃,打卡,自律,輕食,小工具,fasting
+減肥,減脂,瘦身,減重,168,禁食,液斷,生酮,體重,空腹,不吃晚飯,斷糖,計劃,打卡,自律,買斷,小工具,fasting
 ```
 
 描述 / 推廣文本 / 新版本說明：由簡體版轉繁體即可（提交前我可代轉）。
@@ -199,6 +206,8 @@ weight,loss,eating,window,hours,keto,omad,water,clock,widget,if,168,plan,diary,l
 
 ## ASO 运营备忘
 
+- **定位即武器**：竞品评论区全是"又涨价了""到处要订阅"的抱怨——回复评论、
+  更新说明、推广文本里持续重申"一次买断，永不订阅"，让差评区难民看到你
 - 上线前用 Apple Search Ads 后台的**关键词热度指数**逐个验证上述词，热度 < 5 的替换
 - 关键词字段**不放竞品商标**（Zero、YAZIO 等——审核 2.3.7 风险）
 - 健康类忌疗效承诺（"瘦十斤"类措辞），现有克制文案是加分项
