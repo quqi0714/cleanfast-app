@@ -37,7 +37,7 @@
 
 **推广文本**（170 字符内，可随时更新，不索引——只做正面自述，不比较不贬损）
 ```
-一次买断，无订阅，无广告，无内购。不打卡，不催促，不打扰——只做一件事：安静地陪你计时。
+它的原则很简单：陪你断食，然后闭嘴。一次买断，无订阅，无广告，无内购——付一次钱，安静一辈子。
 ```
 
 **关键词**（100 字符内，半角逗号分隔，已与名称/副标题去重）
@@ -45,46 +45,57 @@
 减肥,减脂,瘦身,减重,168,禁食,液断,生酮,体重,空腹,不吃晚饭,断糖,计划,打卡,自律,买断,小组件,fasting
 ```
 
-**描述**（前三行是折叠线以上的黄金位——正面宣言开场，不提及任何其他应用）
+**描述**（前三行是折叠线以上的黄金位——原则宣言开场，只说自己）
 ```
-轻断食时钟只做一件事：安静地陪你计时。
+轻断食时钟，一个有原则的计时器。
 
-一次买断，无订阅，无广告，无内购。
-不打卡，不推送，不打扰——打开，就是计时器本身。
+它的原则很简单：陪你断食，然后闭嘴。
+一次买断，没有订阅，没有广告，没有内购——付一次钱，安静一辈子。
 
-【轻，是设计出来的】
-• 一次买断：付一次钱，一直用。没有订阅，没有广告，没有"高级版"——以后也不会有
-• 一眼看懂：一个圆环 / 一条光带，断食走到哪、还剩多久，打开就知道
-• 不打卡，不排行，不推鸡汤：想休息就跳过今天，生活也需要弹性
-• 两种风格：经典圆环与极简大字，浅色深色都好看
-• 两种节奏：
-　- 手动切换：到点只提醒，什么时候进入下一段由你决定
-　- 自动切换：按设定窗口自动轮转，打开就知道现在该不该吃
+【我们相信的几件事】
+
+好工具应该像一位有分寸的朋友：
+到点了提醒你一声，其余时间不出现。
+
+自律不需要被围观。
+所以这里没有排行榜，没有连续打卡，没有勋章——
+它甚至不数你坚持了多少天。那个数字，属于你自己。
+
+休息不是失败。
+想歇一天，点「今天休息」就好，明天它照常等你。
+你休息的那天，它也休息。
+
+【它认真做的事】
+• 一个圆环 / 一条光带：断食走到哪、还剩多久，一眼看懂
+• 两种风格：经典圆环与极简大字，深浅色都好看
+• 两种节奏：手动切换（到点只提醒，切不切你说了算），
+　或自动切换（按窗口自动轮转，打开就知道现在该不该吃）
 • 身体阶段陪伴：消化中 → 血糖渐稳 → 动用糖原 → 燃料切换 → 深度供能，
-　克制的说明，不夸大、不吓唬
-• 桌面 / 锁屏小组件：不打开 App 也能看到当前进度
-• 忘记按了？开始时间随时可以调整
-• 到点提醒：目标达成时发一条本地通知，仅此而已
+　措辞克制，不夸大、不吓唬
+• 桌面 / 锁屏小组件：不打开 App 也知道进度
+• 忘记按了？开始时间随时补调
+• 到点一条本地通知。通知的故事，到此为止
 
-【隐私也轻】
-不登录、不联网、不收集任何数据。所有记录只保存在你自己的设备上，
-卸载即彻底删除。没有第三方 SDK。
+【它认真不做的事】
+不联网，不登录，不收集任何数据；
+没有第三方 SDK，没有推送营销，没有弹窗催促。
+你的记录只住在你的手机里，随 App 卸载而消失，干干净净。
 
 【健康说明】
-本应用仅用于计时与提醒，不提供医疗建议。间歇性断食并非适合所有人，
-孕产期、糖尿病、进食障碍史、未成年人等人群请先咨询专业人士。
+它是计时器，不是医生。间歇性断食并非适合所有人——
+孕产期、糖尿病、进食障碍史、未成年人等请先咨询专业人士。
 
 按你的节奏来。
 ```
 
 **新版本说明（v1.0）**
 ```
-轻断食时钟首个版本与你见面：
-• 一次买断，无订阅无广告无内购——以后也不会有
-• 16:8 及自定义断食计划，手动 / 自动两种切换节奏
-• 经典圆环与极简大字两种首页风格
-• 桌面 / 锁屏小组件
-• 完全本地，零数据收集
+轻断食时钟 1.0，初次见面。
+
+它带着几条原则出生：
+一次买断，永不订阅；没有广告，不打卡，不打扰。
+
+愿它安安静静，陪你很多年。
 ```
 
 ---
@@ -103,7 +114,7 @@ Intermittent fasting, pay once
 
 **Promotional Text** (≤170 chars, not indexed — positive self-statement only)
 ```
-Pay once, own it forever. No subscription, no ads, no upsells, no streaks — just a quiet, beautiful fasting clock that stays out of your way.
+A timer with principles: keep you company while you fast, then stay out of the way. Pay once — no subscription, no ads, no upsells. One payment, quiet forever.
 ```
 
 **Keywords** (≤100 chars, deduped against name/subtitle)
@@ -111,50 +122,60 @@ Pay once, own it forever. No subscription, no ads, no upsells, no streaks — ju
 weight,loss,eating,window,hours,keto,ketosis,omad,water,clock,widget,if,168,plan,mindful
 ```
 
-**Description** (first 3 lines sit above the fold — positive manifesto, no references to other apps)
+**Description** (first 3 lines sit above the fold — principles first, self-statements only)
 ```
-CleanFast does one thing: it keeps time, quietly.
+CleanFast is a timer with principles.
 
-Pay once and own it forever. No subscription, no ads, no in-app
-purchases. No streaks, no spam — open it, and it's a timer.
+The main one: keep you company while you fast, then stay out of
+the way. Pay once — no subscription, no ads, no in-app purchases.
+One payment, then peace and quiet, forever.
 
-LIGHT BY DESIGN
-• Pay once: no subscription, no ads, no "premium" tier — ever
-• Glanceable: one ring (or one light bar) shows exactly where you are
-• No streaks, no leaderboards, no motivational spam — skip a day
-  whenever life happens
-• Two home styles: a classic progress ring or a minimal cinematic clock,
-  beautiful in both light and dark mode
-• Two rhythms:
-  - Manual: we only remind you at the goal — you decide when to switch
-  - Automatic: windows rotate on schedule, so one glance tells you
-    whether it's time to eat
-• Body-stage companion: Digesting → Blood sugar settling → Glycogen use →
-  Fuel switch → Deep fueling, each explained gently and honestly
-• Home & lock screen widgets: check progress without opening the app
+A FEW THINGS WE BELIEVE
+
+A good tool behaves like a considerate friend:
+it says one thing when it matters, and nothing when it doesn't.
+
+Discipline doesn't need an audience.
+So there are no leaderboards, no streaks, no badges here.
+It doesn't even count your days — that number belongs to you.
+
+Rest is not failure.
+Tap "skip today" and it simply waits until tomorrow.
+On your day off, it takes one too.
+
+WHAT IT DOES, CAREFULLY
+• One ring (or one light bar): where you are, what's left, at a glance
+• Two home styles: classic ring or minimal cinematic clock,
+  beautiful in light and dark
+• Two rhythms: manual (we remind, you decide) or automatic
+  (windows rotate on schedule)
+• Body-stage companion: Digesting → Blood sugar settling → Glycogen use
+  → Fuel switch → Deep fueling — explained gently, never dramatized
+• Home & lock screen widgets: progress without opening the app
 • Forgot to tap? Adjust the start time anytime
-• One local notification when a goal is reached — that's all
+• One local notification at the goal. That's the whole notification story.
 
-PRIVACY, ALSO LIGHT
-No account. No network. No data collection. Everything stays on your
-device and is deleted completely when you uninstall. No third-party SDKs.
+WHAT IT REFUSES TO DO, ALSO CAREFULLY
+No network. No account. No data collection. No third-party SDKs.
+No push marketing, no nag screens. Your records live on your phone
+and leave with the app. Clean.
 
 HEALTH NOTE
-CleanFast is a timer, not medical advice. Intermittent fasting is not
-for everyone — if you are pregnant, diabetic, have a history of eating
-disorders, or are under 18, please consult a professional first.
+It's a timer, not a doctor. Intermittent fasting isn't for everyone —
+if you're pregnant, diabetic, have a history of eating disorders, or
+are under 18, please talk to a professional first.
 
 At your own pace.
 ```
 
 **What's New (v1.0)**
 ```
-The first release of CleanFast:
-• Pay once — no subscriptions, no ads, no IAP, and it will stay that way
-• 16:8 and custom fasting plans, manual or automatic switching
-• Classic ring & minimal cinematic home styles
-• Home and lock screen widgets
-• Fully local, zero data collection
+CleanFast 1.0 — nice to meet you.
+
+Born with a few principles: pay once, never subscribe;
+no ads, no streaks, no noise.
+
+May it keep quiet company with you for years.
 ```
 
 ---
