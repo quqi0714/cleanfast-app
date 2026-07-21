@@ -72,7 +72,7 @@ struct OnboardingView: View {
                    size: 16, color: AppColor.textSecondary,
                    lineSpacing: 6, alignment: .center)
             Spacer()
-            PrimaryButton(title: "开始") {
+            PrimaryButton(title: String(localized: "开始")) {
                 Haptics.play(.primaryAdvance)
                 withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                     step = .howItWorks
@@ -129,7 +129,7 @@ struct OnboardingView: View {
             }
             .scrollIndicators(.hidden)
 
-            PrimaryButton(title: "下一步") {
+            PrimaryButton(title: String(localized: "下一步")) {
                 Haptics.play(.primaryAdvance)
                 withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                     step = .pickTarget
@@ -191,13 +191,13 @@ struct OnboardingView: View {
             .scrollIndicators(.hidden)
 
             HStack(spacing: 10) {
-                SecondaryButton(title: "返回") {
+                SecondaryButton(title: String(localized: "返回")) {
                     Haptics.play(.cancel)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                         step = .howItWorks
                     }
                 }
-                PrimaryButton(title: "下一步") {
+                PrimaryButton(title: String(localized: "下一步")) {
                     Haptics.play(.primaryAdvance)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                         step = .pickTimingMode
@@ -324,13 +324,13 @@ struct OnboardingView: View {
             .scrollIndicators(.hidden)
 
             HStack(spacing: 10) {
-                SecondaryButton(title: "返回") {
+                SecondaryButton(title: String(localized: "返回")) {
                     Haptics.play(.cancel)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                         step = .pickTarget
                     }
                 }
-                PrimaryButton(title: "下一步") {
+                PrimaryButton(title: String(localized: "下一步")) {
                     Haptics.play(.primaryAdvance)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                         step = .pickHomeStyle
@@ -404,13 +404,13 @@ struct OnboardingView: View {
             .scrollIndicators(.hidden)
 
             HStack(spacing: 10) {
-                SecondaryButton(title: "返回") {
+                SecondaryButton(title: String(localized: "返回")) {
                     Haptics.play(.cancel)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                         step = .pickTimingMode
                     }
                 }
-                PrimaryButton(title: "下一步") {
+                PrimaryButton(title: String(localized: "下一步")) {
                     Haptics.play(.primaryAdvance)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
                         step = .notifications
@@ -574,13 +574,15 @@ struct OnboardingView: View {
             Spacer(minLength: 0)
 
             VStack(spacing: 10) {
-                PrimaryButton(title: notificationRequestInFlight ? "请稍候" : "开启提醒") {
+                PrimaryButton(title: notificationRequestInFlight
+                              ? String(localized: "请稍候")
+                              : String(localized: "开启提醒")) {
                     requestNotificationsAndFinish()
                 }
                 .disabled(notificationRequestInFlight)
                 .opacity(notificationRequestInFlight ? 0.7 : 1)
 
-                SecondaryButton(title: "暂时不用") {
+                SecondaryButton(title: String(localized: "暂时不用")) {
                     Haptics.play(.cancel)
                     finish(notificationEnabled: false, playHaptic: false)
                 }

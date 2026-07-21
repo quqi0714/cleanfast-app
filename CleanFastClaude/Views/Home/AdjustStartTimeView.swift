@@ -13,7 +13,7 @@ struct AdjustStartTimeView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
-            TimePickerSheetHeader(title: "调整开始时间") {
+            TimePickerSheetHeader(title: String(localized: "调整开始时间")) {
                 Haptics.play(.cancel)
                 dismiss()
             }
@@ -26,7 +26,7 @@ struct AdjustStartTimeView: View {
 
             Spacer(minLength: 0)
 
-            PrimaryButton(title: "应用", color: AppColor.sunOrange) {
+            PrimaryButton(title: String(localized: "应用"), color: AppColor.sunOrange) {
                 vm.adjustCurrentSessionStartDate(clampedSelectedDate)
                 Haptics.play(.adjustTime)
                 dismiss()

@@ -34,7 +34,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eat at %@"
+            "value" : "Eat after %@"
           }
         },
         "zh-Hans" : {
@@ -481,28 +481,28 @@
     },
     "今天 %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "today %@" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ today" } },
         "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "今天 %@" } },
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "今天 %@" } }
       }
     },
     "明天 %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "tomorrow %@" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ tomorrow" } },
         "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "明天 %@" } },
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "明天 %@" } }
       }
     },
     "昨天 %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "yesterday %@" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%@ yesterday" } },
         "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "昨天 %@" } },
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "昨天 %@" } }
       }
     },
     "%lld月%lld日 %@" : {
       "localizations" : {
-        "en" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld/%2$lld %3$@" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "%3$@ on %1$lld/%2$lld" } },
         "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld月%2$lld日 %3$@" } },
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "%1$lld月%2$lld日 %3$@" } }
       }
