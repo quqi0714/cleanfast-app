@@ -35,9 +35,9 @@
 一次买断的间歇性断食提醒
 ```
 
-**推广文本**（170 字符内，可随时更新，不索引——定位宣言放这里）
+**推广文本**（170 字符内，可随时更新，不索引——只做正面自述，不比较不贬损）
 ```
-十个断食 App 九个订阅制。这一个反着来：一次买断，无广告无内购，不打卡不催促——只做一件事，安静地计时。
+一次买断，无订阅，无广告，无内购。不打卡，不催促，不打扰——只做一件事：安静地陪你计时。
 ```
 
 **关键词**（100 字符内，半角逗号分隔，已与名称/副标题去重）
@@ -45,12 +45,12 @@
 减肥,减脂,瘦身,减重,168,禁食,液断,生酮,体重,空腹,不吃晚饭,断糖,计划,打卡,自律,买断,小组件,fasting
 ```
 
-**描述**（前三行是折叠线以上的黄金位——定位宣言开场）
+**描述**（前三行是折叠线以上的黄金位——正面宣言开场，不提及任何其他应用）
 ```
-我们也搜过 App Store：断食应用十个有十个是订阅制，
-塞满了课程、社区、打卡和弹窗——而你可能只是想要一个安静的断食闹钟。
+轻断食时钟只做一件事：安静地陪你计时。
 
-所以这一个反着来：一次买断，无订阅，无广告，无内购。打开，就是计时器本身。
+一次买断，无订阅，无广告，无内购。
+不打卡，不推送，不打扰——打开，就是计时器本身。
 
 【轻，是设计出来的】
 • 一次买断：付一次钱，一直用。没有订阅，没有广告，没有"高级版"——以后也不会有
@@ -101,9 +101,9 @@ CleanFast — 16:8 Fasting Timer
 Intermittent fasting, pay once
 ```
 
-**Promotional Text** (≤170 chars, not indexed — the manifesto lives here)
+**Promotional Text** (≤170 chars, not indexed — positive self-statement only)
 ```
-Every fasting app is a subscription now. This one isn't: pay once, no ads, no upsells, no streaks — just a quiet, beautiful fasting clock.
+Pay once, own it forever. No subscription, no ads, no upsells, no streaks — just a quiet, beautiful fasting clock that stays out of your way.
 ```
 
 **Keywords** (≤100 chars, deduped against name/subtitle)
@@ -111,14 +111,12 @@ Every fasting app is a subscription now. This one isn't: pay once, no ads, no up
 weight,loss,eating,window,hours,keto,ketosis,omad,water,clock,widget,if,168,plan,mindful
 ```
 
-**Description** (first 3 lines sit above the fold — manifesto first)
+**Description** (first 3 lines sit above the fold — positive manifesto, no references to other apps)
 ```
-We tried the other fasting apps too. Ten out of ten were subscriptions,
-stuffed with courses, communities, streaks and upsells — when all you
-wanted was a quiet clock.
+CleanFast does one thing: it keeps time, quietly.
 
-So CleanFast goes the other way: pay once, own it forever.
-No subscription, no ads, no in-app purchases. Open it, and it's a timer.
+Pay once and own it forever. No subscription, no ads, no in-app
+purchases. No streaks, no spam — open it, and it's a timer.
 
 LIGHT BY DESIGN
 • Pay once: no subscription, no ads, no "premium" tier — ever
@@ -206,8 +204,10 @@ weight,loss,eating,window,hours,keto,omad,water,clock,widget,if,168,plan,diary,l
 
 ## ASO 运营备忘
 
-- **定位即武器**：竞品评论区全是"又涨价了""到处要订阅"的抱怨——回复评论、
-  更新说明、推广文本里持续重申"一次买断，永不订阅"，让差评区难民看到你
+- **红线**：商店元数据（名称/副标题/描述/推广文本/截图文字）只做正面自述——
+  绝不比较、不贬损其他应用、不出现"其他 App / App Store 上的同类"式表述（审核 2.3 风险）。
+  "一次买断、无订阅无广告"是说自己，安全；"别人都是订阅制"是说别人，危险。
+- 定位宣传的比较性表述只放在**商店之外**（小红书/即刻/Twitter 的发布故事），那里不归苹果管
 - 上线前用 Apple Search Ads 后台的**关键词热度指数**逐个验证上述词，热度 < 5 的替换
 - 关键词字段**不放竞品商标**（Zero、YAZIO 等——审核 2.3.7 风险）
 - 健康类忌疗效承诺（"瘦十斤"类措辞），现有克制文案是加分项
