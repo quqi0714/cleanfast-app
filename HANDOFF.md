@@ -24,8 +24,8 @@
 
 ## 上线流水线（按序执行，当前在第 1 步）
 
-1. **注册组织开发者账号**（D-U-N-S 已具备；身份页姓名必须与证件拼音一致
-   Hengliang Qu；实体类型务必选 Organization 不要手滑选 Individual）
+1. **注册组织开发者账号**（D-U-N-S 已具备；身份页姓名必须与所有者证件
+   拼音完全一致；实体类型务必选 Organization 不要手滑选 Individual）
 2. 账号批准后：Xcode 里把签名 Team 从 `545M7K6H6K`（个人免费 Team）切到
    MaxHope LLC 新 Team；开发者后台注册 Bundle ID `com.MaxQ.CleanFast` +
    App Group `group.com.MaxQ.CleanFast`
