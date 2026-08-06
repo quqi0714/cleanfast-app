@@ -9,8 +9,10 @@ CleanFast（轻断食时钟）：iOS 16:8 间歇性断食计时器。SwiftUI，i
 Xcode 工程 `CleanFast-Claude.xcodeproj`，主 App target `CleanFastClaude` +
 Widget 扩展 `CleanFastClaudeWidgetExtension`。**iPhone-only、仅竖屏**（有意为之，勿改回）。
 
-本仓库同时是 GitHub Pages 源：`docs/` 下的法律页面发布在
-https://quqi0714.github.io/cleanfast/ ——**推送 main 即发布**，改动 docs/ 前想清楚。
+本仓库（`quqi0714/cleanfast-app`，**私有**）只放 App 源码。
+法律页面（隐私政策/条款）在独立的**公开**仓库 `quqi0714/cleanfast`，
+经 GitHub Pages 发布于 https://quqi0714.github.io/cleanfast/ ——
+改法律文案去那个仓库，推 main 即发布；本仓库里没有它们的副本。
 
 ## 产品理念（最高准则，压倒一切功能建议）
 
