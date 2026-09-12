@@ -117,3 +117,13 @@ iPhone 17 Pro / Pro Max 模拟器里可能残留手工种入的假断食会话
 ## 工程命名
 
 2026-09-11 所有者要求清理开发遗留命名。当前工程为 `CleanFast.xcodeproj`，主 Scheme/target/module 为 `CleanFast`，扩展为 `CleanFastWidgetExtension`，测试为 `CleanFastTests` / `CleanFastUITests`。归档与产物使用正式 CleanFast 名称。WidgetKit kind 统一为 `CleanFastWidget`；更新旧开发版后，已添加的小组件可能需要重新添加。Bundle ID、Team、App Group 与用户数据键不变。
+
+## 版本号规则
+
+所有者明确决定以此次上线版本作为1.0，后续用户可见版本按变更类型递增：
+
+- 纯BUG修复：1.0.1、1.0.2；其他功能版本上的修复同理，如1.1.1。
+- 新增功能：1.1、1.2。
+- 大版本更新：2.0、3.0。
+- 本次首发仍为1.0，不因上架准备、提交Git或补充文档更改用户可见版本。
+- 内部构建号独立递增，当前为5；与用户可见版本号分开管理。更新版本时主App与Widget的用户可见版本和构建号保持一致。
