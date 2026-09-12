@@ -32,7 +32,7 @@ struct WidgetSnapshot {
     let automaticResumeStartDate: Date?
     let date: Date
 
-    static let appGroupIdentifier = "group.com.MaxQ.CleanFast"
+    static let appGroupIdentifier = "group.la.maxhope.cleanfast"
 
     static func current(at date: Date = Date()) -> WidgetSnapshot {
         let defaults = UserDefaults(suiteName: appGroupIdentifier) ?? .standard
@@ -181,19 +181,33 @@ struct WidgetSnapshot {
         eatingDuration: TimeInterval,
         at referenceDate: Date
     ) -> (startDate: Date, duration: TimeInterval, isFasting: Bool, cyclesAdvanced: Int) {
-        var current = (start: startDate, duration: currentDuration, fasting: isFasting)
-        var cycles = 0
-        let maxCycles = 200
+        let unchanged = (startDate, currentDuration, isFasting, 0)
+        let period = fastingDuration + eatingDuration
+        guard currentDuration.isFinite, currentDuration > 0,
+              fastingDuration.isFinite, fastingDuration > 0,
+              eatingDuration.isFinite, eatingDuration > 0, period.isFinite,
+              referenceDate.timeIntervalSince(startDate).isFinite,
+              referenceDate >= startDate.addingTimeInterval(currentDuration) else {
+            return unchanged
+        }
 
-        while referenceDate >= current.start.addingTimeInterval(current.duration) && cycles < maxCycles {
-            let nextStart = current.start.addingTimeInterval(current.duration)
-            let nextFasting = !current.fasting
-            let nextDuration = nextFasting ? fastingDuration : eatingDuration
-            current = (nextStart, nextDuration, nextFasting)
+        // Preserve the current session's duration, even if the plan changed after it began.
+        var nextStart = startDate.addingTimeInterval(currentDuration)
+        var nextFasting = !isFasting
+        var nextDuration = nextFasting ? fastingDuration : eatingDuration
+        let completePairs = floor(referenceDate.timeIntervalSince(nextStart) / period)
+        nextStart = nextStart.addingTimeInterval(completePairs * period)
+        // Saturation only matters for malformed, astronomical dates; a catch-up must
+        // never look like one transition and incorrectly award a completed-fast milestone.
+        var cycles = completePairs < Double(Int.max / 4) ? 1 + Int(completePairs) * 2 : Int.max - 1
+        if referenceDate >= nextStart.addingTimeInterval(nextDuration) {
+            nextStart = nextStart.addingTimeInterval(nextDuration)
+            nextFasting.toggle()
+            nextDuration = nextFasting ? fastingDuration : eatingDuration
             cycles += 1
         }
 
-        return (current.start, current.duration, current.fasting, cycles)
+        return (nextStart, nextDuration, nextFasting, cycles)
     }
 
     var elapsed: TimeInterval {

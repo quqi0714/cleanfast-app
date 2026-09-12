@@ -1,250 +1,214 @@
 # CleanFast · App Store 提交素材
 
-> 提交入口：App Store Connect → 我的 App → 新建 App
-> 截图在 `AppStore/screenshots/`（1320×2868，6.9" 规格，按文件名 01–05 顺序上传；zh 传简体中文商店，en 传英文商店）
+2026-09-11 更新。以下名称、副标题、推广文本、关键词、描述和支持链接已保存到 App Store Connect 的简体中文、英文和繁体中文版本。简介保留所有者确认的 16:8 计时定位。价格、首发地区和审核联系方式待所有者提供；尚未提交审核。
 
-## 基础信息（所有语言共用）
+## 基础信息
 
 | 项目 | 值 |
 |---|---|
+| Apple ID | 6810958220 |
 | Bundle ID | com.MaxQ.CleanFast |
-| SKU | cleanfast-001（任意唯一字符串即可） |
+| Widget Bundle ID | com.MaxQ.CleanFast.CleanFastWidget |
+| App Group | group.la.maxhope.cleanfast |
+| Development Team | 57H8BQUP62（MaxHope LLC） |
+| SKU | cleanfast-001 |
 | 主类目 | 健康健美（Health & Fitness） |
-| 次类目 | 生活（可留空） |
-| 价格 | **付费买断**（建议首发 ¥6 / $0.99 冲量攒评分，站稳后可调价；永不加订阅/内购/广告——这是产品承诺） |
-| 年龄分级 | 问卷如实作答（无敏感内容 → 4+；"健康主题"相关题选"否/无"，App 不提供医疗建议） |
-| App 隐私 | **Data Not Collected（不收集数据）** —— 全部类目选"否" |
+| 次类目 | 留空 |
+| 价格 | 一次买断；具体首发价格待所有者确认 |
+| 隐私标签 | 不收集数据；已在 App Store Connect 发布 |
 | 隐私政策 URL | https://quqi0714.github.io/cleanfast/privacy.html |
 | 支持 URL | https://quqi0714.github.io/cleanfast/ |
-| 版权 | © 2026 MaxHope LLC |
-| 审核备注 | 无需登录，无需演示账号。App 完全本地运行，无网络请求。 |
+| 版权 | 2026 MaxHope LLC |
+| 内容版权声明 | 不包含、显示或访问第三方内容；已保存 |
+| 审核登录要求 | 无需登录；已关闭后台“需要登录” |
+| 图标 | 保持现有图标；所有生成候选已废弃 |
+| 产品平台 | iPhone、竖屏；Mac 与 Vision Pro 分发已关闭 |
 
----
+年龄定位为仅供年满18岁的人士使用，不增加年龄确认或收集年龄资料。新系统173个国家或地区18+（含中国大陆）、巴西18岁以上、韩国19+；26以前系统全球17+、巴西A18。适龄URL为使用条款。中英文条款与隐私页已发布18岁要求（9024405）。内容分级不代表断食适合相应年龄的人群。一般饮食计时用途的受监管医疗设备声明为“否”。
+
+## ASO 范围与验证边界
+
+依据 [Apple App Store Search](https://developer.apple.com/app-store/search/) 的公开说明，名称、副标题、关键词和主类别参与搜索相关性判断，用户行为也会影响发现表现。推广文本不影响搜索排名。不宣称固定的字段权重或跨地区语言索引组合。
+
+本版仅覆盖实际功能：16:8、间歇性断食、进食窗口、计时、小组件、提醒、手动/自动和离线使用。去掉了旧稿中的生酮、液断、体重记录、打卡等不对应功能的词，也不使用竞品商标、疗效承诺或宗教词汇。没有测量搜索热度、竞争度或真实转化；上线后用 App Store Connect 的搜索曝光、产品页浏览与下载数据继续评估。三种语言均检查了名称/副标题30字符、关键词100字符与推广文本170字符限制。
 
 ## 简体中文（zh-Hans）
 
-> 索引机制：名称权重最高 > 副标题 > 关键词字段；三处互不重复用词；描述不参与搜索。
+**名称**
 
-**名称**（30 字符内）
 ```
 轻断食时钟 - 16:8断食计时器
 ```
 
-**副标题**（30 字符内，黄金关键词位 + 核心定位）
-```
-一次买断的间歇性断食提醒
-```
+**副标题**
 
-**推广文本**（170 字符内，可随时更新，不索引——只做正面自述，不比较不贬损）
 ```
-它的原则很简单：默默陪伴，从不打扰。一次买断，无订阅，无广告，无内购——付一次钱，安静一辈子。
+进食窗口与到点提醒，一次买断
 ```
 
-**关键词**（100 字符内，半角逗号分隔，已与名称/副标题去重）
+**推广文本**
+
 ```
-减肥,减脂,瘦身,减重,168,禁食,液断,生酮,体重,空腹,不吃晚饭,断糖,计划,打卡,自律,买断,小组件,fasting
-```
-
-**描述**（前三行是折叠线以上的黄金位——原则宣言开场，只说自己）
-```
-轻断食时钟，一个有原则的计时器。
-
-它的原则很简单：默默陪伴，从不打扰。
-一次买断，没有订阅，没有广告，没有内购——付一次钱，安静一辈子。
-
-【我们相信的几件事】
-
-好工具应该像一位有分寸的朋友：
-到点了提醒你一声，其余时间不出现。
-
-自律不需要被围观。
-所以这里没有排行榜，没有连续打卡，没有勋章——
-它甚至不数你坚持了多少天。那个数字，属于你自己。
-
-休息不是失败。
-想歇一天，点「今天休息」就好，明天它照常等你。
-你休息的那天，它也休息。
-
-【它认真做的事】
-• 一个圆环 / 一条光带：断食走到哪、还剩多久，一眼看懂
-• 两种风格：经典圆环与极简大字，深浅色都好看
-• 两种节奏：手动切换（到点只提醒，切不切你说了算），
-　或自动切换（按窗口自动轮转，打开就知道现在该不该吃）
-• 身体阶段陪伴：消化中 → 血糖渐稳 → 动用糖原 → 燃料切换 → 深度供能，
-　措辞克制，不夸大、不吓唬
-• 桌面 / 锁屏小组件：不打开 App 也知道进度
-• 忘记按了？开始时间随时补调
-• 到点一条本地通知。通知的故事，到此为止
-
-【它认真不做的事】
-不联网，不登录，不收集任何数据；
-没有第三方 SDK，没有推送营销，没有弹窗催促。
-你的记录只住在你的手机里，随 App 卸载而消失，干干净净。
-
-【健康说明】
-它是计时器，不是医生。间歇性断食并非适合所有人——
-孕产期、糖尿病、进食障碍史、未成年人等请先咨询专业人士。
-
-按你的节奏来。
+16:8 轻断食计时，断食与进食分别记录。支持到点提醒、主屏幕与锁屏小组件、手动与自动模式。一次买断，无订阅、无广告、无内购。
 ```
 
-**新版本说明（v1.0）**
+**关键词**
+
 ```
-轻断食时钟 1.0，初次见面。
-
-它带着几条原则出生：
-一次买断，永不订阅；没有广告，不打卡，不打扰。
-
-愿它安安静静，陪你很多年。
+168,间歇性,空腹,饮食,小组件,锁屏,倒计时,自动,手动,离线
 ```
 
----
+**描述（所有者确认稿）**
+
+```
+轻断食时钟，一款简洁易用的 16:8 轻断食计时器。
+
+围绕 16 小时断食、8 小时进食窗口，帮你清楚掌握每天的断食与进食时间。轻点开始，即可查看当前进度、已进行时长和剩余时间，也可开启到点提醒。
+
+一次买断，无订阅、无广告、无内购。
+
+• 断食与进食，分别计时
+清晰显示当前状态与目标结束时间，支持 16:8 等预设及自定义时长。
+
+• 主屏幕与锁屏小组件
+不打开 App，也能随时查看断食进度。
+
+• 经典与极简，两种界面
+经典圆环直观呈现进度，极简大字突出计时。支持浅色与深色外观。
+
+• 手动与自动，两种模式
+手动模式由你决定何时切换；自动模式按设定时长循环。忘记开始计时，也可以补调开始时间。
+
+• 按需提醒，随时休息
+开启通知后，在目标达成时提醒。需要休息一天，轻点「跳过今天」即可。
+
+无需注册，离线即可使用。记录保存在本机，我们不收集你的使用数据。
+
+本应用仅供年满 18 岁的人士使用，提供计时与记录功能，不提供医疗建议或诊断。
+```
 
 ## English（en-US）
 
-**Name** (≤30 chars)
-```
-CleanFast — 16:8 Fasting Timer
-```
+**名称**
 
-**Subtitle** (≤30 chars, keywords + core positioning; exactly 30)
 ```
-Intermittent fasting, pay once
+CleanFast: 16:8 Fasting Timer
 ```
 
-**Promotional Text** (≤170 chars, not indexed — positive self-statement only)
-```
-A timer with principles: keep you company while you fast, then stay out of the way. Pay once — no subscription, no ads, no upsells. One payment, quiet forever.
-```
+**副标题**
 
-**Keywords** (≤100 chars, deduped against name/subtitle)
 ```
-weight,loss,eating,window,hours,keto,ketosis,omad,water,clock,widget,if,168,plan,mindful
+Eating Windows & Reminders
 ```
 
-**Description** (first 3 lines sit above the fold — principles first, self-statements only)
+**推广文本**
+
 ```
-CleanFast is a timer with principles.
-
-The main one: keep you company while you fast, then stay out of
-the way. Pay once — no subscription, no ads, no in-app purchases.
-One payment, then peace and quiet, forever.
-
-A FEW THINGS WE BELIEVE
-
-A good tool behaves like a considerate friend:
-it says one thing when it matters, and nothing when it doesn't.
-
-Discipline doesn't need an audience.
-So there are no leaderboards, no streaks, no badges here.
-It doesn't even count your days — that number belongs to you.
-
-Rest is not failure.
-Tap "skip today" and it simply waits until tomorrow.
-On your day off, it takes one too.
-
-WHAT IT DOES, CAREFULLY
-• One ring (or one light bar): where you are, what's left, at a glance
-• Two home styles: classic ring or minimal cinematic clock,
-  beautiful in light and dark
-• Two rhythms: manual (we remind, you decide) or automatic
-  (windows rotate on schedule)
-• Body-stage companion: Digesting → Blood sugar settling → Glycogen use
-  → Fuel switch → Deep fueling — explained gently, never dramatized
-• Home & lock screen widgets: progress without opening the app
-• Forgot to tap? Adjust the start time anytime
-• One local notification at the goal. That's the whole notification story.
-
-WHAT IT REFUSES TO DO, ALSO CAREFULLY
-No network. No account. No data collection. No third-party SDKs.
-No push marketing, no nag screens. Your records live on your phone
-and leave with the app. Clean.
-
-HEALTH NOTE
-It's a timer, not a doctor. Intermittent fasting isn't for everyone —
-if you're pregnant, diabetic, have a history of eating disorders, or
-are under 18, please talk to a professional first.
-
-At your own pace.
+Track 16:8 fasting and eating windows with optional reminders and Home and Lock Screen widgets. Pay once. No subscriptions, ads, or in-app purchases.
 ```
 
-**What's New (v1.0)**
+**关键词**
+
 ```
-CleanFast 1.0 — nice to meet you.
-
-Born with a few principles: pay once, never subscribe;
-no ads, no streaks, no noise.
-
-May it keep quiet company with you for years.
+intermittent,tracker,widget,countdown,schedule,manual,automatic,offline,private,168
 ```
 
----
+**描述（所有者确认稿）**
 
-## 繁體中文（zh-Hant，台灣/香港商店獨立索引）
+```
+CleanFast, a simple, easy-to-use 16:8 intermittent fasting timer.
 
-**名稱**
+Keep track of your daily 16-hour fast and 8-hour eating window. Tap to start and see your progress, elapsed time, and time remaining. Turn on reminders to be notified when you reach your goal.
+
+Pay once. No subscriptions, ads, or in-app purchases.
+
+• Track fasting and eating separately
+See your current status and target end time at a glance. Choose a preset such as 16:8 or customize the duration.
+
+• Home Screen and Lock Screen widgets
+Check your fasting progress without opening the app.
+
+• Two styles: Classic and Minimal
+Follow your progress with the Classic ring or focus on the time with the large Minimal clock. Both support light and dark appearances.
+
+• Manual and Automatic modes
+In Manual mode, you decide when to switch. Automatic mode cycles through your chosen durations. Forgot to start the timer? You can adjust the start time.
+
+• Optional reminders and days off
+Enable notifications for a reminder when you reach your goal. Need a day off? Just tap "Skip today."
+
+No account needed. Works offline. Your records stay on your device, and we do not collect your usage data.
+
+CleanFast is intended only for people aged 18 and over. It provides timing and recording features, not medical advice or diagnosis.
+```
+
+## 繁體中文（zh-Hant）
+
+**名称**
+
 ```
 輕斷食時鐘 - 16:8斷食計時器
 ```
 
-**副標題**
-```
-一次買斷的間歇性斷食提醒
-```
+**副标题**
 
-**關鍵詞**
 ```
-減肥,減脂,瘦身,減重,168,禁食,液斷,生酮,體重,空腹,不吃晚飯,斷糖,計劃,打卡,自律,買斷,小工具,fasting
+進食時段與到點提醒，一次買斷
 ```
 
-描述 / 推廣文本 / 新版本說明：由簡體版轉繁體即可（提交前我可代轉）。
+**推广文本**
 
----
-
-## 附加元数据集（关键词配额倍增）
-
-> 美区商店同时索引 en-US、es-MX、zh-Hans 三套关键词；en-GB 覆盖英联邦多国。
-> 界面无对应语言也可添加商店元数据，用户界面自动回落到英文。
-
-**es-MX（墨西哥西语——美区西语用户直接命中）**
 ```
-名称：   CleanFast: Ayuno Intermitente
-副标题： Temporizador de ayuno 16:8
-关键词： ayuno,intermitente,ayunar,peso,perder,bajar,horas,ventana,comer,reloj,keto,168
-描述：   可复用英文版（或提交前我来翻译一版西语）
+16:8 輕斷食計時，斷食與進食分別記錄。支援到點提醒、主畫面與鎖定畫面小工具、手動與自動模式。一次買斷，無訂閱、無廣告、無 App 內購買。
 ```
 
-**en-GB（顺带覆盖 AU/CA 等）**
+**关键词**
+
 ```
-Name / Subtitle：与 en-US 相同
-Keywords（换一批变体词）：
-weight,loss,eating,window,hours,keto,omad,water,clock,widget,if,168,plan,diary,log
+168,間歇性,空腹,飲食,小工具,鎖定畫面,倒數,自動,手動,離線
 ```
 
----
+**描述（所有者确认稿）**
 
-## ASO 运营备忘
+```
+輕斷食時鐘，一款簡潔易用的 16:8 輕斷食計時器。
 
-- **红线**：商店元数据（名称/副标题/描述/推广文本/截图文字）只做正面自述——
-  绝不比较、不贬损其他应用、不出现"其他 App / App Store 上的同类"式表述（审核 2.3 风险）。
-  "一次买断、无订阅无广告"是说自己，安全；"别人都是订阅制"是说别人，危险。
-- 定位宣传的比较性表述只放在**商店之外**（小红书/即刻/Twitter 的发布故事），那里不归苹果管
-- 上线前用 Apple Search Ads 后台的**关键词热度指数**逐个验证上述词，热度 < 5 的替换
-- 关键词字段**不放竞品商标**（Zero、YAZIO 等——审核 2.3.7 风险）
-- 健康类忌疗效承诺（"瘦十斤"类措辞），现有克制文案是加分项
-- 每 2–4 周小版本更新维持活跃权重；公开回复用户评论
-- 求评弹窗已内置：第 3 / 10 / 30 次完成断食目标时触发系统评分请求（Apple 上限每年 3 次）
+以 16 小時斷食、8 小時進食時段，幫你清楚掌握每天的斷食與進食時間。輕點開始，即可查看目前進度、已進行時間和剩餘時間，也可開啟到點提醒。
 
----
+一次買斷，無訂閱、無廣告、無 App 內購買。
 
-## 上传检查单
+• 斷食與進食，分別計時
+清楚顯示目前狀態與目標結束時間，支援 16:8 等預設及自訂時長。
 
-- [ ] D-U-N-S 到号 → 组织开发者账号注册完成（$99）
-- [ ] Xcode: Signing Team 切到 MaxHope LLC 的新 Team，注册 Bundle ID + App Group
-- [ ] Archive → Distribute → App Store Connect 上传
-- [ ] 截图：优先用 zh-framed / en-framed 各 5 张（带卖点横幅，1320×2868）；raw 版在 zh / en 目录备用
-- [ ] 上表所有文案粘贴到对应语言页
-- [ ] 隐私标签全选"不收集"，隐私政策 URL 填上表链接
-- [ ] 年龄分级问卷 + 出口合规（工程已声明，无需再答）
-- [ ] 首发地区建议：先不勾欧盟（避免公司地址电话公示义务），其余全选
-- [ ] 提交审核
+• 主畫面與鎖定畫面小工具
+不開啟 App，也能隨時查看斷食進度。
+
+• 經典與極簡，兩種介面
+經典圓環直觀呈現進度，極簡大字凸顯計時。支援淺色與深色外觀。
+
+• 手動與自動，兩種模式
+手動模式由你決定何時切換；自動模式依設定時長循環。忘記開始計時，也可以補調開始時間。
+
+• 按需提醒，隨時休息
+開啟通知後，在目標達成時提醒。需要休息一天，輕點「跳過今天」即可。
+
+無需註冊，離線即可使用。紀錄儲存在本機，我們不收集你的使用資料。
+
+本應用程式僅供年滿 18 歲的人士使用，提供計時與記錄功能，不提供醫療建議或診斷。
+```
+
+## 审核备注
+
+```
+CleanFast is a local-only 16:8 intermittent fasting timer intended for adults aged 18 and over. No account or sign-in is required. It has no subscriptions, in-app purchases, ads, analytics SDKs, or app network requests. Notifications are optional and local. The included Home Screen and Lock Screen widgets share the timer state with the app.
+```
+
+## 截图与提交状态
+
+截图工作目录：`/Users/qu/Documents/New project/cleanfast-store-2026-09-11/`。正式文件为 `exports/zh-Hans`、`exports/en`、`exports/zh-Hant` 下的1320×2868无透明通道PNG，上传至6.9英寸媒体位置。第一张明确展示16:8计时。`preview-*` 是缩略联系表，不作为上传源图。旧图标概念不属于交付素材。
+
+最终发布候选与上传检查状态见 `HANDOFF.md` 顶部及 `/Users/qu/Documents/New project/cleanfast-release-2026-09-11/` 证据。不得将本地截图生成、构建通过或隐私标签发布等同于已提交审核。
+
+最终候选 1.0 (5) 已通过 49 项单测、2 项 UI 测试、公司签名归档与苹果验证，并已上传。三语言12张截图已上传并核对顺序，构建已处理完成、选中并保存。所有者已确认美国 $1.99 一次买断；首批九个国家/地区已在后台保存，价格配置随W-9相关阶段暂停；具体安排与推荐申请草稿见发布证据目录的 `metadata/launch-strategy.md`。仍需完成：提供审核联系人；处理付费应用协议及苹果要求的银行/税务资料（欧盟上架另需DSA资料）；最后确认提交审核。
+
+审核备注已在后台补充并保存：完成引导（通知可选）、开始计时、设置中的模式/时长/样式与小组件教程、通过iOS小组件图库添加小组件；明确手动到点不自动切换、自动按时长循环。无登录要求不变。当前集中状态见发布目录 `metadata/release-readiness.md`。

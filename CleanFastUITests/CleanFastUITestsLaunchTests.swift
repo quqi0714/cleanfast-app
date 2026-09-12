@@ -1,13 +1,13 @@
 //
-//  CleanFastClaudeUITestsLaunchTests.swift
-//  CleanFastClaudeUITests
+//  CleanFastUITestsLaunchTests.swift
+//  CleanFastUITests
 //
 //  Created by Qu on 4/26/26.
 //
 
 import XCTest
 
-final class CleanFastClaudeUITestsLaunchTests: XCTestCase {
+final class CleanFastUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

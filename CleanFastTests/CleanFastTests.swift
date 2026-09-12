@@ -1,6 +1,6 @@
 //
-//  CleanFastClaudeTests.swift
-//  CleanFastClaudeTests
+//  CleanFastTests.swift
+//  CleanFastTests
 //
 //  Covers FastingTimerViewModel state machine + automatic-mode resume mechanic.
 //  Each test gets a fresh PersistenceService backed by an isolated UserDefaults suite,
@@ -9,10 +9,10 @@
 
 import Testing
 import Foundation
-@testable import CleanFastClaude
+@testable import CleanFast
 
 @MainActor
-struct CleanFastClaudeTests {
+struct CleanFastTests {
 
     // MARK: - Test helpers
 
@@ -385,20 +385,30 @@ struct CleanFastClaudeTests {
         #expect(r.startDate == start.addingTimeInterval(72 * 3600))
     }
 
-    @Test func advanceAutomaticCycle_capsAtMaxIterations() {
-        // 极端：1 秒目标会让 200 cycle 内推完非常多时间。这个 test 守护无限循环兜底。
+    @Test func advanceAutomaticCycle_catchesUpWithoutIterationLimit() {
         let start = Date(timeIntervalSince1970: 0)
         let now = Date(timeIntervalSince1970: 100_000_000)
         let r = FastingTimerViewModel.advanceAutomaticCycle(
-            startDate: start,
-            currentDuration: 1,
-            isFasting: true,
-            fastingDuration: 1,
-            eatingDuration: 1,
-            at: now
+            startDate: start, currentDuration: 1, isFasting: true,
+            fastingDuration: 1, eatingDuration: 1, at: now
         )
-        // 守护值 200，表示循环命中上限
-        #expect(r.cyclesAdvanced == 200)
+        #expect(r.cyclesAdvanced == 100_000_000)
+        #expect(r.startDate == now)
+        #expect(r.isFasting)
+        #expect(r.duration == 1)
+    }
+
+    @Test func advanceAutomaticCycle_rejectsInvalidDurations() {
+        let start = Date(timeIntervalSince1970: 1_700_000_000)
+        for duration in [TimeInterval(0), -1, .infinity, .nan] {
+            let r = FastingTimerViewModel.advanceAutomaticCycle(
+                startDate: start, currentDuration: 3600, isFasting: true,
+                fastingDuration: duration, eatingDuration: 3600,
+                at: start.addingTimeInterval(365 * 86400)
+            )
+            #expect(r.cyclesAdvanced == 0)
+            #expect(r.startDate == start)
+        }
     }
 
     @Test func advanceAutomaticCycle_eatingToFastingBoundary() {
@@ -419,7 +429,7 @@ struct CleanFastClaudeTests {
         #expect(r.startDate == start.addingTimeInterval(8 * 3600))
     }
 
-    /// 独立参考实现（刻意用不同写法：直接按周期数学求余，而不是逐段循环），
+    /// 独立参考实现（逐段推进，与正式实现的整周期跳转采用不同算法），
     /// 在整段网格上与 `advanceAutomaticCycle` 比对，钉住其行为。
     /// widget 侧的镜像副本无法被本 target 引用，人工同步时以此为准绳。
     @Test func advanceAutomaticCycle_matchesPinnedReference() {
@@ -432,45 +442,43 @@ struct CleanFastClaudeTests {
         let offsets: [TimeInterval] = [
             0, 1, 3599, 3600, 8 * 3600 - 1, 8 * 3600, 16 * 3600 - 1, 16 * 3600,
             24 * 3600, 30 * 3600, 72 * 3600 + 5 * 3600, 30 * 24 * 3600 + 123,
+            101 * 86400, 180 * 86400 + 16 * 3600, 365 * 86400 + 123,
         ]
         for plan in plans {
             for isFasting in [true, false] {
-                let currentDuration = isFasting ? plan.fasting : plan.eating
-                for offset in offsets {
-                    let now = base.addingTimeInterval(offset)
-                    let r = FastingTimerViewModel.advanceAutomaticCycle(
-                        startDate: base,
-                        currentDuration: currentDuration,
-                        isFasting: isFasting,
-                        fastingDuration: plan.fasting,
-                        eatingDuration: plan.eating,
-                        at: now
-                    )
-                    // 参考实现：先消耗当前段，再按整周期求余推进
-                    var refStart = base
-                    var refFasting = isFasting
-                    var refDuration = currentDuration
-                    if now >= base.addingTimeInterval(currentDuration) {
-                        refStart = base.addingTimeInterval(currentDuration)
-                        refFasting = !isFasting
-                        refDuration = refFasting ? plan.fasting : plan.eating
-                        let cycle = plan.fasting + plan.eating
-                        var remaining = now.timeIntervalSince(refStart)
-                        let fullCycles = floor(remaining / cycle)
-                        refStart = refStart.addingTimeInterval(fullCycles * cycle)
-                        remaining -= fullCycles * cycle
-                        if remaining >= refDuration {
+                let initialDurations: [TimeInterval] = [isFasting ? plan.fasting : plan.eating, 5 * 3600 + 123]
+                for currentDuration in initialDurations {
+                    for offset in offsets {
+                        let now = base.addingTimeInterval(offset)
+                        let r = FastingTimerViewModel.advanceAutomaticCycle(
+                            startDate: base,
+                            currentDuration: currentDuration,
+                            isFasting: isFasting,
+                            fastingDuration: plan.fasting,
+                            eatingDuration: plan.eating,
+                            at: now
+                        )
+                        // Independent oracle: walk every boundary, including the original session.
+                        var refStart = base
+                        var refFasting = isFasting
+                        var refDuration = currentDuration
+                        var refTransitions = 0
+                        while now >= refStart.addingTimeInterval(refDuration) {
                             refStart = refStart.addingTimeInterval(refDuration)
                             refFasting.toggle()
                             refDuration = refFasting ? plan.fasting : plan.eating
+                            refTransitions += 1
                         }
+                        #expect(r.cyclesAdvanced == refTransitions)
+                        #expect(r.startDate <= now)
+                        #expect(r.startDate.addingTimeInterval(r.duration) > now)
+                        #expect(r.startDate == refStart,
+                                "startDate mismatch at offset \(offset), fasting=\(isFasting)")
+                        #expect(r.isFasting == refFasting,
+                                "isFasting mismatch at offset \(offset), fasting=\(isFasting)")
+                        #expect(r.duration == refDuration,
+                                "duration mismatch at offset \(offset), fasting=\(isFasting)")
                     }
-                    #expect(r.startDate == refStart,
-                            "startDate mismatch at offset \(offset), fasting=\(isFasting)")
-                    #expect(r.isFasting == refFasting,
-                            "isFasting mismatch at offset \(offset), fasting=\(isFasting)")
-                    #expect(r.duration == refDuration,
-                            "duration mismatch at offset \(offset), fasting=\(isFasting)")
                 }
             }
         }

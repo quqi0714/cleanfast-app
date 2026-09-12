@@ -9,6 +9,7 @@ struct SettingsView: View {
     @State private var notificationEnabled: Bool = PersistenceService.shared.notificationEnabled
     @State private var timingMode: TimingMode = PersistenceService.shared.timingMode
     @State private var isRevertingNotificationToggle = false
+    @State private var notificationRequestID = UUID()
 
     private static let presets: [Int] = [14, 16, 18, 20, 22]
 
@@ -109,9 +110,9 @@ struct SettingsView: View {
     private var timingModeFooter: String {
         switch timingMode {
         case .manual:
-            return "到点只提醒，什么时候切换由你决定。"
+            return String(localized: "到点只提醒，什么时候切换由你决定。")
         case .automatic:
-            return "按时间自动切换，打开就知道现在是哪一段。"
+            return String(localized: "按时间自动切换，打开就知道现在是哪一段。")
         }
     }
 
@@ -160,29 +161,33 @@ struct SettingsView: View {
         } header: {
             Text("通知")
         } footer: {
-            ZHText(content: "断食或进食目标达成时会发一条本地通知，\n仅此而已。",
+            ZHText(content: notificationFooter,
                    size: 13, color: AppColor.textSecondary, lineSpacing: 2)
         }
         .listRowBackground(AppColor.cardSurface.opacity(0.7))
     }
 
+    private var notificationFooter: LocalizedStringKey {
+        switch timingMode {
+        case .manual:
+            return "断食或进食目标达成时会发一条本地通知，\n仅此而已。"
+        case .automatic:
+            return "自动提醒会预先安排未来几天的通知（16:8 约 3 天），需要定期打开 App 才能继续更新提醒。"
+        }
+    }
+
     private func handleNotificationToggle(_ on: Bool) {
-        if on {
-            Task { @MainActor in
-                let granted = await NotificationService.shared.requestPermission()
-                if granted {
-                    PersistenceService.shared.notificationEnabled = true
-                    vm.refreshNotificationsFromCurrentSession()
-                } else {
-                    // 用户拒绝授权 → 把开关回退，避免给用户"已开启"的错觉
-                    isRevertingNotificationToggle = true
-                    notificationEnabled = false
-                    PersistenceService.shared.notificationEnabled = false
-                }
+        let requestID = UUID()
+        notificationRequestID = requestID
+        let request = vm.setNotificationsEnabled(on)
+        guard on else { return }
+        Task { @MainActor in
+            let granted = await request.value
+            guard notificationRequestID == requestID, notificationEnabled else { return }
+            if !granted {
+                isRevertingNotificationToggle = true
+                notificationEnabled = false
             }
-        } else {
-            PersistenceService.shared.notificationEnabled = false
-            NotificationService.shared.cancelAll()
         }
     }
 
@@ -205,9 +210,13 @@ struct SettingsView: View {
                     Spacer()
                 }
                 Divider().opacity(0.3)
-                instructionRow(num: "1", text: "桌面：长按空白处 → 左上角 +")
-                instructionRow(num: "2", text: "锁屏：长按表盘空白 → Customize")
-                instructionRow(num: "3", text: "搜「轻断食」→ 选尺寸 → 加上")
+                instructionRow(num: "1", text: "长按主屏幕空白处")
+                instructionRow(num: "2", text: "点击左上角「+」，或点「编辑」→「添加小组件」")
+                instructionRow(num: "3", text: "搜索「轻断食时钟」")
+                instructionRow(num: "4", text: "选择尺寸并点击「添加小组件」")
+                Divider().opacity(0.3)
+                ZHText(content: "锁屏：长按锁定屏幕 → 自定 → 添加小组件，选择「轻断食时钟」。",
+                       size: 13, color: AppColor.textSecondary, lineSpacing: 2)
             }
             .padding(.vertical, 4)
         } header: {
@@ -220,9 +229,9 @@ struct SettingsView: View {
         HStack(alignment: .top, spacing: 8) {
             Text(num)
                 .font(.system(size: 12, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
+                .foregroundStyle(AppColor.textPrimary)
                 .frame(width: 18, height: 18)
-                .background(Circle().fill(AppColor.sunOrange))
+                .background(Circle().fill(AppColor.sunOrange.opacity(0.16)))
             ZHText(content: text, size: 13, color: AppColor.textPrimary)
             Spacer()
         }
@@ -281,8 +290,12 @@ struct SettingsView: View {
 
     private var healthSection: some View {
         Section("健康说明") {
-            ZHText(content: "轻断食时钟仅用于计时与提醒，不提供医疗建议。\n若你有特殊健康情况，或计划进行较长时间断食，\n请先咨询专业人士。",
-                   size: 13, color: AppColor.textSecondary, lineSpacing: 3)
+            VStack(alignment: .leading, spacing: 4) {
+                ZHText(content: "本应用面向年满 18 岁的人士。",
+                       size: 13, color: AppColor.textSecondary, lineSpacing: 3)
+                ZHText(content: "轻断食时钟仅用于计时与提醒，不提供医疗建议。\n若你有特殊健康情况，或计划进行较长时间断食，\n请先咨询专业人士。",
+                       size: 13, color: AppColor.textSecondary, lineSpacing: 3)
+            }
         }
         .listRowBackground(AppColor.cardSurface.opacity(0.7))
     }

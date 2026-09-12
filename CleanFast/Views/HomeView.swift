@@ -14,6 +14,7 @@ struct HomeView: View {
     @State private var didEnter = false
     @State private var stageInfo: StageInfo?
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.colorScheme) private var colorScheme
 
     private let ringSize: CGFloat = 280
     private let ringSlotHeight: CGFloat = 340
@@ -107,20 +108,44 @@ struct HomeView: View {
         }
     }
 
+    @ViewBuilder
     private var classicHomeLayout: some View {
-        VStack(spacing: 18) {
-            topBar
-            Spacer(minLength: 0)
-            ringSection
-                .frame(height: ringSlotHeight)
-            stageCard
-                .frame(minHeight: 110, alignment: .top)
-            Spacer(minLength: 0)
-            primaryActionArea
+        GeometryReader { geometry in
+            if geometry.size.height < 720 || geometry.size.width < 390 {
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 14) {
+                        topBar
+                        ringSection(size: compactRingSize(for: geometry))
+                        stageCard
+                        primaryActionArea
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 12)
+                    .padding(.bottom, 24)
+                }
+            } else {
+                VStack(spacing: 18) {
+                    topBar
+                    Spacer(minLength: 0)
+                    ringSection(size: ringSize)
+                        .frame(height: ringSlotHeight)
+                    stageCard
+                        .frame(minHeight: 110, alignment: .top)
+                    Spacer(minLength: 0)
+                    primaryActionArea
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 12)
+                .padding(.bottom, 24)
+            }
         }
-        .padding(.horizontal, 24)
-        .padding(.top, 12)
-        .padding(.bottom, 24)
+    }
+
+    private func compactRingSize(for geometry: GeometryProxy) -> CGFloat {
+        let widthBound = max(226, geometry.size.width - 48)
+        let heightBound = geometry.size.height * 0.34
+        return min(ringSize, max(226, min(widthBound, heightBound)))
     }
 
     private var cinematicHomeLayout: some View {
@@ -370,9 +395,15 @@ struct HomeView: View {
             .animation(.snappy(duration: 0.35), value: cinematicSecondaryClockValue)
             .shadow(color: AppColor.shadowAmbient.opacity(0.22), radius: 8, y: 3)
         case .notStarted:
-            Text("准备好了，就开始")
-                .font(.system(size: 14, weight: .medium, design: .rounded))
-                .foregroundStyle(AppColor.textSecondary)
+            if let pendingAutomaticResumeText {
+                Text(pendingAutomaticResumeText)
+                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .foregroundStyle(AppColor.textSecondary)
+            } else {
+                Text("准备好了，就开始")
+                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .foregroundStyle(AppColor.textSecondary)
+            }
         case .skipped:
             Text("生活也需要弹性")
                 .font(.system(size: 14, weight: .medium, design: .rounded))
@@ -518,6 +549,22 @@ struct HomeView: View {
         vm.state == .skipped ? "arrow.uturn.backward" : "arrow.right"
     }
 
+    private var pendingAutomaticResumeDate: Date? {
+        guard vm.timingMode == .automatic,
+              vm.state == .notStarted,
+              let resumeDay = PersistenceService.shared.automaticResumeDateString,
+              let startMinute = PersistenceService.shared.automaticFastingStartMinute,
+              let date = ScheduleService().date(forDayString: resumeDay, minuteOfDay: startMinute),
+              date > vm.now
+        else { return nil }
+        return date
+    }
+
+    private var pendingAutomaticResumeText: String? {
+        guard let date = pendingAutomaticResumeDate else { return nil }
+        return String(localized: "自动恢复于 \(TimeFormat.relativeClock(date))")
+    }
+
     private var stateLabel: String {
         switch vm.state {
         case .notStarted: return String(localized: "准 备 中")
@@ -541,18 +588,20 @@ struct HomeView: View {
 
     // MARK: - Ring section
 
-    private var ringSection: some View {
-        ZStack {
+    private func ringSection(size: CGFloat) -> some View {
+        let scale = size / ringSize
+
+        return ZStack {
             ProgressRingView(
                 progress: animatedProgress,
                 color: ringColor,
                 trackColor: ringTrackColor,
                 markers: ringMarkers,
-                radius: ringSize / 2
+                radius: size / 2
             ) { marker, anchor in
                 showMarkerInfo(title: marker.title, color: marker.color, anchor: anchor)
             }
-            .frame(width: ringSize, height: ringSize)
+            .frame(width: size, height: size)
             .animation(.easeInOut(duration: 0.6), value: ringTrackColor)
 
             Text(stateTitle)
@@ -560,11 +609,11 @@ struct HomeView: View {
                 .foregroundStyle(AppColor.textSecondary)
                 .contentTransition(.opacity)
                 .animation(.easeInOut(duration: 0.4), value: stateTitle)
-                .offset(y: -64)
+                .offset(y: -64 * scale)
 
             // 跳过态用月亮中心位替换大数字
             if vm.state == .skipped {
-                SkippedCenterpiece(size: 56)
+                SkippedCenterpiece(size: 56 * scale)
                     .transition(.opacity.combined(with: .scale(scale: 0.92)))
             } else {
                 Text(elapsedDisplay)
@@ -580,17 +629,17 @@ struct HomeView: View {
             }
 
             secondaryClock
-                .offset(y: 42)
+                .offset(y: 42 * scale)
 
             Text(targetText)
                 .font(.system(size: 12, weight: .regular, design: .rounded))
                 .foregroundStyle(AppColor.textSecondary.opacity(0.85))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-                .frame(maxWidth: ringSize - 80)
-                .offset(y: 74)
+                .frame(maxWidth: size - 80 * scale)
+                .offset(y: 74 * scale)
         }
-        .frame(width: ringSize, height: ringSize)
+        .frame(width: size, height: size)
     }
 
     @ViewBuilder
@@ -752,13 +801,13 @@ struct HomeView: View {
                 accentColor: ringColor,
                 supportColor: ambientSupportColor,
                 contrastColor: ambientContrastColor,
-                intensity: vm.state == .fasting || vm.state == .eating ? .cinematic : .normal
+                intensity: cinematicBackgroundIntensity
             )
             .animation(.easeInOut(duration: 1.4), value: vm.state)
 
             RadialGradient(
                 colors: [
-                    ringColor.opacity(vm.state == .fasting || vm.state == .eating ? 0.30 : 0.14),
+                    ringColor.opacity(cinematicRingGlowOpacity),
                     .clear
                 ],
                 center: lightCenter,
@@ -775,7 +824,30 @@ struct HomeView: View {
                 endPoint: .bottom
             )
             .allowsHitTesting(false)
+
+            // Keep the light text readable over the cinematic eating glow.
+            Color.black
+                .opacity(cinematicBackgroundDimOpacity)
+                .allowsHitTesting(false)
         }
+    }
+
+    private var cinematicBackgroundIntensity: AmbientBackground.Intensity {
+        if vm.state == .eating && colorScheme == .dark {
+            return .vibrant
+        }
+        return vm.state == .fasting || vm.state == .eating ? .cinematic : .normal
+    }
+
+    private var cinematicRingGlowOpacity: Double {
+        if vm.state == .eating && colorScheme == .dark {
+            return 0.12
+        }
+        return vm.state == .fasting || vm.state == .eating ? 0.30 : 0.14
+    }
+
+    private var cinematicBackgroundDimOpacity: Double {
+        vm.state == .eating && colorScheme == .dark ? 0.18 : 0
     }
 
     /// 副光团颜色：断食态用暖橙、进食态用鼠尾草绿、休息态用冷蓝。
@@ -847,6 +919,9 @@ struct HomeView: View {
         let lockedHours = Int(vm.activeTargetDuration / 3600)
         switch vm.state {
         case .notStarted:
+            if pendingAutomaticResumeDate != nil {
+                return String(localized: "按设定时间自动开始。")
+            }
             return String(localized: "从你点击开始的那一刻计时")
         case .fasting:
             if let end = vm.sessionEndDate {
@@ -875,7 +950,11 @@ struct HomeView: View {
 
     private var stageTitle: String {
         switch vm.state {
-        case .notStarted: return String(localized: "准备好了，就开始")
+        case .notStarted:
+            if let pendingAutomaticResumeDate {
+                return String(localized: "自动恢复于 \(TimeFormat.relativeClock(pendingAutomaticResumeDate))")
+            }
+            return String(localized: "准备好了，就开始")
         case .fasting:
             return vm.currentStage.title
         case .eating:
@@ -888,6 +967,9 @@ struct HomeView: View {
     private var stageMessage: String {
         switch vm.state {
         case .notStarted:
+            if pendingAutomaticResumeDate != nil {
+                return String(localized: "按设定时间自动开始，准备好了也可以现在提前开始。")
+            }
             return String(localized: "按你的节奏来，准备好了就开始。")
         case .fasting:
             if vm.hasReachedTarget {
@@ -915,7 +997,10 @@ struct HomeView: View {
     private var primaryTitle: String {
         if vm.timingMode == .automatic {
             switch vm.state {
-            case .notStarted: return String(localized: "开始计时")
+            case .notStarted:
+                return pendingAutomaticResumeDate == nil
+                    ? String(localized: "开始计时")
+                    : String(localized: "现在提前开始")
             case .fasting, .eating: return String(localized: "今天休息")
             case .skipped: return String(localized: "恢复今天")
             }

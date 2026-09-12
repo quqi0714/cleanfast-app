@@ -17,6 +17,11 @@ final class FastingTimerViewModel: ObservableObject {
 
     private let persistence: PersistenceService
     private let schedule: ScheduleService
+    private let notifications: NotificationService
+    private var notificationObserver: Task<Void, Never>?
+    private var notificationRevision: UInt64 = 0
+    private var permissionTask: Task<Bool, Never>?
+    private var permissionRevision: UInt64 = 0
     private var ticker: AnyCancellable?
 
     /// 测试可注入独立 `PersistenceService` 和 `ScheduleService`，
@@ -26,10 +31,12 @@ final class FastingTimerViewModel: ObservableObject {
     init(
         persistence: PersistenceService = .shared,
         schedule: ScheduleService? = nil,
-        startTicker autoStartTicker: Bool = true
+        startTicker autoStartTicker: Bool = true,
+        notifications: NotificationService? = nil
     ) {
         self.persistence = persistence
         self.schedule = schedule ?? ScheduleService()
+        self.notifications = notifications ?? .shared
         self.targetMinutes = persistence.targetMinutes
         self.state = persistence.state
         self.session = persistence.session
@@ -387,14 +394,9 @@ final class FastingTimerViewModel: ObservableObject {
             cancelSessionNotifications()
             return
         }
-        Task { @MainActor in
-            let result = await NotificationService.shared.scheduleTargetReached(
-                at: endDate, title: title, body: body
-            )
-            if result == .notAuthorized {
-                persistence.notificationEnabled = false
-            }
-        }
+        observeNotificationResult(notifications.scheduleTargetReached(
+            at: endDate, title: title, body: body
+        ))
     }
 
     private func scheduleAutomaticResumeNotificationIfNeeded() {
@@ -434,12 +436,7 @@ final class FastingTimerViewModel: ObservableObject {
                     : String(localized: "进食窗口已经结束，新一段断食已经开始。")
             )
         }
-        Task { @MainActor in
-            let result = await NotificationService.shared.scheduleSeries(items)
-            if result == .notAuthorized {
-                persistence.notificationEnabled = false
-            }
-        }
+        observeNotificationResult(notifications.scheduleSeries(items))
     }
 
     /// 自动模式：从给定会话推出接下来 `count` 次窗口切换。
@@ -464,8 +461,43 @@ final class FastingTimerViewModel: ObservableObject {
         return result
     }
 
+    private func observeNotificationResult(_ task: Task<NotificationService.ScheduleResult, Never>) {
+        notificationRevision &+= 1
+        let token = notificationRevision
+        notificationObserver?.cancel()
+        notificationObserver = Task { @MainActor [weak self] in
+            let result = await task.value
+            guard let self, !Task.isCancelled, token == self.notificationRevision else { return }
+            if result == .notAuthorized { self.persistence.notificationEnabled = false }
+        }
+    }
+
     private func cancelSessionNotifications() {
-        NotificationService.shared.cancelAll()
+        notificationRevision &+= 1
+        notificationObserver?.cancel()
+        notifications.cancelAll()
+    }
+
+    /// The latest switch choice owns permission completion, including when the
+    /// system prompt returns after the user has switched reminders off.
+    @discardableResult
+    func setNotificationsEnabled(_ enabled: Bool) -> Task<Bool, Never> {
+        permissionRevision &+= 1
+        let token = permissionRevision
+        permissionTask?.cancel()
+        persistence.notificationEnabled = false
+        cancelSessionNotifications()
+        guard enabled else { return Task { false } }
+        let task = Task { @MainActor [weak self] in
+            guard let self, !Task.isCancelled, token == self.permissionRevision else { return false }
+            let granted = await self.notifications.requestPermission()
+            guard !Task.isCancelled, token == self.permissionRevision else { return false }
+            self.persistence.notificationEnabled = granted
+            if granted { self.refreshNotificationScheduleForCurrentState() }
+            return granted
+        }
+        permissionTask = task
+        return task
     }
 
     private func refreshNotificationScheduleForCurrentState() {
@@ -556,19 +588,33 @@ final class FastingTimerViewModel: ObservableObject {
         eatingDuration: TimeInterval,
         at referenceDate: Date
     ) -> (startDate: Date, duration: TimeInterval, isFasting: Bool, cyclesAdvanced: Int) {
-        var current = (start: startDate, duration: currentDuration, fasting: isFasting)
-        var cycles = 0
-        let maxCycles = 200
+        let unchanged = (startDate, currentDuration, isFasting, 0)
+        let period = fastingDuration + eatingDuration
+        guard currentDuration.isFinite, currentDuration > 0,
+              fastingDuration.isFinite, fastingDuration > 0,
+              eatingDuration.isFinite, eatingDuration > 0, period.isFinite,
+              referenceDate.timeIntervalSince(startDate).isFinite,
+              referenceDate >= startDate.addingTimeInterval(currentDuration) else {
+            return unchanged
+        }
 
-        while referenceDate >= current.start.addingTimeInterval(current.duration) && cycles < maxCycles {
-            let nextStart = current.start.addingTimeInterval(current.duration)
-            let nextFasting = !current.fasting
-            let nextDuration = nextFasting ? fastingDuration : eatingDuration
-            current = (nextStart, nextDuration, nextFasting)
+        // Preserve the current session's duration, even if the plan changed after it began.
+        var nextStart = startDate.addingTimeInterval(currentDuration)
+        var nextFasting = !isFasting
+        var nextDuration = nextFasting ? fastingDuration : eatingDuration
+        let completePairs = floor(referenceDate.timeIntervalSince(nextStart) / period)
+        nextStart = nextStart.addingTimeInterval(completePairs * period)
+        // Saturation only matters for malformed, astronomical dates; a catch-up must
+        // never look like one transition and incorrectly award a completed-fast milestone.
+        var cycles = completePairs < Double(Int.max / 4) ? 1 + Int(completePairs) * 2 : Int.max - 1
+        if referenceDate >= nextStart.addingTimeInterval(nextDuration) {
+            nextStart = nextStart.addingTimeInterval(nextDuration)
+            nextFasting.toggle()
+            nextDuration = nextFasting ? fastingDuration : eatingDuration
             cycles += 1
         }
 
-        return (current.start, current.duration, current.fasting, cycles)
+        return (nextStart, nextDuration, nextFasting, cycles)
     }
 
     // MARK: - App Store review milestones

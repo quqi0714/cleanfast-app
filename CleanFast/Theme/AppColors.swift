@@ -22,7 +22,8 @@ enum AppColor {
 
     static let textPrimary     = Color.adaptive(light: 0x2F2A26, dark: 0xF5EDE0)
     static let textSecondary   = Color.adaptive(light: 0x7A7168, dark: 0xA89A8C)
-    static let textOnAccent    = Color.white
+    // Solid orange / yellow / mint buttons need the same deep ink in both themes.
+    static let textOnAccent    = Color(hex: 0x2F2A26)
 
     static let ringTrack       = Color.adaptive(light: 0xEDE4D6, dark: 0x2A2520)
 

@@ -7,6 +7,7 @@ struct OnboardingView: View {
         case pickTarget
         case pickTimingMode
         case pickHomeStyle
+        case widget
         case notifications
     }
 
@@ -18,6 +19,8 @@ struct OnboardingView: View {
     @State private var targetMinutes: Int = PersistenceService.shared.targetMinutes
     @State private var timingMode: TimingMode = PersistenceService.shared.timingMode
     @State private var notificationRequestInFlight = false
+    @State private var notificationRequestID = UUID()
+    @State private var didFinish = false
 
     private static let presets: [FastingPlanPreset] = [
         FastingPlanPreset(hours: 12, name: "温和开始", badge: "新手友好",
@@ -50,6 +53,7 @@ struct OnboardingView: View {
         case .pickTarget: pickTargetPage
         case .pickTimingMode: pickTimingModePage
         case .pickHomeStyle: pickHomeStylePage
+        case .widget: widgetPage
         case .notifications: notificationPage
         }
     }
@@ -111,12 +115,12 @@ struct OnboardingView: View {
                         bulletCard(
                             symbol: "infinity",
                             title: "到了目标，也不催你",
-                            body: "到了以后会继续计时。\n什么时候结束，由你决定。"
+                            body: "开启提醒后，到了目标会提醒你。\n之后会按你选择的切换方式继续。"
                         )
                         bulletCard(
                             symbol: "fork.knife",
-                            title: "结束后，进入进食窗口",
-                            body: "进食窗口也会继续计时。\n准备好下一轮时，点「现在开始断食」。"
+                            title: "断食和进食，都会计时",
+                            body: "两段都会继续计时。\n按你选择的切换方式进入下一段。"
                         )
                         bulletCard(
                             symbol: "moon.zzz",
@@ -309,13 +313,11 @@ struct OnboardingView: View {
                     VStack(spacing: 12) {
                         timingModeCard(
                             mode: .manual,
-                            titleSuffix: String(localized: "（推荐）"),
-                            detail: "到点后只提醒，不自动切换。\n准备好了再轻触进入下一段。"
+                            titleSuffix: String(localized: "（推荐）")
                         )
                         timingModeCard(
                             mode: .automatic,
-                            titleSuffix: "",
-                            detail: "按设定的断食和进食窗口自动切换。\n打开时可以直接看到当前是否在进食窗口。"
+                            titleSuffix: ""
                         )
                     }
                 }
@@ -341,7 +343,7 @@ struct OnboardingView: View {
         }
     }
 
-    private func timingModeCard(mode: TimingMode, titleSuffix: String, detail: LocalizedStringKey) -> some View {
+    private func timingModeCard(mode: TimingMode, titleSuffix: String) -> some View {
         let selected = timingMode == mode
         let shape = RoundedRectangle(cornerRadius: 16, style: .continuous)
         return Button {
@@ -359,7 +361,8 @@ struct OnboardingView: View {
                     Text(mode.title + titleSuffix)
                         .font(.system(size: 17, weight: .semibold, design: .rounded))
                         .foregroundStyle(AppColor.textPrimary)
-                    ZHText(content: detail, size: 13, color: AppColor.textSecondary, lineSpacing: 3)
+                    ZHText(verbatim: mode.shortDescription, size: 13,
+                           color: AppColor.textSecondary, lineSpacing: 3)
                 }
                 Spacer()
                 if selected {
@@ -413,7 +416,7 @@ struct OnboardingView: View {
                 PrimaryButton(title: String(localized: "下一步")) {
                     Haptics.play(.primaryAdvance)
                     withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
-                        step = .notifications
+                        step = .widget
                     }
                 }
             }
@@ -549,6 +552,84 @@ struct OnboardingView: View {
         }
     }
 
+    // MARK: - Widget
+
+    private var widgetPage: some View {
+        VStack(spacing: 0) {
+            ScrollView {
+                VStack(spacing: 18) {
+                    VStack(spacing: 12) {
+                        Image(systemName: "rectangle.3.group.fill")
+                            .font(.system(size: 48, weight: .light))
+                            .foregroundStyle(AppColor.sunOrange)
+                            .shadow(color: AppColor.sunOrange.opacity(0.28), radius: 20)
+
+                        VStack(spacing: 8) {
+                            Text("把进度放到主屏幕")
+                                .font(.system(size: 26, weight: .semibold, design: .rounded))
+                                .foregroundStyle(AppColor.textPrimary)
+                            ZHText(content: "小组件需要在主屏幕手动添加，之后不打开 App 也能看到进度。\n完成设置后就能添加；稍后也可以在设置里查看方法。",
+                                   size: 14, color: AppColor.textSecondary,
+                                   lineSpacing: 4, alignment: .center)
+                        }
+                    }
+                    .padding(.top, 12)
+
+                    VStack(spacing: 10) {
+                        widgetInstructionRow(num: "1", text: "长按主屏幕空白处")
+                        widgetInstructionRow(num: "2", text: "点击左上角「+」，或点「编辑」→「添加小组件」")
+                        widgetInstructionRow(num: "3", text: "搜索「轻断食时钟」")
+                        widgetInstructionRow(num: "4", text: "选择尺寸并点击「添加小组件」")
+                    }
+                }
+                .padding(.bottom, 16)
+            }
+            .scrollIndicators(.hidden)
+
+            HStack(spacing: 10) {
+                SecondaryButton(title: String(localized: "返回")) {
+                    Haptics.play(.cancel)
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
+                        step = .pickHomeStyle
+                    }
+                }
+                PrimaryButton(title: String(localized: "继续")) {
+                    Haptics.play(.primaryAdvance)
+                    withAnimation(.spring(response: 0.5, dampingFraction: 0.85)) {
+                        step = .notifications
+                    }
+                }
+            }
+            .padding(.top, 8)
+        }
+    }
+
+    private func widgetInstructionRow(num: String, text: LocalizedStringKey) -> some View {
+        let shape = RoundedRectangle(cornerRadius: 16, style: .continuous)
+        return HStack(alignment: .top, spacing: 10) {
+            Text(num)
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .foregroundStyle(AppColor.textPrimary)
+                .frame(width: 20, height: 20)
+                .background(Circle().fill(AppColor.cardSurface.opacity(0.82)))
+                .overlay(
+                    Circle()
+                        .stroke(AppColor.sunOrange.opacity(0.35), lineWidth: 0.75)
+                )
+
+            ZHText(content: text, size: 13, color: AppColor.textPrimary, lineSpacing: 2)
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.ultraThinMaterial, in: shape)
+        .overlay(
+            shape
+                .stroke(Color.white.opacity(0.5), lineWidth: 0.5)
+        )
+    }
+
     // MARK: - Notification permission
 
     private var notificationPage: some View {
@@ -584,35 +665,40 @@ struct OnboardingView: View {
 
                 SecondaryButton(title: String(localized: "暂时不用")) {
                     Haptics.play(.cancel)
-                    finish(notificationEnabled: false, playHaptic: false)
+                    finish(disableNotifications: true, playHaptic: false)
                 }
             }
         }
     }
 
     private func requestNotificationsAndFinish() {
-        guard !notificationRequestInFlight else { return }
+        guard !notificationRequestInFlight, !didFinish else { return }
         notificationRequestInFlight = true
+        let requestID = UUID()
+        notificationRequestID = requestID
         Haptics.play(.primaryAdvance)
+        let request = vm.setNotificationsEnabled(true)
         Task { @MainActor in
-            let granted = await NotificationService.shared.requestPermission()
+            _ = await request.value
+            guard notificationRequestID == requestID, !didFinish else { return }
             notificationRequestInFlight = false
-            finish(notificationEnabled: granted, playHaptic: false)
+            finish(playHaptic: false)
         }
     }
 
-    private func finish(notificationEnabled: Bool? = nil, playHaptic: Bool = true) {
-        if playHaptic {
-            Haptics.play(.primaryAdvance)
-        }
-        if let notificationEnabled {
-            PersistenceService.shared.notificationEnabled = notificationEnabled
-        }
+    private func finish(disableNotifications: Bool = false, playHaptic: Bool = true) {
+        guard !didFinish else { return }
+        didFinish = true
+        notificationRequestID = UUID()
+        notificationRequestInFlight = false
+        if playHaptic { Haptics.play(.primaryAdvance) }
+        if disableNotifications { vm.setNotificationsEnabled(false) }
         vm.updateTargetMinutes(targetMinutes)
         vm.updateTimingMode(timingMode)
         PersistenceService.shared.hasCompletedOnboarding = true
         onFinish()
     }
+
 }
 
 private struct FastingPlanPreset: Identifiable {

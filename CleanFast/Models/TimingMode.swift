@@ -16,9 +16,9 @@ enum TimingMode: String, Codable, CaseIterable, Identifiable {
     var shortDescription: String {
         switch self {
         case .manual:
-            return String(localized: "到点后只提醒，由你决定什么时候进入下一段。")
+            return String(localized: "按实际用餐时间计时。到点提醒，什么时候开始和结束由你决定。")
         case .automatic:
-            return String(localized: "按设定窗口自动进入下一段，打开时直接看到当前窗口。")
+            return String(localized: "适合用餐时间比较固定的人，按设定窗口自动循环。")
         }
     }
 }

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		9249B8622F9FE88700D10C2E /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9249B8612F9FE88700D10C2E /* WidgetKit.framework */; };
 		9249B8642F9FE88700D10C2E /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9249B8632F9FE88700D10C2E /* SwiftUI.framework */; };
-		9249B8712F9FE88900D10C2E /* CleanFastClaudeWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9249B85F2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9249B8712F9FE88900D10C2E /* CleanFastWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9249B85F2F9FE88700D10C2E /* CleanFastWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -18,21 +18,21 @@
 			containerPortal = 92D6B26D2F9EE1540009CAC6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 9249B85E2F9FE88700D10C2E;
-			remoteInfo = CleanFastClaudeWidgetExtension;
+			remoteInfo = CleanFastWidgetExtension;
 		};
 		92D6B2832F9EE1550009CAC6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 92D6B26D2F9EE1540009CAC6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 92D6B2742F9EE1540009CAC6;
-			remoteInfo = CleanFastClaude;
+			remoteInfo = CleanFast;
 		};
 		92D6B28D2F9EE1550009CAC6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 92D6B26D2F9EE1540009CAC6 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 92D6B2742F9EE1540009CAC6;
-			remoteInfo = CleanFastClaude;
+			remoteInfo = CleanFast;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -43,7 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				9249B8712F9FE88900D10C2E /* CleanFastClaudeWidgetExtension.appex in Embed Foundation Extensions */,
+				9249B8712F9FE88900D10C2E /* CleanFastWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -51,47 +51,47 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9249B85F2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CleanFastClaudeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9249B85F2F9FE88700D10C2E /* CleanFastWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CleanFastWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9249B8612F9FE88700D10C2E /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		9249B8632F9FE88700D10C2E /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		9249B8782F9FFA2100D10C2E /* CleanFastClaudeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleanFastClaudeWidgetExtension.entitlements; sourceTree = "<group>"; };
-		92D6B2752F9EE1540009CAC6 /* CleanFastClaude.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanFastClaude.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		92D6B2822F9EE1550009CAC6 /* CleanFastClaudeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanFastClaudeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92D6B28C2F9EE1550009CAC6 /* CleanFastClaudeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanFastClaudeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9249B8782F9FFA2100D10C2E /* CleanFastWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CleanFastWidgetExtension.entitlements; sourceTree = "<group>"; };
+		92D6B2752F9EE1540009CAC6 /* CleanFast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanFast.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		92D6B2822F9EE1550009CAC6 /* CleanFastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanFastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92D6B28C2F9EE1550009CAC6 /* CleanFastUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CleanFastUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9249B8722F9FE88900D10C2E /* Exceptions for "CleanFastClaudeWidget" folder in "CleanFastClaudeWidgetExtension" target */ = {
+		9249B8722F9FE88900D10C2E /* Exceptions for "CleanFastWidget" folder in "CleanFastWidgetExtension" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 9249B85E2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension */;
+			target = 9249B85E2F9FE88700D10C2E /* CleanFastWidgetExtension */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		9249B8652F9FE88700D10C2E /* CleanFastClaudeWidget */ = {
+		9249B8652F9FE88700D10C2E /* CleanFastWidget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				9249B8722F9FE88900D10C2E /* Exceptions for "CleanFastClaudeWidget" folder in "CleanFastClaudeWidgetExtension" target */,
+				9249B8722F9FE88900D10C2E /* Exceptions for "CleanFastWidget" folder in "CleanFastWidgetExtension" target */,
 			);
-			path = CleanFastClaudeWidget;
+			path = CleanFastWidget;
 			sourceTree = "<group>";
 		};
-		92D6B2772F9EE1540009CAC6 /* CleanFastClaude */ = {
+		92D6B2772F9EE1540009CAC6 /* CleanFast */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CleanFastClaude;
+			path = CleanFast;
 			sourceTree = "<group>";
 		};
-		92D6B2852F9EE1550009CAC6 /* CleanFastClaudeTests */ = {
+		92D6B2852F9EE1550009CAC6 /* CleanFastTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CleanFastClaudeTests;
+			path = CleanFastTests;
 			sourceTree = "<group>";
 		};
-		92D6B28F2F9EE1550009CAC6 /* CleanFastClaudeUITests */ = {
+		92D6B28F2F9EE1550009CAC6 /* CleanFastUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = CleanFastClaudeUITests;
+			path = CleanFastUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -142,11 +142,11 @@
 		92D6B26C2F9EE1540009CAC6 = {
 			isa = PBXGroup;
 			children = (
-				9249B8782F9FFA2100D10C2E /* CleanFastClaudeWidgetExtension.entitlements */,
-				92D6B2772F9EE1540009CAC6 /* CleanFastClaude */,
-				92D6B2852F9EE1550009CAC6 /* CleanFastClaudeTests */,
-				92D6B28F2F9EE1550009CAC6 /* CleanFastClaudeUITests */,
-				9249B8652F9FE88700D10C2E /* CleanFastClaudeWidget */,
+				9249B8782F9FFA2100D10C2E /* CleanFastWidgetExtension.entitlements */,
+				92D6B2772F9EE1540009CAC6 /* CleanFast */,
+				92D6B2852F9EE1550009CAC6 /* CleanFastTests */,
+				92D6B28F2F9EE1550009CAC6 /* CleanFastUITests */,
+				9249B8652F9FE88700D10C2E /* CleanFastWidget */,
 				9249B8602F9FE88700D10C2E /* Frameworks */,
 				92D6B2762F9EE1540009CAC6 /* Products */,
 			);
@@ -155,10 +155,10 @@
 		92D6B2762F9EE1540009CAC6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92D6B2752F9EE1540009CAC6 /* CleanFastClaude.app */,
-				92D6B2822F9EE1550009CAC6 /* CleanFastClaudeTests.xctest */,
-				92D6B28C2F9EE1550009CAC6 /* CleanFastClaudeUITests.xctest */,
-				9249B85F2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension.appex */,
+				92D6B2752F9EE1540009CAC6 /* CleanFast.app */,
+				92D6B2822F9EE1550009CAC6 /* CleanFastTests.xctest */,
+				92D6B28C2F9EE1550009CAC6 /* CleanFastUITests.xctest */,
+				9249B85F2F9FE88700D10C2E /* CleanFastWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -166,9 +166,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9249B85E2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension */ = {
+		9249B85E2F9FE88700D10C2E /* CleanFastWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9249B8732F9FE88900D10C2E /* Build configuration list for PBXNativeTarget "CleanFastClaudeWidgetExtension" */;
+			buildConfigurationList = 9249B8732F9FE88900D10C2E /* Build configuration list for PBXNativeTarget "CleanFastWidgetExtension" */;
 			buildPhases = (
 				9249B85B2F9FE88700D10C2E /* Sources */,
 				9249B85C2F9FE88700D10C2E /* Frameworks */,
@@ -179,18 +179,18 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				9249B8652F9FE88700D10C2E /* CleanFastClaudeWidget */,
+				9249B8652F9FE88700D10C2E /* CleanFastWidget */,
 			);
-			name = CleanFastClaudeWidgetExtension;
+			name = CleanFastWidgetExtension;
 			packageProductDependencies = (
 			);
-			productName = CleanFastClaudeWidgetExtension;
-			productReference = 9249B85F2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension.appex */;
+			productName = CleanFastWidgetExtension;
+			productReference = 9249B85F2F9FE88700D10C2E /* CleanFastWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
-		92D6B2742F9EE1540009CAC6 /* CleanFastClaude */ = {
+		92D6B2742F9EE1540009CAC6 /* CleanFast */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92D6B2962F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastClaude" */;
+			buildConfigurationList = 92D6B2962F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFast" */;
 			buildPhases = (
 				92D6B2712F9EE1540009CAC6 /* Sources */,
 				92D6B2722F9EE1540009CAC6 /* Frameworks */,
@@ -203,18 +203,18 @@
 				9249B8702F9FE88900D10C2E /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				92D6B2772F9EE1540009CAC6 /* CleanFastClaude */,
+				92D6B2772F9EE1540009CAC6 /* CleanFast */,
 			);
-			name = CleanFastClaude;
+			name = CleanFast;
 			packageProductDependencies = (
 			);
-			productName = CleanFastClaude;
-			productReference = 92D6B2752F9EE1540009CAC6 /* CleanFastClaude.app */;
+			productName = CleanFast;
+			productReference = 92D6B2752F9EE1540009CAC6 /* CleanFast.app */;
 			productType = "com.apple.product-type.application";
 		};
-		92D6B2812F9EE1550009CAC6 /* CleanFastClaudeTests */ = {
+		92D6B2812F9EE1550009CAC6 /* CleanFastTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92D6B2992F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastClaudeTests" */;
+			buildConfigurationList = 92D6B2992F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastTests" */;
 			buildPhases = (
 				92D6B27E2F9EE1550009CAC6 /* Sources */,
 				92D6B27F2F9EE1550009CAC6 /* Frameworks */,
@@ -226,18 +226,18 @@
 				92D6B2842F9EE1550009CAC6 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				92D6B2852F9EE1550009CAC6 /* CleanFastClaudeTests */,
+				92D6B2852F9EE1550009CAC6 /* CleanFastTests */,
 			);
-			name = CleanFastClaudeTests;
+			name = CleanFastTests;
 			packageProductDependencies = (
 			);
-			productName = CleanFastClaudeTests;
-			productReference = 92D6B2822F9EE1550009CAC6 /* CleanFastClaudeTests.xctest */;
+			productName = CleanFastTests;
+			productReference = 92D6B2822F9EE1550009CAC6 /* CleanFastTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		92D6B28B2F9EE1550009CAC6 /* CleanFastClaudeUITests */ = {
+		92D6B28B2F9EE1550009CAC6 /* CleanFastUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92D6B29C2F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastClaudeUITests" */;
+			buildConfigurationList = 92D6B29C2F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastUITests" */;
 			buildPhases = (
 				92D6B2882F9EE1550009CAC6 /* Sources */,
 				92D6B2892F9EE1550009CAC6 /* Frameworks */,
@@ -249,13 +249,13 @@
 				92D6B28E2F9EE1550009CAC6 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				92D6B28F2F9EE1550009CAC6 /* CleanFastClaudeUITests */,
+				92D6B28F2F9EE1550009CAC6 /* CleanFastUITests */,
 			);
-			name = CleanFastClaudeUITests;
+			name = CleanFastUITests;
 			packageProductDependencies = (
 			);
-			productName = CleanFastClaudeUITests;
-			productReference = 92D6B28C2F9EE1550009CAC6 /* CleanFastClaudeUITests.xctest */;
+			productName = CleanFastUITests;
+			productReference = 92D6B28C2F9EE1550009CAC6 /* CleanFastUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -284,7 +284,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92D6B2702F9EE1540009CAC6 /* Build configuration list for PBXProject "CleanFast-Claude" */;
+			buildConfigurationList = 92D6B2702F9EE1540009CAC6 /* Build configuration list for PBXProject "CleanFast" */;
 			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -300,10 +300,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92D6B2742F9EE1540009CAC6 /* CleanFastClaude */,
-				92D6B2812F9EE1550009CAC6 /* CleanFastClaudeTests */,
-				92D6B28B2F9EE1550009CAC6 /* CleanFastClaudeUITests */,
-				9249B85E2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension */,
+				92D6B2742F9EE1540009CAC6 /* CleanFast */,
+				92D6B2812F9EE1550009CAC6 /* CleanFastTests */,
+				92D6B28B2F9EE1550009CAC6 /* CleanFastUITests */,
+				9249B85E2F9FE88700D10C2E /* CleanFastWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -373,17 +373,17 @@
 /* Begin PBXTargetDependency section */
 		9249B8702F9FE88900D10C2E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9249B85E2F9FE88700D10C2E /* CleanFastClaudeWidgetExtension */;
+			target = 9249B85E2F9FE88700D10C2E /* CleanFastWidgetExtension */;
 			targetProxy = 9249B86F2F9FE88900D10C2E /* PBXContainerItemProxy */;
 		};
 		92D6B2842F9EE1550009CAC6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92D6B2742F9EE1540009CAC6 /* CleanFastClaude */;
+			target = 92D6B2742F9EE1540009CAC6 /* CleanFast */;
 			targetProxy = 92D6B2832F9EE1550009CAC6 /* PBXContainerItemProxy */;
 		};
 		92D6B28E2F9EE1550009CAC6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92D6B2742F9EE1540009CAC6 /* CleanFastClaude */;
+			target = 92D6B2742F9EE1540009CAC6 /* CleanFast */;
 			targetProxy = 92D6B28D2F9EE1550009CAC6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -394,12 +394,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = CleanFastClaudeWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CleanFastWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CleanFastClaudeWidget/Info.plist;
+				INFOPLIST_FILE = CleanFastWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "CleanFast Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 MaxHope LLC";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -426,12 +426,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = CleanFastClaudeWidgetExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CleanFastWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CleanFastClaudeWidget/Info.plist;
+				INFOPLIST_FILE = CleanFastWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "CleanFast Widget";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2026 MaxHope LLC";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -488,7 +488,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -552,7 +552,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -579,10 +579,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CleanFastClaude/CleanFastClaude.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CleanFast/CleanFast.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = CleanFast;
@@ -616,10 +616,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = CleanFastClaude/CleanFastClaude.entitlements;
+				CODE_SIGN_ENTITLEMENTS = CleanFast/CleanFast.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = CleanFast;
@@ -653,8 +653,8 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -666,7 +666,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanFastClaude.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CleanFastClaude";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanFast.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CleanFast";
 			};
 			name = Debug;
 		};
@@ -675,8 +675,8 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -688,7 +688,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanFastClaude.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CleanFastClaude";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CleanFast.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/CleanFast";
 			};
 			name = Release;
 		};
@@ -696,8 +696,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MaxQ.CleanFastUITests;
@@ -708,7 +708,7 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = CleanFastClaude;
+				TEST_TARGET_NAME = CleanFast;
 			};
 			name = Debug;
 		};
@@ -716,8 +716,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 545M7K6H6K;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 57H8BQUP62;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.MaxQ.CleanFastUITests;
@@ -728,14 +728,14 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = CleanFastClaude;
+				TEST_TARGET_NAME = CleanFast;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9249B8732F9FE88900D10C2E /* Build configuration list for PBXNativeTarget "CleanFastClaudeWidgetExtension" */ = {
+		9249B8732F9FE88900D10C2E /* Build configuration list for PBXNativeTarget "CleanFastWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9249B8742F9FE88900D10C2E /* Debug */,
@@ -744,7 +744,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92D6B2702F9EE1540009CAC6 /* Build configuration list for PBXProject "CleanFast-Claude" */ = {
+		92D6B2702F9EE1540009CAC6 /* Build configuration list for PBXProject "CleanFast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92D6B2942F9EE1550009CAC6 /* Debug */,
@@ -753,7 +753,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92D6B2962F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastClaude" */ = {
+		92D6B2962F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFast" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92D6B2972F9EE1550009CAC6 /* Debug */,
@@ -762,7 +762,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92D6B2992F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastClaudeTests" */ = {
+		92D6B2992F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92D6B29A2F9EE1550009CAC6 /* Debug */,
@@ -771,7 +771,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92D6B29C2F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastClaudeUITests" */ = {
+		92D6B29C2F9EE1550009CAC6 /* Build configuration list for PBXNativeTarget "CleanFastUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92D6B29D2F9EE1550009CAC6 /* Debug */,

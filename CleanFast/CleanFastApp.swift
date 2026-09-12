@@ -1,6 +1,6 @@
 //
-//  CleanFastClaudeApp.swift
-//  CleanFastClaude
+//  CleanFastApp.swift
+//  CleanFast
 //
 //  Created by Qu on 4/26/26.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct CleanFastClaudeApp: App {
+struct CleanFastApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var settings = AppSettingsStore()
 

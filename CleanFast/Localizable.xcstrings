@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "zh-Hans",
   "strings" : {
+    "锁屏：长按锁定屏幕 → 自定 → 添加小组件，选择「轻断食时钟」。": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁屏：长按锁定屏幕 → 自定 → 添加小组件，选择「轻断食时钟」。"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lock Screen: touch and hold → Customize → Add Widgets, then choose CleanFast."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鎖定畫面：長按鎖定畫面 → 自訂 → 加入小工具，選擇「輕斷食時鐘」。"
+          }
+        }
+      }
+    },
     "" : {
 
     },
@@ -727,6 +749,28 @@
         }
       }
     },
+    "本应用面向年满 18 岁的人士。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CleanFast is intended for people aged 18 and over."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本应用面向年满 18 岁的人士。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本應用程式面向年滿 18 歲的人士。"
+          }
+        }
+      }
+    },
     "先简单设置一下" : {
       "localizations" : {
         "en" : {
@@ -965,6 +1009,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "到了目標，也不催你"
+          }
+        }
+      }
+    },
+    "开启提醒后，到了目标会提醒你。\n之后会按你选择的切换方式继续。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "When reminders are on, you'll get a reminder when a goal is reached.\nThe next phase follows the switching mode you choose."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启提醒后，到了目标会提醒你。\n之后会按你选择的切换方式继续。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開啟提醒後，到了目標會提醒你。\n之後會按你選擇的切換方式繼續。"
+          }
+        }
+      }
+    },
+    "断食和进食，都会计时" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Both fasting and eating are timed"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "断食和进食，都会计时"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "斷食和進食，都會計時"
+          }
+        }
+      }
+    },
+    "两段都会继续计时。\n按你选择的切换方式进入下一段。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Both phases are timed.\nThe next phase starts according to the switching mode you choose."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "两段都会继续计时。\n按你选择的切换方式进入下一段。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "兩段都會繼續計時。\n按你選擇的切換方式進入下一段。"
           }
         }
       }
@@ -1212,6 +1322,28 @@
         }
       }
     },
+    "继续" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "继续"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "繼續"
+          }
+        }
+      }
+    },
     "小时" : {
       "localizations" : {
         "en" : {
@@ -1252,6 +1384,138 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "小工具"
+          }
+        }
+      }
+    },
+    "把进度放到主屏幕" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Put your progress on the Home Screen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "把进度放到主屏幕"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "把進度放到主畫面"
+          }
+        }
+      }
+    },
+    "小组件需要在主屏幕手动添加，之后不打开 App 也能看到进度。\n完成设置后就能添加；稍后也可以在设置里查看方法。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widgets are added manually from the Home Screen, so you can see your progress without opening the app.\nYou can add one after setup, or find these steps later in Settings."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小组件需要在主屏幕手动添加，之后不打开 App 也能看到进度。\n完成设置后就能添加；稍后也可以在设置里查看方法。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "小工具需要在主畫面手動加入，之後不打開 App 也能看到進度。\n完成設定後就能加入；稍後也可以在設定裡查看方法。"
+          }
+        }
+      }
+    },
+    "长按主屏幕空白处" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Touch and hold an empty area on the Home Screen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "长按主屏幕空白处"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "長按主畫面空白處"
+          }
+        }
+      }
+    },
+    "点击左上角「+」，或点「编辑」→「添加小组件」" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap “+” at the top left, or “Edit” → “Add Widget”"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点击左上角「+」，或点「编辑」→「添加小组件」"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "點選左上角「+」，或點「編輯」→「加入小工具」"
+          }
+        }
+      }
+    },
+    "搜索「轻断食时钟」" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search “CleanFast”"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索「轻断食时钟」"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜尋「輕斷食時鐘」"
+          }
+        }
+      }
+    },
+    "选择尺寸并点击「添加小组件」" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose a size, then tap “Add Widget”"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择尺寸并点击「添加小组件」"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選擇尺寸，然後點選「加入小工具」"
           }
         }
       }
@@ -1762,6 +2026,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "按設定視窗自動進入下一段，打開時直接看到目前視窗。"
+          }
+        }
+      }
+    },
+    "按实际用餐时间计时。到点提醒，什么时候开始和结束由你决定。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time around your actual mealtimes. We’ll remind you when time is up; you decide when each phase starts and ends."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按实际用餐时间计时。到点提醒，什么时候开始和结束由你决定。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按實際用餐時間計時。到點提醒，什麼時候開始和結束由你決定。"
+          }
+        }
+      }
+    },
+    "适合用餐时间比较固定的人，按设定窗口自动循环。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best for people with regular mealtimes; cycles automatically through the set windows."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "适合用餐时间比较固定的人，按设定窗口自动循环。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "適合用餐時間比較固定的人，按設定視窗自動循環。"
           }
         }
       }
@@ -3992,6 +4300,41 @@
             "value" : "首頁風格"
           }
         }
+      }
+    },
+    "按设定时间自动开始。" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Starts automatically at the set time." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "按设定时间自动开始。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "會在設定時間自動開始。" } }
+      }
+    },
+    "按设定时间自动开始，准备好了也可以现在提前开始。" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Starts automatically at the set time. You can also start early now." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "按设定时间自动开始，准备好了也可以现在提前开始。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "會在設定時間自動開始。準備好也可以現在提前開始。" } }
+      }
+    },
+    "自动恢复于 %@" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-resumes %@" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动恢复于 %@" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "將於 %@ 自動恢復" } }
+      }
+    },
+    "现在提前开始" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Start early now" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "现在提前开始" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "現在提前開始" } }
+      }
+    },
+    "自动提醒会预先安排未来几天的通知（16:8 约 3 天），需要定期打开 App 才能继续更新提醒。" : {
+      "localizations" : {
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Automatic reminders schedule notifications for the next few days (about 3 days for 16:8); open the app regularly to keep them updated." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "自动提醒会预先安排未来几天的通知（16:8 约 3 天），需要定期打开 App 才能继续更新提醒。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "自動提醒會預先安排未來幾天的通知（16:8 約 3 天），需要定期打開 App 才能繼續更新提醒。" } }
       }
     }
   },

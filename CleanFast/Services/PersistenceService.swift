@@ -9,7 +9,7 @@ final class PersistenceService: Sendable {
 
     /// App Group 标识符——主 App 和 Widget 共享同一份 UserDefaults。
     /// 必须和两个 target 在 Signing & Capabilities → App Groups 里勾选的一致。
-    static let appGroupIdentifier = "group.com.MaxQ.CleanFast"
+    static let appGroupIdentifier = "group.la.maxhope.cleanfast"
 
     private let defaults: UserDefaults
     private let encoder = JSONEncoder()

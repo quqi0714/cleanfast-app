@@ -3,27 +3,27 @@ import SwiftUI
 
 // MARK: - Timeline entry
 
-struct CleanFastClaudeEntry: TimelineEntry {
+struct CleanFastEntry: TimelineEntry {
     let date: Date
     let snapshot: WidgetSnapshot
 }
 
 // MARK: - Provider
 
-struct CleanFastClaudeProvider: TimelineProvider {
-    func placeholder(in context: Context) -> CleanFastClaudeEntry {
-        CleanFastClaudeEntry(date: Date(), snapshot: .current())
+struct CleanFastProvider: TimelineProvider {
+    func placeholder(in context: Context) -> CleanFastEntry {
+        CleanFastEntry(date: Date(), snapshot: .current())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (CleanFastClaudeEntry) -> Void) {
-        completion(CleanFastClaudeEntry(date: Date(), snapshot: .current()))
+    func getSnapshot(in context: Context, completion: @escaping (CleanFastEntry) -> Void) {
+        completion(CleanFastEntry(date: Date(), snapshot: .current()))
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<CleanFastClaudeEntry>) -> Void) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<CleanFastEntry>) -> Void) {
         let now = Date()
         let snapshot = WidgetSnapshot.current(at: now)
-        var entries: [CleanFastClaudeEntry] = [
-            CleanFastClaudeEntry(date: now, snapshot: snapshot)
+        var entries: [CleanFastEntry] = [
+            CleanFastEntry(date: now, snapshot: snapshot)
         ]
 
         if snapshot.state == .fasting || snapshot.state == .eating {
@@ -33,7 +33,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
         if snapshot.state == .skipped,
            let nextDay = WidgetSnapshot.startOfNextDay(),
            nextDay > now {
-            entries.append(CleanFastClaudeEntry(date: nextDay, snapshot: WidgetSnapshot.current(at: nextDay)))
+            entries.append(CleanFastEntry(date: nextDay, snapshot: WidgetSnapshot.current(at: nextDay)))
         }
         // 自动模式存在"明天自动恢复"时（skipped 和跨午夜后的 notStarted 都可能带着
         // resumeDate），必须在恢复时刻放 entry，并给恢复后的断食段生成完整刷新序列，
@@ -43,7 +43,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
            let resumeDate = snapshot.automaticResumeStartDate,
            resumeDate > now {
             let resumeSnapshot = WidgetSnapshot.current(at: resumeDate)
-            entries.append(CleanFastClaudeEntry(date: resumeDate, snapshot: resumeSnapshot))
+            entries.append(CleanFastEntry(date: resumeDate, snapshot: resumeSnapshot))
             if resumeSnapshot.state == .fasting || resumeSnapshot.state == .eating {
                 appendActiveTimelineEntries(to: &entries, snapshot: resumeSnapshot, now: resumeDate)
             }
@@ -66,7 +66,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
     /// 自动模式不需要在这里"穿越"未来 cycle —— `WidgetSnapshot.current(at:)` 内部
     /// 的 `advanceAutomatic` 已经能把 reload 时刻的状态推到正确的下一段。
     private func appendActiveTimelineEntries(
-        to entries: inout [CleanFastClaudeEntry],
+        to entries: inout [CleanFastEntry],
         snapshot: WidgetSnapshot,
         now: Date
     ) {
@@ -93,7 +93,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
 
         // 目标到达时刻：让 hasReachedTarget 翻转、自动模式滚到下一 cycle
         if !snapshot.hasReachedTarget, session.targetEndDate > now {
-            entries.append(CleanFastClaudeEntry(
+            entries.append(CleanFastEntry(
                 date: session.targetEndDate,
                 snapshot: WidgetSnapshot.current(at: session.targetEndDate)
             ))
@@ -101,7 +101,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
     }
 
     private func appendFastingStageEntries(
-        to entries: inout [CleanFastClaudeEntry],
+        to entries: inout [CleanFastEntry],
         session: WidgetSession,
         now: Date,
         horizon: Date
@@ -110,7 +110,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
         for boundary in stageBoundaries {
             let date = session.startDate.addingTimeInterval(boundary)
             if date > now && date < session.targetEndDate && date <= horizon {
-                entries.append(CleanFastClaudeEntry(date: date, snapshot: WidgetSnapshot.current(at: date)))
+                entries.append(CleanFastEntry(date: date, snapshot: WidgetSnapshot.current(at: date)))
             }
         }
     }
@@ -120,7 +120,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
     /// CountUpClock 内部用 `Text(timerInterval:)` 自走，不受影响；
     /// 但 progress 是 snapshot 上的静态字段，必须靠新 entry 才会更新。
     private func appendPeriodicEntries(
-        to entries: inout [CleanFastClaudeEntry],
+        to entries: inout [CleanFastEntry],
         from start: Date,
         to end: Date,
         intervalMinutes: Int
@@ -129,7 +129,7 @@ struct CleanFastClaudeProvider: TimelineProvider {
         let stride = TimeInterval(intervalMinutes * 60)
         var t = start.addingTimeInterval(stride)
         while t < end {
-            entries.append(CleanFastClaudeEntry(date: t, snapshot: WidgetSnapshot.current(at: t)))
+            entries.append(CleanFastEntry(date: t, snapshot: WidgetSnapshot.current(at: t)))
             t = t.addingTimeInterval(stride)
         }
     }
@@ -137,12 +137,12 @@ struct CleanFastClaudeProvider: TimelineProvider {
 
 // MARK: - Widget configuration
 
-struct CleanFastClaudeWidget: Widget {
-    let kind = "CleanFastClaudeWidget"
+struct CleanFastWidget: Widget {
+    let kind = "CleanFastWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: CleanFastClaudeProvider()) { entry in
-            CleanFastClaudeWidgetView(entry: entry)
+        StaticConfiguration(kind: kind, provider: CleanFastProvider()) { entry in
+            CleanFastWidgetView(entry: entry)
                 .containerBackground(for: .widget) {
                     backgroundFor(entry: entry)
                 }
@@ -160,7 +160,7 @@ struct CleanFastClaudeWidget: Widget {
 }
 
 @ViewBuilder
-private func backgroundFor(entry: CleanFastClaudeEntry) -> some View {
+private func backgroundFor(entry: CleanFastEntry) -> some View {
     let color = ringColor(entry.snapshot)
     ZStack {
         // 1. 底层：温暖底色 → 状态色斜向渐变
@@ -203,9 +203,9 @@ private func backgroundFor(entry: CleanFastClaudeEntry) -> some View {
 
 // MARK: - Top-level dispatcher view
 
-struct CleanFastClaudeWidgetView: View {
+struct CleanFastWidgetView: View {
     @Environment(\.widgetFamily) var family
-    let entry: CleanFastClaudeEntry
+    let entry: CleanFastEntry
 
     var body: some View {
         switch family {
@@ -285,7 +285,7 @@ private func stageSymbolName(_ snapshot: WidgetSnapshot) -> String {
 // MARK: - Home Screen: Small
 
 struct SmallWidgetView: View {
-    let entry: CleanFastClaudeEntry
+    let entry: CleanFastEntry
     var snapshot: WidgetSnapshot { entry.snapshot }
     private var color: Color { ringColor(snapshot) }
 
@@ -362,7 +362,7 @@ struct SmallWidgetView: View {
 // MARK: - Home Screen: Medium
 
 struct MediumWidgetView: View {
-    let entry: CleanFastClaudeEntry
+    let entry: CleanFastEntry
     var snapshot: WidgetSnapshot { entry.snapshot }
     private var color: Color { ringColor(snapshot) }
 
@@ -452,7 +452,7 @@ struct MediumWidgetView: View {
 // MARK: - Lock Screen: Rectangular
 
 struct LockRectangularView: View {
-    let entry: CleanFastClaudeEntry
+    let entry: CleanFastEntry
     var snapshot: WidgetSnapshot { entry.snapshot }
     private var color: Color { ringColor(snapshot) }
 
@@ -539,7 +539,7 @@ struct LockRectangularView: View {
 // MARK: - Lock Screen: Circular
 
 struct LockCircularView: View {
-    let entry: CleanFastClaudeEntry
+    let entry: CleanFastEntry
     var snapshot: WidgetSnapshot { entry.snapshot }
     private var color: Color { ringColor(snapshot) }
 
@@ -574,7 +574,7 @@ struct LockCircularView: View {
 // MARK: - Lock Screen: Inline
 
 struct LockInlineView: View {
-    let entry: CleanFastClaudeEntry
+    let entry: CleanFastEntry
     var snapshot: WidgetSnapshot { entry.snapshot }
 
     var body: some View {
